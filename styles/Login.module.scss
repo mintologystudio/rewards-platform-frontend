@@ -1,0 +1,302 @@
+@import '../styles/variables.module.scss';
+@import '../styles/mixin.module.scss';
+
+.container {
+  background-color: $blue;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 6rem;
+
+  @include l {
+    padding-top: 7.8rem;
+  }
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100vh - 6rem);
+
+  @include l {
+    height: calc(100vh - 7.8rem);
+    flex-direction: row;
+  }
+
+  .logo_image {
+    position: relative;
+    height: 26rem;
+    width: 29.5rem;
+    margin: 0 0 2rem 0;
+
+    @include l {
+      height: 52rem;
+      width: 58rem;
+      margin: 0 5.8rem 0 0;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include l {
+      width: 600px;
+    }
+
+    .info_loggedin {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 300px;
+
+      @include s {
+        width: 400px;
+      }
+
+      @include m {
+        width: 500px;
+      }
+    }
+
+    & h1 {
+      font-size: 5.8rem;
+      color: $white;
+      line-height: 5.8rem;
+      text-align: left;
+      font-family: $baseFont;
+      margin: 0px;
+
+      @include s {
+        font-size: 7.6rem;
+      }
+
+      @include l {
+        font-size: 9.6rem;
+      }
+
+      span {
+        color: $pink;
+      }
+    }
+
+    & h2 {
+      font-size: 3rem;
+      color: $white;
+      line-height: 3.629rem;
+      font-family: $baseFont;
+      margin: 0px;
+      text-align: left;
+
+      @include s {
+        font-size: 3.6rem;
+        line-height: 3.629rem;
+      }
+
+      @include l {
+        font-size: 4.8rem;
+        line-height: 5rem;
+      }
+    }
+
+    &_title {
+      background: rgba(227, 0, 184, 0.2);
+      padding: 1.1rem 3.5rem;
+
+      & p {
+        margin: 0;
+        font-size: 2.2rem;
+        color: $pink;
+        font-weight: 700;
+      }
+    }
+
+    &_subheading {
+      margin: 1.5rem 0 2rem 0;
+      font-size: 2.4rem;
+      color: $white;
+      font-family: $baseFont;
+      font-weight: 700;
+
+      @include l {
+        font-size: 4.9rem;
+        margin: 2.5rem 0 4rem 0;
+      }
+
+      & ul {
+        list-style: none;
+        padding-inline-start: 0px;
+        font-size: 1.8rem;
+        font-weight: 400;
+
+        @include s {
+          list-style: unset;
+          list-style-type: disc;
+          padding-inline-start: 2rem;
+        }
+      }
+
+      & li:nth-child(1) {
+        margin-bottom: 2rem;
+      }
+    }
+
+    &_text {
+      margin: 2rem 0;
+
+      font-size: 1.4rem;
+      color: $white;
+      font-family: $baseFont;
+
+      @include l {
+        font-size: 1.8rem;
+      }
+    }
+
+    &_loading {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    & button {
+      cursor: pointer;
+      background-color: $white;
+      border-radius: 10px;
+      padding: 1.5rem 3.5rem;
+      border: none;
+      cursor: pointer;
+      border: 3px solid $black;
+
+      font-family: $baseFont;
+      color: $black;
+      font-size: 2rem;
+      text-transform: uppercase;
+
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+      transition: all 0.5s ease;
+
+      @include s {
+        font-size: 20px;
+      }
+
+      &:hover {
+        transform: translateY(0.2rem);
+        transition: all 0.5s ease;
+      }
+
+      &.loading {
+        background-color: $white;
+        color: $black;
+        margin-top: 1rem;
+        cursor: default;
+      }
+    }
+
+    .web3 {
+      width: 100%;
+      padding: 4rem 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-family: $baseFont;
+      font-size: 1.4rem;
+
+      &_wallet {
+        background: rgba(227, 0, 184, 0.2);
+        padding: 0.8rem 2rem;
+
+        & p {
+          margin: 0;
+          font-size: 2.2rem;
+          color: $pink;
+          font-weight: 700;
+        }
+
+        color: $pink;
+      }
+
+      &_address {
+        color: $white;
+      }
+    }
+  }
+}
+
+.lines {
+  display: none;
+
+  @include l {
+    display: block;
+  }
+  &_top_left_pink {
+    z-index: 2;
+    position: absolute;
+    left: 10.2rem;
+    top: calc(20vh - 1rem);
+
+    width: 21.7rem;
+    height: 0.7rem;
+
+    background-color: rgba(227, 0, 185, 0.45);
+  }
+
+  &_top_left_grey {
+    z-index: 2;
+    position: absolute;
+
+    left: 0;
+    top: 20vh;
+
+    width: 22.4rem;
+    height: 0.2rem;
+
+    background-color: rgba(255, 255, 255, 0.45);
+  }
+
+  &_bottom_right_pink {
+    z-index: 2;
+    position: absolute;
+
+    right: 0;
+    bottom: calc(20vh + 0.6rem);
+
+    width: 18.4rem;
+    height: 0.7rem;
+
+    background-color: rgba(227, 0, 185, 1);
+  }
+
+  &_bottom_right_grey {
+    z-index: 2;
+    position: absolute;
+
+    right: 0;
+    bottom: 20vh;
+
+    width: 29.1rem;
+    height: 0.2rem;
+
+    background-color: rgba(255, 255, 255, 1);
+  }
+}

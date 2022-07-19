@@ -1,0 +1,296 @@
+@import '../../styles/variables.module.scss';
+@import '../../styles/mixin.module.scss';
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 4;
+
+  width: 100vw;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  padding: 1.5rem;
+  padding-left: 5vw;
+  padding-right: 5vw;
+
+  background-color: $blue;
+
+  @include l {
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
+
+  & button {
+    background-color: $pink;
+    border-radius: 1rem;
+    margin: 0 0 0 3.5rem;
+    border: none;
+    cursor: pointer;
+
+    // height: 4rem;
+    // width: 15rem;
+
+    padding: 1rem 5rem;
+
+    font-family: $baseFont;
+    color: $white;
+    font-size: 1.7rem;
+    font-weight: 700;
+
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    transition: all 0.5s ease;
+
+    &:hover:enabled {
+      transform: translateY(0.2rem);
+      transition: all 0.5s ease;
+    }
+
+    &:disabled {
+      border: 0.2rem solid $pink;
+      cursor: unset;
+
+      background-color: transparent;
+      color: $white;
+    }
+  }
+
+  & .mt {
+    margin-top: 3rem;
+  }
+
+  & .lwidth {
+    width: 20rem;
+  }
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 100%;
+  width: 100%;
+  max-width: 160rem;
+
+  // & img {
+  //   height: 3.2rem;
+  //   cursor: pointer;
+
+  //   @include l {
+  //     height: 4.8rem;
+  //   }
+  // }
+
+  &_img {
+    position: relative;
+    height: 3.2rem;
+    width: 4.5rem;
+    cursor: pointer;
+
+    @include l {
+      height: 3.5rem;
+      width: 4.9rem;
+    }
+  }
+}
+
+.nav_mobile {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 100vh;
+  width: 100vw;
+
+  padding: 1.5rem;
+  padding-left: 5vw;
+  padding-right: 5vw;
+
+  background-color: $blue;
+
+  transition: all 0.4s linear;
+
+  top: calc(-100vh + 6rem);
+
+  &_expanded {
+    top: 0;
+  }
+
+  &_nav {
+    width: 100%;
+    padding-left: 5vw;
+    margin-top: 3rem;
+
+    & ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+
+      color: $white;
+      font-size: 2rem;
+      font-family: $baseFont;
+      cursor: pointer;
+
+      & li {
+        margin-top: 3rem;
+      }
+    }
+  }
+
+  &_social {
+    position: relative;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    width: 90%;
+    border-top: 0.1rem solid #a0a0a0;
+    padding-top: 3.2rem;
+
+    & li {
+      position: relative;
+      margin-left: 2rem;
+      margin-right: 2rem;
+      cursor: pointer;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      @include xl {
+        margin-left: 2rem;
+        margin-right: 2rem;
+      }
+
+      & a {
+        & svg {
+          fill: #1b1b1b;
+          transition: all 0.5s ease;
+          height: 2.5rem;
+        }
+
+        &:hover {
+          & svg {
+            fill: $pink;
+          }
+        }
+      }
+    }
+  }
+
+  &_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 3rem;
+    width: 100%;
+
+    background-color: $blue;
+
+    &_img {
+      position: relative;
+      height: 3.2rem;
+      width: 4.5rem;
+      cursor: pointer;
+
+      @include l {
+        height: 3.5rem;
+        width: 4.9rem;
+      }
+    }
+  }
+}
+
+.sub {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+  padding: 0;
+
+  & li {
+    color: $white;
+    font-family: $baseFont;
+    font-size: 1.8rem;
+    margin: 0 3.5rem 0 3.5rem;
+    cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      color: $pink;
+      transition: all 0.5s ease;
+    }
+  }
+}
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  // justify-content: flex-end;
+
+  i {
+    background-color: $white;
+    width: 2rem;
+    height: 0.2rem;
+    margin: 0.2rem;
+    border-radius: 2px;
+    transition: all ease 0.5s;
+  }
+
+  .open {
+    padding-left: 2.5rem;
+  }
+
+  .open:nth-child(1) {
+    // transform: rotate(45deg) translateY(0.9rem) translateX(0.8rem);
+    transform: rotate(45deg) translateY(0.9rem);
+  }
+
+  .open:nth-child(2) {
+    opacity: 0;
+  }
+
+  .open:nth-child(3) {
+    // transform: rotate(-45deg) translateY(-0.9rem) translateX(0.8rem);
+    transform: rotate(-45deg) translateY(-0.9rem);
+  }
+
+  .close:nth-child(1) {
+    transform: rotate(0) translateY(0);
+  }
+
+  .close:nth-child(2) {
+    opacity: 1;
+  }
+
+  .close:nth-child(3) {
+    transform: rotate(0) translateY(0);
+  }
+}

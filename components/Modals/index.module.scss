@@ -1,0 +1,83 @@
+@import '../../styles/variables.module.scss';
+@import '../../styles/mixin.module.scss';
+
+.background {
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100vh;
+  width: 100vw;
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background-color: $blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  border-radius: 2rem;
+
+  width: 32rem;
+  height: 50rem;
+  padding: 3rem;
+
+  @include l {
+    width: 60rem;
+    height: 50rem;
+    padding: 5rem;
+  }
+
+  & p {
+    font-family: $baseFont;
+    color: $white;
+    font-size: 1.8rem;
+    margin: 0;
+    text-align: center;
+
+    @include l {
+      font-size: 2.4rem;
+    }
+  }
+
+  & h3 {
+    font-family: $baseFont;
+    color: $white;
+    text-align: center;
+    margin: 0;
+    font-size: 2.4rem;
+
+    @include l {
+      font-size: 3.6rem;
+    }
+  }
+}
+
+.button {
+  background-color: $pink;
+  border-radius: 1rem;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+
+  padding: 1.5rem 5rem;
+
+  font-family: $baseFont;
+  color: $white;
+  font-size: 2.4rem;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  transition: all 0.5s ease;
+
+  &:hover {
+    transform: translateY(0.2rem);
+    transition: all 0.5s ease;
+  }
+}

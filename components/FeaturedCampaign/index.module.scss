@@ -1,0 +1,219 @@
+@import '../../styles/variables.module.scss';
+@import '../../styles/mixin.module.scss';
+
+.slideshow {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 100vw;
+
+  &_slider {
+    white-space: nowrap;
+    transition: ease 1000ms;
+  }
+
+  &_dots {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    bottom: 1rem;
+    padding: 0;
+    list-style: none;
+
+    & li {
+      height: 1.5rem;
+      width: 1.5rem;
+      border-radius: 50%;
+      background-color: $white;
+      margin: 0 1rem;
+      cursor: pointer;
+    }
+
+    &_active {
+      background-color: $pink !important;
+    }
+  }
+}
+
+.container {
+  display: inline-block;
+  position: relative;
+  width: 100vw;
+  height: 40rem;
+
+  @include l {
+    height: 35rem;
+  }
+}
+
+.background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.36;
+}
+
+.content {
+  width: 80vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  max-width: 160rem;
+
+  @include l {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 35rem;
+  }
+
+  & div {
+    width: 100%;
+
+    @include l {
+      width: 40vw;
+      max-width: 75rem;
+    }
+  }
+
+  &_right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &_title {
+      color: $white;
+      font-family: $baseFont;
+      margin: 0 0 1rem 0;
+      text-align: left;
+      font-size: 3rem;
+      line-height: 3rem;
+      white-space: normal;
+      text-align: center;
+      font-weight: 500;
+
+      @include l {
+        text-align: center;
+        font-size: 4rem;
+        line-height: 4rem;
+        margin: 0 0 2rem 0;
+      }
+
+      @include xxl {
+        white-space: nowrap;
+        text-align: center;
+        font-size: 5rem;
+        line-height: 5rem;
+      }
+    }
+
+    &_sub {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      margin: 0 0 1rem 0;
+
+      @include l {
+        margin: 0 0 2rem 0;
+      }
+    }
+
+    &_desc {
+      font-size: 2rem;
+      color: $white;
+      font-family: $baseFont;
+      margin: 0;
+      text-align: left;
+      width: 25rem;
+      white-space: normal;
+      text-transform: uppercase;
+
+      @include l {
+        font-size: 2.4rem;
+      }
+
+      @include xxl {
+        font-size: 3rem;
+      }
+    }
+
+    &_percentage {
+      font-size: 5rem;
+      line-height: 5rem;
+      color: $white;
+      font-family: $baseFont;
+      margin: 0;
+      margin-right: 1rem;
+      font-weight: 700;
+
+      @include l {
+        font-size: 6rem;
+        line-height: 6rem;
+      }
+
+      @include xxl {
+        font-size: 9rem;
+        line-height: 9rem;
+      }
+    }
+
+    &_button {
+      background-color: $pink;
+      border-radius: 1rem;
+      padding: 1.5rem 3rem;
+      margin: 0;
+      border: none;
+      cursor: pointer;
+
+      // height: 5rem;
+      // width: 18rem;
+
+      font-family: $baseFont;
+      color: $white;
+      font-size: 1.4rem;
+      font-weight: 700;
+
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+      transition: all 0.5s ease;
+
+      @include l {
+        padding: 2rem 4rem;
+        font-size: 1.8rem;
+      }
+
+      &:hover {
+        transform: translateY(0.2rem);
+        transition: all 0.5s ease;
+      }
+    }
+  }
+
+  &_left {
+    display: none;
+
+    @include l {
+      display: block;
+      position: relative;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: center;
+      width: 40rem;
+    }
+  }
+}

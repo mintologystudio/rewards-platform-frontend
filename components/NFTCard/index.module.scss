@@ -1,0 +1,71 @@
+@import '../../styles/variables.module.scss';
+@import '../../styles/mixin.module.scss';
+
+.token {
+  position: relative;
+  width: 15rem;
+  height: 15rem;
+
+  @include l {
+    width: 25rem;
+    height: 25rem;
+  }
+
+  border-radius: 1rem;
+
+  & img {
+    border-radius: 1rem;
+  }
+  cursor: pointer;
+
+  &_id {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    height: 4rem;
+
+    background-color: rgba(0, 0, 0, 0.76);
+    border-radius: 0 0 0.9rem 0.9rem;
+
+    & p {
+      color: $white;
+      font-size: 1.8rem;
+      font-family: $baseFont;
+      margin: 0;
+    }
+  }
+
+  &_selected {
+    outline: 0.7rem solid $pink;
+  }
+
+  &_redeemed {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+
+    &::after {
+      content: 'REDEEMED';
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      font-family: $baseFont;
+
+      color: $pink;
+      font-size: 2.4rem;
+
+      @include l {
+        font-size: 3.2rem;
+      }
+    }
+  }
+}

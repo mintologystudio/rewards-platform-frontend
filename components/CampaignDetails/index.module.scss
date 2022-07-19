@@ -1,0 +1,122 @@
+@import '../../styles/variables.module.scss';
+@import '../../styles/mixin.module.scss';
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  margin: 5rem 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & h2 {
+    color: $pink;
+    font-family: $baseFont;
+    font-size: 2.4rem;
+    word-wrap: break-word;
+    text-align: center;
+
+    width: 80vw;
+
+    @include l {
+      font-size: 3.2rem;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  color: $white;
+  font-family: $baseFont;
+
+  font-size: 1.8rem;
+  word-wrap: break-word;
+
+  width: 80vw;
+
+  @include l {
+    font-size: 2.4rem;
+    width: 50vw;
+    max-width: 80rem;
+  }
+
+  &_tnc {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    &_title {
+      font-size: 1.4rem;
+      font-weight: 500;
+
+      @include l {
+        font-size: 1.8rem;
+      }
+    }
+
+    & ul {
+      padding-left: 2rem;
+      margin: 0;
+      & li {
+        padding: 0.5rem 0;
+
+        font-size: 1.2rem;
+        word-wrap: break-word;
+
+        @include l {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+}
+
+.button {
+  background-color: $pink;
+  border-radius: 1rem;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+
+  padding: 1.5rem 3rem;
+
+  font-family: $baseFont;
+  color: $white;
+  font-size: 2.4rem;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  transition: all 0.5s ease;
+
+  &:hover {
+    transform: translateY(0.2rem);
+    transition: all 0.5s ease;
+  }
+}
+
+.tokens {
+  display: grid;
+  padding: 0;
+  list-style: none;
+
+  margin: 5rem 0;
+
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+
+  @include l {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}

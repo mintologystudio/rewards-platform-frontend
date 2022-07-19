@@ -1,0 +1,59 @@
+@import 'styles/variables.module.scss';
+@import 'styles/mixin.module.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+
+  // Set your font family here
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  overflow-x: hidden;
+  overscroll-behavior: none;
+
+  // background-image: url('/assets/misc/bg.png');
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  background: linear-gradient(45deg, #000000, #686561);
+
+  &::-webkit-scrollbar {
+    display: block;
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    color: $blue;
+    background-color: $blue;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    color: $pink;
+    background-color: $pink;
+  }
+}
+
+body {
+  min-height: 100vh;
+}
+
+html {
+  // This redefine 1rem of 16px to become 1rem of 10px
+  font-size: 62.5%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  margin-bottom: 0rem;
+}
+
+* {
+  box-sizing: border-box;
+}
