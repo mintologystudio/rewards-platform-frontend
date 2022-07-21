@@ -4,28 +4,29 @@ import BadgesPair from '../BadgesPair'
 import { useEffect, useRef, useState } from 'react'
 import Routes from '../../utils/constants/routes'
 import Link from 'next/link'
+import { upperCaseString } from '../../utils'
 
 const delay = 500000000
 
 const ListOfFeaturedCampaigns = [
   {
     campaignId: 4,
-    nft: 'Bayc',
-    company: 'Adidas',
+    nft: 'bayc',
+    company: 'adidas',
     percentage: '10',
     description: 'off storewide footwear',
   },
   {
     campaignId: 1,
-    nft: 'Azuki',
-    company: 'Nike',
+    nft: 'azuki',
+    company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
   },
   {
     campaignId: 2,
-    nft: 'Karafura',
-    company: 'Atmos',
+    nft: 'karafura',
+    company: 'atmos',
     percentage: '20',
     description: 'off storewide',
   },
@@ -59,7 +60,7 @@ const FeaturedCampaignItem = ({
         </div>
         <div className={styles.content_right}>
           <h2 className={styles.content_right_title}>
-            {company} x {nft}
+            {upperCaseString(company)} x {upperCaseString(nft)}
           </h2>
           <div className={styles.content_right_sub}>
             <p className={styles.content_right_percentage}>{percentage}%</p>

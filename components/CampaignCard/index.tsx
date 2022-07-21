@@ -1,6 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from './index.module.scss'
-import { renderSvgIcon, IconEnum, getReadableTime } from '../../utils/index'
+import {
+  renderSvgIcon,
+  IconEnum,
+  getReadableTime,
+  upperCaseString,
+} from '../../utils/index'
 import BadgesPair from '../BadgesPair'
 import Link from 'next/link'
 import Routes from '../../utils/constants/routes'
@@ -36,7 +41,7 @@ const CampaignCard = ({
         </div>
         <div className={styles.main_bottom}>
           <h3>
-            {nft} x {company}
+            {upperCaseString(nft)} x {upperCaseString(company)}
           </h3>
           <p>{offer}</p>
           <div className={styles.main_info}>

@@ -109,3 +109,7 @@ export const getDisplayAddress = (
     return `${address.toString().slice(0, 3)}...${address.toString().slice(-4)}`
   }
 }
+
+export const upperCaseString = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}

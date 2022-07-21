@@ -2,6 +2,7 @@
 import styles from './index.module.scss'
 import BadgesPair from '../BadgesPair'
 import Skeleton from 'react-loading-skeleton'
+import { upperCaseString } from '../../utils'
 
 interface ICampaign {
   nft: string
@@ -30,8 +31,8 @@ const CampaignBanner = ({ campaign }: { campaign: ICampaign }) => {
       <div className={styles.content}>
         <div className={styles.content_left}>
           <h2 className={styles.content_left_title}>
-            {campaign.nft.toUpperCase() || <Skeleton />} X{' '}
-            {campaign.company.toUpperCase() || <Skeleton />}
+            {upperCaseString(campaign.nft) || <Skeleton />} X{' '}
+            {upperCaseString(campaign.company) || <Skeleton />}
           </h2>
           <div className={styles.content_left_sub}>
             <p>
