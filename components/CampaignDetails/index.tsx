@@ -1,12 +1,19 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable @next/next/no-img-element */
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { getTokensFromUser } from '../../utils/api'
 import { IOwnedNFTData, IOwnedNFTDataSelection } from '../../utils/interfaces'
 import styles from './index.module.scss'
 import Image from 'next/image'
 import NFTCard from '../NFTCard'
 import listOfNftsByCollection from '../../utils/dummyNftCollections'
+import { Web3Context } from '../../context/web3Context'
 
 interface IVoucher {
   title: string
@@ -26,6 +33,7 @@ const CampaignDetails = ({
   details: IVoucher
   toggleModal: Dispatch<SetStateAction<boolean>>
 }) => {
+  const { appState: Web3State } = useContext(Web3Context)
   const [availableTokens, setAvailableTokens] = useState<
     IOwnedNFTDataSelection[]
   >([])
@@ -84,26 +92,32 @@ const CampaignDetails = ({
           </div>
         </div>
 
-        <ul className={styles.tokens}>
-          {availableTokens.map((_token) => {
-            return (
-              <NFTCard
-                key={`${collectionAddr}_${_token.tokenId}`}
-                collectionAddr={collectionAddr}
-                token={_token}
-                selected={selectedNFT}
-                handleSelect={handleSelectNFT}
-              />
-            )
-          })}
-        </ul>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() => toggleModal(true)}
-        >
-          Redeem Now
-        </button>
+        {Web3State.address_to_bind ? (
+          <>
+            <ul className={styles.tokens}>
+              {availableTokens.map((_token) => {
+                return (
+                  <NFTCard
+                    key={`${collectionAddr}_${_token.tokenId}`}
+                    collectionAddr={collectionAddr}
+                    token={_token}
+                    selected={selectedNFT}
+                    handleSelect={handleSelectNFT}
+                  />
+                )
+              })}
+            </ul>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={() => toggleModal(true)}
+            >
+              Redeem Now
+            </button>
+          </>
+        ) : (
+          <h2>Connect your wallet to redeem</h2>
+        )}
       </div>
     </div>
   )
