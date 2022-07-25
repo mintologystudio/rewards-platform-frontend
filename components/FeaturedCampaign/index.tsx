@@ -9,13 +9,14 @@ import { upperCaseString } from '../../utils'
 const delay = 500000000
 
 const ListOfFeaturedCampaigns = [
-  {
-    campaignId: 4,
-    nft: 'bayc',
-    company: 'adidas',
-    percentage: '10',
-    description: 'off storewide footwear',
-  },
+  // {
+  //   campaignId: 4,
+  //   nft: 'bayc',
+  //   company: 'adidas',
+  //   percentage: '10',
+  //   description: 'off storewide footwear',
+  // },
+
   {
     campaignId: 1,
     nft: 'azuki',
@@ -29,6 +30,13 @@ const ListOfFeaturedCampaigns = [
     company: 'atmos',
     percentage: '20',
     description: 'off storewide',
+  },
+  {
+    campaignId: 3,
+    nft: 'doodles',
+    company: 'whitecastle',
+    percentage: '10',
+    description: 'off storewide footwear',
   },
 ]
 
