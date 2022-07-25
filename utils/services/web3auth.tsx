@@ -11,6 +11,7 @@ import {
 } from 'react'
 import { CHAIN_CONFIG, CHAIN_CONFIG_TYPE } from '../config/chainConfig'
 import { WEB3AUTH_NETWORK_TYPE } from '../config/web3AuthNetwork'
+import envConfig from '../envConfig'
 import { getWalletProvider, IWalletProvider } from './walletProvider'
 
 export interface IWeb3AuthContext {
@@ -111,8 +112,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
       try {
         const { Web3Auth } = await import('@web3auth/web3auth')
         const { OpenloginAdapter } = await import('@web3auth/openlogin-adapter')
-        const clientId =
-          'BLkr4gqSnGutMxM2-8w8ceO65hrcwz33A1BFfZB0KLJu4LWF-Hhv-AGWYDGOEBYWFZYu3qetAguhU5FsAGT5lhE'
+        const clientId = envConfig.WEB3_AUTH_CLIENT_ID
         setIsLoading(true)
         const web3AuthInstance = new Web3Auth({
           chainConfig: currentChainConfig,

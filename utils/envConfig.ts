@@ -8,6 +8,7 @@ const envConfig = {
   CONTRACT_NAME: process.env.NEXT_PUBLIC_CONTRACT_NAME || '',
   API_URL: process.env.NEXT_PUBLIC_API_URL || '',
   MORALIS_API_KEY: process.env.NEXT_PUBLIC_MORALIS_API_KEY || '',
+  WEB3_AUTH_CLIENT_ID: process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID || '',
 }
 
 export default envConfig
