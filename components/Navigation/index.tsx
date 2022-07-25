@@ -50,27 +50,25 @@ const Navigation = () => {
             }`}
           >
             <div className={styles.nav_mobile_nav}>
-              <ul>
-                {finalRoutes}
+              <ul>{finalRoutes}</ul>
+              <div className={styles.nav_mobile_nav_action}>
                 {appState.address_to_bind ? (
                   appState.chainId === 1 ? (
-                    <button disabled className={styles.mt}>
+                    <button disabled>
                       {appState.address_to_bind.substring(0, 4)}...
                       {appState.address_to_bind.substring(
                         appState.address_to_bind.length - 4
                       )}
                     </button>
                   ) : (
-                    <button className={`${styles.mt} ${styles.lwidth}`}>
+                    <button className={`${styles.lwidth}`}>
                       Wrong Network
                     </button>
                   )
                 ) : (
-                  <button className={styles.mt} onClick={loginHandler}>
-                    Login
-                  </button>
+                  <button onClick={loginHandler}>Login</button>
                 )}
-              </ul>
+              </div>
             </div>
 
             {/* <ul className={styles.main_mobile_social}>
