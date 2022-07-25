@@ -21,6 +21,7 @@ const data = (index: string) => {
         location: 'Worldwide Official Nike Stores',
         startTime: 1657887360000,
         endTime: 1658319360000,
+        nftCollectionAddr: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
         voucher: {
           title: '10% Off Footwear',
           description:
@@ -31,16 +32,17 @@ const data = (index: string) => {
             'Applicable only for in-store purchases',
             'Other Nike T&Cs apply',
           ],
-          code: '123',
+          code: '23cv-f34c-xc123',
         },
       }
     case '2':
       return {
-        nft: 'karafura',
+        nft: 'karafuru',
         company: 'atmos',
         location: 'Worldwide Official Nike Stores',
         startTime: 1657887360000,
         endTime: 1658319360000,
+        nftCollectionAddr: '0xd2F668a8461D6761115dAF8Aeb3cDf5F40C532C6',
         voucher: {
           title: '10% OFF FOOTWEAR',
           description:
@@ -51,7 +53,7 @@ const data = (index: string) => {
             'Applicable only for in-store purchases',
             'Other Nike T&Cs apply',
           ],
-          code: '123',
+          code: '56gg-sd56-sfdg4',
         },
       }
     case '3':
@@ -61,6 +63,7 @@ const data = (index: string) => {
         location: 'Worldwide Official Nike Stores',
         startTime: 1657887360000,
         endTime: 1658319360000,
+        nftCollectionAddr: '0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e',
         voucher: {
           title: '10% OFF FOOTWEAR',
           description:
@@ -71,7 +74,7 @@ const data = (index: string) => {
             'Applicable only for in-store purchases',
             'Other Nike T&Cs apply',
           ],
-          code: '123',
+          code: '11uf-df78-kgsf5',
         },
       }
     default:
@@ -81,6 +84,7 @@ const data = (index: string) => {
         location: '',
         startTime: 0,
         endTime: 0,
+        nftCollectionAddr: '',
         voucher: {
           title: '',
           description: '',
@@ -100,6 +104,7 @@ const Campaign: NextPage = () => {
     location: '',
     startTime: 0,
     endTime: 0,
+    nftCollectionAddr: '',
     voucher: {
       title: '',
       description: '',
@@ -137,7 +142,7 @@ const Campaign: NextPage = () => {
         <CampaignBanner campaign={campaignDetails} />
         <CampaignDetails
           details={campaignDetails.voucher}
-          collectionAddr="0x68bb5b33b1d41353bd5f3e4b2bcfc8b01952482c"
+          collectionAddr={campaignDetails.nftCollectionAddr}
           toggleModal={setShowRedemptionModal}
         />
 

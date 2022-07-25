@@ -145,6 +145,7 @@ export interface ICampaign {
   startTime: number
   endTime: number
   voucher: IVoucher
+  nftCollectionAddr: string
 }
 
 export interface IVoucher {

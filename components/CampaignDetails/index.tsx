@@ -6,6 +6,7 @@ import { IOwnedNFTData, IOwnedNFTDataSelection } from '../../utils/interfaces'
 import styles from './index.module.scss'
 import Image from 'next/image'
 import NFTCard from '../NFTCard'
+import listOfNftsByCollection from '../../utils/dummyNftCollections'
 
 interface IVoucher {
   title: string
@@ -31,10 +32,13 @@ const CampaignDetails = ({
   const [selectedNFT, setSelectedNFT] = useState<IOwnedNFTDataSelection>()
 
   const retrieveUserNFTs = async () => {
-    const tokens = await getTokensFromUser(
-      mockUserWalletAddress,
-      collectionAddr
-    )
+    // const tokens = await getTokensFromUser(
+    //   mockUserWalletAddress,
+    //   collectionAddr
+    // )
+
+    // Mock return some basic images
+    const tokens = listOfNftsByCollection(collectionAddr)
     return tokens
   }
 
@@ -43,7 +47,7 @@ const CampaignDetails = ({
     const userTokens = await retrieveUserNFTs()
 
     // Query backend to detect NFTs that are already claimed for this voucher
-    const mockRedeemedTokenIds = [267, 265]
+    const mockRedeemedTokenIds = [896]
 
     const filteredTokens = userTokens.map((_token) => {
       return {
@@ -61,7 +65,7 @@ const CampaignDetails = ({
 
   useEffect(() => {
     retrieveAndFilterEligibleTokens()
-  }, [])
+  }, [collectionAddr])
 
   return (
     <div className={styles.container}>
