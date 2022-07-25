@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Meta from '../components/Meta'
 import Navigation from '../components/Navigation'
 import styles from '../styles/Login.module.scss'
-import LoginPageImage from '../public/assets/misc/login_page_image.png'
+import LoginPageImage from '../public/assets/misc/login_page_image.svg'
 import Image from 'next/image'
 import { useWeb3Auth } from '../utils/services/web3auth'
 

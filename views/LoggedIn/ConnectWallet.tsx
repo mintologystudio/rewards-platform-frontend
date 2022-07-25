@@ -7,7 +7,7 @@ import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
 import Meta from '../../components/Meta'
 import Navigation from '../../components/Navigation'
 import styles from '../../styles/Login.module.scss'
-import LoginPageImage from '../../public/assets/misc/login_page_image.png'
+import LoginPageImage from '../../public/assets/misc/login_page_image.svg'
 import Image from 'next/image'
 import { Web3Context } from '../../context/web3Context'
 import { useWeb3Auth } from '../../utils/services/web3auth'
@@ -140,8 +140,9 @@ const ConnectWallet = () => {
       <main className={styles.main}>
         <div className={styles.content}>
           <div className={styles.lines}>
-            <div className={styles.lines_top_left_pink} />
-            <div className={styles.lines_top_left_grey} />
+            <div className={styles.lines_top_left_pink_object} />
+            {/* <div className={styles.lines_top_left_pink} /> */}
+            {/* <div className={styles.lines_top_left_grey} /> */}
             <div className={styles.lines_bottom_right_pink} />
             <div className={styles.lines_bottom_right_grey} />
           </div>
