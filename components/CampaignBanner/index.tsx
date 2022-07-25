@@ -22,7 +22,7 @@ const CampaignBanner = ({ campaign }: { campaign: ICampaign }) => {
       <div
         className={styles.background}
         style={{
-          backgroundImage: `linear-gradient(180deg, rgba(1, 10, 29, 0) 0%, #010A1D 100%), url(assets/nfts/banner/${
+          backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 100%), url(assets/nfts/banner/${
             campaign.nft || 'default'
           }.png)`,
           opacity: 0.6,
