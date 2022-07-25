@@ -23,7 +23,7 @@ const AvailableCampaign = () => {
           />
           <CampaignCard
             campaignId="2"
-            nft="karafura"
+            nft="karafuru"
             company="atmos"
             offer="10% OFF STOREWIDE"
             expiration={1655433980000}

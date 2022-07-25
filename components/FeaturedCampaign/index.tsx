@@ -25,7 +25,7 @@ const ListOfFeaturedCampaigns = [
   },
   {
     campaignId: 2,
-    nft: 'karafura',
+    nft: 'karafuru',
     company: 'atmos',
     percentage: '20',
     description: 'off storewide',
