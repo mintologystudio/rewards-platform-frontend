@@ -18,7 +18,7 @@ body {
   // background-image: url('/assets/misc/bg.png');
   // background-repeat: no-repeat;
   // background-size: cover;
-  background: linear-gradient(45deg, #000000, #686561);
+  // background: linear-gradient(45deg, #000000, #686561);
 
   &::-webkit-scrollbar {
     display: block;
@@ -26,8 +26,8 @@ body {
   }
 
   &::-webkit-scrollbar-track {
-    color: $blue;
-    background-color: $blue;
+    color: $white;
+    background-color: $white;
   }
 
   &::-webkit-scrollbar-thumb {

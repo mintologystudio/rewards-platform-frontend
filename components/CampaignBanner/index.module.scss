@@ -53,15 +53,15 @@
 
     &_title {
       display: flex;
-      color: $white;
+      color: $black;
       font-family: $baseFont;
       margin: 0;
       text-align: left;
-      margin-bottom: 1rem;
-      font-size: 4rem;
+      font-size: 4.2rem;
+      font-weight: 500;
 
       @include l {
-        font-size: 7rem;
+        font-size: 4.8rem;
       }
     }
 
@@ -72,7 +72,7 @@
       & p {
         display: flex;
         font-size: 2rem;
-        color: $white;
+        color: $black;
         font-family: $baseFont;
         text-align: left;
 

@@ -37,6 +37,8 @@
     height: 50%;
     background-color: $white;
     border-radius: 0 0 2rem 2rem;
+    border: 0.1rem solid $grey;
+    border-top: none;
 
     display: flex;
     flex-direction: column;

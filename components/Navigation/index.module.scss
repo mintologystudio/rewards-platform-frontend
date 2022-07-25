@@ -21,7 +21,7 @@
   padding-left: 5vw;
   padding-right: 5vw;
 
-  background-color: $blue;
+  background-color: $white;
 
   @include l {
     padding-left: 10vw;
@@ -31,9 +31,12 @@
   & button {
     background-color: $pink;
     border-radius: 1rem;
-    margin: 0 0 0 3.5rem;
     border: none;
     cursor: pointer;
+
+    @include l {
+      margin: 0 0 0 3.5rem;
+    }
 
     // height: 4rem;
     // width: 15rem;
@@ -59,17 +62,17 @@
       cursor: unset;
 
       background-color: transparent;
-      color: $white;
+      color: $black;
     }
   }
 
-  & .mt {
-    margin-top: 3rem;
-  }
+  // & .mt {
+  //   margin-top: 3rem;
+  // }
 
-  & .lwidth {
-    width: 20rem;
-  }
+  // & .lwidth {
+  //   width: 20rem;
+  // }
 }
 
 .nav {
@@ -119,7 +122,7 @@
   padding-left: 5vw;
   padding-right: 5vw;
 
-  background-color: $blue;
+  background-color: $white;
 
   transition: all 0.4s linear;
 
@@ -144,7 +147,7 @@
       padding: 0;
       height: 100%;
 
-      color: $white;
+      color: $black;
       font-size: 2rem;
       font-family: $baseFont;
       cursor: pointer;
@@ -152,6 +155,14 @@
       & li {
         margin-top: 3rem;
       }
+    }
+
+    &_action {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -208,7 +219,7 @@
     height: 3rem;
     width: 100%;
 
-    background-color: $blue;
+    background-color: $white;
 
     &_img {
       position: relative;
@@ -232,7 +243,7 @@
   padding: 0;
 
   & li {
-    color: $white;
+    color: $black;
     font-family: $baseFont;
     font-size: 1.8rem;
     margin: 0 3.5rem 0 3.5rem;
@@ -256,7 +267,7 @@
   // justify-content: flex-end;
 
   i {
-    background-color: $white;
+    background-color: $pink;
     width: 2rem;
     height: 0.2rem;
     margin: 0.2rem;

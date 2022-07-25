@@ -2,7 +2,7 @@
 @import '../styles/mixin.module.scss';
 
 .container {
-  background-color: $blue;
+  background-color: $white;
   min-height: 100vh;
   width: 100vw;
 }
@@ -20,7 +20,7 @@
   padding-top: 6rem;
 
   @include l {
-    padding-top: 7.8rem;
+    padding-top: 9.6rem;
   }
 }
 
@@ -34,19 +34,20 @@
   min-height: calc(100vh - 6rem);
 
   @include l {
-    height: calc(100vh - 7.8rem);
+    height: calc(100vh - 9.6rem);
+    min-height: auto;
     flex-direction: row;
   }
 
   .logo_image {
     position: relative;
-    height: 26rem;
+    height: 26.1rem;
     width: 29.5rem;
     margin: 0 0 2rem 0;
 
     @include l {
-      height: 52rem;
-      width: 58rem;
+      height: 42.5rem;
+      width: 48rem;
       margin: 0 5.8rem 0 0;
     }
   }
@@ -55,7 +56,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     @include l {
       width: 600px;
@@ -79,7 +80,7 @@
 
     & h1 {
       font-size: 5.8rem;
-      color: $white;
+      color: $black;
       line-height: 5.8rem;
       text-align: left;
       font-family: $baseFont;
@@ -100,7 +101,7 @@
 
     & h2 {
       font-size: 3rem;
-      color: $white;
+      color: $black;
       line-height: 3.629rem;
       font-family: $baseFont;
       margin: 0px;
@@ -132,7 +133,7 @@
     &_subheading {
       margin: 1.5rem 0 2rem 0;
       font-size: 2.4rem;
-      color: $white;
+      color: $black;
       font-family: $baseFont;
       font-weight: 700;
 
@@ -163,7 +164,7 @@
       margin: 2rem 0;
 
       font-size: 1.4rem;
-      color: $white;
+      color: $black;
       font-family: $baseFont;
 
       @include l {
@@ -180,15 +181,15 @@
 
     & button {
       cursor: pointer;
-      background-color: $white;
+      background-color: $pink;
       border-radius: 10px;
       padding: 1.5rem 3.5rem;
       border: none;
       cursor: pointer;
-      border: 3px solid $black;
+      // border: 3px solid $black;
 
       font-family: $baseFont;
-      color: $black;
+      color: $white;
       font-size: 2rem;
       text-transform: uppercase;
 
@@ -206,8 +207,8 @@
       }
 
       &.loading {
-        background-color: $white;
-        color: $black;
+        background-color: $pink;
+        color: $white;
         margin-top: 1rem;
         cursor: default;
       }
@@ -237,7 +238,7 @@
       }
 
       &_address {
-        color: $white;
+        color: $black;
       }
     }
   }
@@ -249,8 +250,21 @@
   @include l {
     display: block;
   }
+
+  &_top_left_pink_object {
+    position: absolute;
+    left: 0rem;
+    top: calc(20vh - 1rem);
+
+    width: 30.3rem;
+    height: 28.7rem;
+
+    border-radius: 0 17rem 0 0;
+
+    background-color: rgba(255, 191, 233, 0.35);
+  }
+
   &_top_left_pink {
-    z-index: 2;
     position: absolute;
     left: 10.2rem;
     top: calc(20vh - 1rem);
@@ -262,7 +276,6 @@
   }
 
   &_top_left_grey {
-    z-index: 2;
     position: absolute;
 
     left: 0;
@@ -275,7 +288,6 @@
   }
 
   &_bottom_right_pink {
-    z-index: 2;
     position: absolute;
 
     right: 0;
