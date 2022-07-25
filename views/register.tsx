@@ -17,8 +17,9 @@ const Register: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.content}>
           <div className={styles.lines}>
-            <div className={styles.lines_top_left_pink} />
-            <div className={styles.lines_top_left_grey} />
+            <div className={styles.lines_top_left_pink_object} />
+            {/* <div className={styles.lines_top_left_pink} /> */}
+            {/* <div className={styles.lines_top_left_grey} /> */}
             <div className={styles.lines_bottom_right_pink} />
             <div className={styles.lines_bottom_right_grey} />
           </div>
