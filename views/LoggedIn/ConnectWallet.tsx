@@ -173,7 +173,7 @@ const ConnectWallet = () => {
                     </li>
                   </ul>
                 </div>
-                <button onClick={connect}>Web3Modal</button>
+                <button onClick={connect}>Bind Wallet</button>
               </div>
             )}
           </div>
