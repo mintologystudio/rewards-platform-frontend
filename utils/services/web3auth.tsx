@@ -112,7 +112,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
       try {
         const { Web3Auth } = await import('@web3auth/web3auth')
         const { OpenloginAdapter } = await import('@web3auth/openlogin-adapter')
-        const clientId = envConfig.WEB3_AUTH_CLIENT_ID
+        const clientId = envConfig.WEB3AUTH_CLIENT_ID
         setIsLoading(true)
         const web3AuthInstance = new Web3Auth({
           chainConfig: currentChainConfig,
