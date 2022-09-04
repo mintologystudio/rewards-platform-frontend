@@ -3,42 +3,51 @@ import styles from './index.module.scss'
 import MainLogo from '../../public/assets/misc/main.png'
 import Link from 'next/link'
 import useWindowDimensions from '../../hooks/useWindowDimension'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Image from 'next/image'
 import { Web3Context } from '../../context/web3Context'
 import { useRouter } from 'next/router'
+import useWeb3Modal from '../../hooks/useWeb3Modal'
+import Routes from '../../utils/constants/routes'
+import { getDisplayAddress } from '../../utils'
 
-const Routes = {
-  Home: '/',
-  Explore: '/explore',
-  Profile: '/profile',
-}
-
-const FilteredRoutes = {
-  Home: '/',
-  Explore: '/explore',
+const NavigationBarRoutes = {
+  Home: Routes.HOME,
+  Explore: Routes.EXPLORE,
+  Profile: Routes.PROFILE,
 }
 
 const Navigation = () => {
   const router = useRouter()
   const { windowDimensions, LARGE_SCREEN_SIZE } = useWindowDimensions()
   const [expanded, setExpanded] = useState<boolean>(false)
-  const { appState, appDispatch } = useContext(Web3Context)
+  const { appState: Web3State } = useContext(Web3Context)
+  const [navRoutes, setNavRoutes] = useState<any>([])
+
+  // Initialize useWeb3Modal on first load of webpage
+  useWeb3Modal()
 
   const loginHandler = () => {
-    router.push('/login')
+    router.push(Routes.LOGIN)
   }
 
-  let finalRoutes
-  if (appState.address_to_bind && appState.chainId === 1) {
-    finalRoutes = Object.keys(Routes).map((route) => (
-      <li key={`Navigation_${route}`}>{route}</li>
-    ))
-  } else {
-    finalRoutes = Object.keys(FilteredRoutes).map((route) => (
-      <li key={`Navigation_${route}`}>{route}</li>
-    ))
-  }
+  useEffect(() => {
+    let _routes
+    if (Web3State.address_to_bind) {
+      // If account is logged in
+      _routes = Object.keys(NavigationBarRoutes).map((route) => (
+        <li key={`Navigation_${route}`}>{route}</li>
+      ))
+    } else {
+      // If account is not logged in
+      _routes = Object.keys(NavigationBarRoutes).map((route) => {
+        if (route !== 'Profile') {
+          return <li key={`Navigation_${route}`}>{route}</li>
+        }
+      })
+    }
+    setNavRoutes(_routes)
+  }, [Web3State.address_to_bind])
 
   return (
     <nav className={styles.container}>
@@ -50,52 +59,23 @@ const Navigation = () => {
             }`}
           >
             <div className={styles.nav_mobile_nav}>
-              <ul>{finalRoutes}</ul>
+              <ul>{navRoutes}</ul>
               <div className={styles.nav_mobile_nav_action}>
-                {appState.address_to_bind ? (
-                  appState.chainId === 1 ? (
-                    <button disabled>
-                      {appState.address_to_bind.substring(0, 4)}...
-                      {appState.address_to_bind.substring(
-                        appState.address_to_bind.length - 4
-                      )}
-                    </button>
-                  ) : (
-                    <button className={`${styles.lwidth}`}>
-                      Wrong Network
-                    </button>
-                  )
+                {Web3State.address_to_bind ? (
+                  <button disabled>
+                    {getDisplayAddress(Web3State.address_to_bind)}
+                  </button>
                 ) : (
                   <button onClick={loginHandler}>Login</button>
                 )}
               </div>
             </div>
-
-            {/* <ul className={styles.main_mobile_social}>
-                {socials.map((item) => {
-                  return (
-                    <li key={`Navigation_Social_${item.name}`}>
-                      <a
-                        href={item.href}
-                        target='_blank'
-                        rel='noreferrer'
-                        style={{
-                          pointerEvents: !item.released ? 'none' : 'auto',
-                        }}
-                      >
-                        <>{getIconSvg(item.icon)}</>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul> */}
-
             <div className={styles.nav_mobile_header}>
-              <div className={styles.nav_mobile_header_img}>
-                <Link href={Routes.Home}>
+              <Link href={Routes.HOME}>
+                <div className={styles.nav_mobile_header_img}>
                   <Image src={MainLogo} alt="Main Logo" layout="fill" />
-                </Link>
-              </div>
+                </div>
+              </Link>
               <div
                 id="BurgerMenu"
                 className={styles.burger}
@@ -111,25 +91,18 @@ const Navigation = () => {
       ) : (
         <div className={styles.main}>
           <div className={styles.nav}>
-            <div className={styles.nav_img}>
-              <Link href={Routes.Home}>
+            <Link href={Routes.HOME}>
+              <div className={styles.nav_img}>
                 <Image src={MainLogo} alt="Main Logo" layout="fill" />
-              </Link>
-            </div>
+              </div>
+            </Link>
 
             <ul className={styles.sub}>
-              {finalRoutes}
-              {appState.address_to_bind ? (
-                appState.chainId === 1 ? (
-                  <button disabled>
-                    {appState.address_to_bind.substring(0, 4)}...
-                    {appState.address_to_bind.substring(
-                      appState.address_to_bind.length - 4
-                    )}
-                  </button>
-                ) : (
-                  <button className={styles.lwidth}>Wrong Network</button>
-                )
+              {navRoutes}
+              {Web3State.address_to_bind ? (
+                <button disabled>
+                  {getDisplayAddress(Web3State.address_to_bind)}
+                </button>
               ) : (
                 <button onClick={loginHandler}>Login</button>
               )}
