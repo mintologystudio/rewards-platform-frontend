@@ -33,9 +33,10 @@
     "react-icons": "^4.4.0",
     "react-jsbarcode": "^0.2.4",
     "react-loading-skeleton": "^3.1.0",
+    "react-spinners": "^0.13.4",
     "sass": "^1.52.2",
     "web3": "^1.7.3",
-    "web3modal": "^1.9.8",
+    "web3modal": "1.9.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
