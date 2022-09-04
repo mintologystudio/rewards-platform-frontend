@@ -1,8 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
 import styles from './index.module.scss'
-import Image from 'next/image'
-import BAYCBadge from '../../public/assets/nfts/bayc.png'
-import AdidasBadge from '../../public/assets/companies/adidas.png'
 import CampaignCard from '../CampaignCard'
 
 const AvailableCampaign = () => {
