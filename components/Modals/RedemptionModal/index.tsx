@@ -6,32 +6,79 @@ import { Dispatch, DispatchWithoutAction, SetStateAction } from 'react'
 import Barcode from 'react-jsbarcode'
 import Routes from '../../../utils/constants/routes'
 import { useRouter } from 'next/router'
+import Badge from "../../Badge";
+import Image from "next/image";
+import NftSearch from "../../../public/assets/misc/searchnft.svg";
 
 const RedemptionModal = ({
   voucher,
+  company,
   toggleModal,
+  isEmpty = false
 }: {
   voucher: IVoucher
+  company: string
+  isEmpty: boolean
   toggleModal: Dispatch<SetStateAction<boolean>>
 }) => {
   const router = useRouter()
   return (
     <li className={styles.background}>
       <div className={styles.container}>
-        <p>You have successfully redeemed:</p>
-        <h3>{voucher.title}</h3>
-        <div>
-          <Barcode value={voucher.code} options={{ format: 'code128' }} />
-        </div>
-        <button
-          className={styles.button}
-          onClick={() => {
-            toggleModal(false)
-            router.push('/')
-          }}
-        >
-          BACK
-        </button>
+
+     {!isEmpty ? (
+       <>
+          <p>Successfully Redeemed:</p>
+            <div className={styles.company}>
+              <Badge company={company} width={'20rem'}/>
+              <p>{voucher.title}</p>
+            </div>
+            <div className={styles.voucher}>
+                <div className={styles.voucher_title}>Voucher Code</div>
+                <div className={styles.voucher_code}>{voucher.code}</div>
+                {/*<Barcode value={voucher.code} options={{ format: 'code128' }} />*/}
+            </div>
+            <div className={styles.info}>
+                <span className={styles.info_text}>
+                    You can review and manage your perks in “My Perks”.
+                    <Link href={'#'}><span className={styles.info_link}>Go here ></span></Link>
+                </span>
+            </div>
+
+          <button
+            className={styles.button}
+            onClick={() => {
+              toggleModal(false)
+              // router.push('/')
+            }}
+          >
+            Use Now
+          </button>
+        </>
+     ) : (
+        <>
+          <p>No eligible NFTs</p>
+            <div className={styles.logo_image}>
+              <Image src={NftSearch} alt="Nft Search" layout="fill" />
+            </div>
+          <div className={styles.info}>
+                <span className={styles.info_text}>
+                    Seems there's no matching eligible NFT are found.
+                </span>
+          </div>
+
+          <button
+            className={styles.button}
+            onClick={() => {
+                toggleModal(false)
+            }}
+          >
+            Back
+          </button>
+        </>
+        )
+
+        }
       </div>
     </li>
   )

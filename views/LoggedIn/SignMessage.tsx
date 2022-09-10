@@ -6,6 +6,7 @@ import router, { useRouter } from 'next/router'
 import { useWeb3Auth } from '../../utils/services/web3auth'
 import styles from '../../styles/Login.module.scss'
 import { Web3Context } from '../../context/web3Context'
+import {BsFillCheckCircleFill} from "react-icons/bs";
 
 interface Props {
   connector: any
@@ -76,62 +77,74 @@ const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
   }
 
   return (
-    <div className={styles.info_loggedin}>
+      <div className={styles.connect}>
       {/* loading signature*/}
       {loadingSignature === 'loading' && (
-        <div className={styles.info_loading}>
-          <h2>Please sign message from nft wallet</h2>
-          <button disabled className={styles.loading}>
-            Pending signature...
-          </button>
-        </div>
+          <>
+            <span>Please sign message from NFT wallet</span>
+            <div className={styles.connect_connected}>
+              <p className={styles.connect_connected_title}>Connected Wallet</p>
+
+              {fullAddress ? (
+                  <p className={styles.connect_connected_wallet}>{address_to_bind}</p>
+              ) : (
+                  <p className={styles.connect_connected_wallet}>
+                    {address_to_bind.substring(0, 4)}...
+                    {address_to_bind.substring(address_to_bind.length - 4)}
+                  </p>
+              )}
+            </div>
+            <br/>
+            <p className={styles.connect_text}>Signing the message essentially proves that<br/>are indeed the owner of the wallet address</p>
+            <p className={styles.connect_text}>Mintology will not perform any transactions or<br/>require any approval from you</p>
+
+            <p className={styles.connect_connected_pending}>Pending signature...</p>
+          </>
+
       )}
 
       {/* generated signature */}
       {loadingSignature === 'done' && (
-        <div className={styles.info_loading}>
-          <h2>Congratulations</h2>
-          <p className={styles.info_text}>
-            You have successfully created and binded your NFT wallet
-          </p>
-          <button onClick={homeHandler}>Go to Home</button>
-        </div>
+          <>
+            <p className={styles.connected_title}>Congratulations</p>
+            <br/>
+            <div className={styles.connected}>
+              <BsFillCheckCircleFill className={styles.connected_icon} />
+              <p className={styles.connected_text}>
+                You have successfully created and binded your NFT wallet
+              </p>
+            </div>
+
+            <button className={styles.connect_button} onClick={homeHandler}>Go to home</button>
+          </>
+
       )}
 
       {/* have not signed*/}
       {loadingSignature === '' && (
-        <div className={styles.info_loading}>
-          <h2>Bind Wallet</h2>
-          <div className={styles.info_subheading}>
-            <ul>
-              <li>
-                Signing the message essentially proves that you are indeed the
-                owner of the wallet address
-              </li>
-              <li>
-                Mintology will not perform any transactions or require any
-                approval from you
-              </li>
-            </ul>
-          </div>
+          <>
+          <span>Bind Wallet</span>
+          <div className={styles.connect_connected}>
+            <p className={styles.connect_connected_title}>Connected Wallet</p>
 
-          <button onClick={signTypedMessage}>Sign Message</button>
-        </div>
+              {fullAddress ? (
+                  <p className={styles.connect_connected_wallet}>{address_to_bind}</p>
+              ) : (
+                  <p className={styles.connect_connected_wallet}>
+                    {address_to_bind.substring(0, 4)}...
+                    {address_to_bind.substring(address_to_bind.length - 4)}
+                  </p>
+              )}
+          </div>
+            <br/>
+            <p className={styles.connect_text}>Signing the message essentially proves that<br/>are indeed the owner of the wallet address</p>
+            <p className={styles.connect_text}>Mintology will not perform any transactions or<br/>require any approval from you</p>
+            <br/>
+
+          <button className={styles.connect_button} onClick={signTypedMessage}>Sign Message</button>
+        </>
       )}
 
-      <div className={styles.web3}>
-        <div className={styles.web3_wallet}>Connected Wallet:</div>
-        <div className={styles.web3_address}>
-          {fullAddress ? (
-            <p>{address_to_bind}</p>
-          ) : (
-            <p>
-              {address_to_bind.substring(0, 4)}...
-              {address_to_bind.substring(address_to_bind.length - 4)}
-            </p>
-          )}
-        </div>
-      </div>
     </div>
   )
 }

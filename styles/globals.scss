@@ -42,7 +42,7 @@ body {
 
 html {
   // This redefine 1rem of 16px to become 1rem of 10px
-  font-size: 62.5%;
+  font-size: 48%;
 }
 
 a {
@@ -56,4 +56,12 @@ p {
 
 * {
   box-sizing: border-box;
+}
+
+footer {
+  position: inherit;
+  bottom: 0;
+  width: 100%;
+  height: 40rem;
+  background-color: #0E131D;
 }

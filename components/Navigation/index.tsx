@@ -1,22 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from './index.module.scss'
 import MainLogo from '../../public/assets/misc/main.png'
+import NavLogo from '../../public/assets/misc/logo-nav.png'
 import Link from 'next/link'
 import useWindowDimensions from '../../hooks/useWindowDimension'
-import { useState, useContext } from 'react'
+import {useState, useContext, useCallback, useEffect} from 'react'
 import Image from 'next/image'
 import { Web3Context } from '../../context/web3Context'
 import { useRouter } from 'next/router'
 
 const Routes = {
   Home: '/',
-  Explore: '/explore',
-  Profile: '/profile',
+  Explore: '/',
+  Profile: '/',
 }
 
 const FilteredRoutes = {
   Home: '/',
-  Explore: '/explore',
+  Explore: '/',
 }
 
 const Navigation = () => {
@@ -29,14 +30,18 @@ const Navigation = () => {
     router.push('/login')
   }
 
+  const redirectHandler = (obj: any, key: string) => {
+    return obj[key];
+  };
+
   let finalRoutes
   if (appState.address_to_bind && appState.chainId === 1) {
     finalRoutes = Object.keys(Routes).map((route) => (
-      <li key={`Navigation_${route}`}>{route}</li>
+        <li key={`Navigation_${route}`}><Link href={redirectHandler(Routes, route)}>{route}</Link></li>
     ))
   } else {
     finalRoutes = Object.keys(FilteredRoutes).map((route) => (
-      <li key={`Navigation_${route}`}>{route}</li>
+        <li key={`Navigation_${route}`}><Link href={redirectHandler(FilteredRoutes, route)}>{route}</Link></li>
     ))
   }
 
@@ -93,7 +98,7 @@ const Navigation = () => {
             <div className={styles.nav_mobile_header}>
               <div className={styles.nav_mobile_header_img}>
                 <Link href={Routes.Home}>
-                  <Image src={MainLogo} alt="Main Logo" layout="fill" />
+                  <Image src={NavLogo} alt="Main Logo" layout="fill" />
                 </Link>
               </div>
               <div
@@ -113,7 +118,7 @@ const Navigation = () => {
           <div className={styles.nav}>
             <div className={styles.nav_img}>
               <Link href={Routes.Home}>
-                <Image src={MainLogo} alt="Main Logo" layout="fill" />
+                <Image src={NavLogo} alt="Main Logo" layout="fill" />
               </Link>
             </div>
 

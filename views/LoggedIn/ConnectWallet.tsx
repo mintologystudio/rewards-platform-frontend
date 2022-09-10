@@ -72,7 +72,8 @@ const ConnectWallet = () => {
       address_to_bind: address_to_bind,
       address_w3a: address_w3a,
       chainId: network.chainId,
-    })
+    });
+
   }, [])
 
   const disconnect = useCallback(
@@ -138,46 +139,66 @@ const ConnectWallet = () => {
       <Meta />
       <Navigation />
       <main className={styles.main}>
-        <div className={styles.content}>
-          <div className={styles.lines}>
-            <div className={styles.lines_top_left_pink_object} />
-            {/* <div className={styles.lines_top_left_pink} /> */}
-            {/* <div className={styles.lines_top_left_grey} /> */}
-            <div className={styles.lines_bottom_right_pink} />
-            <div className={styles.lines_bottom_right_grey} />
-          </div>
-          <div className={styles.logo_image}>
-            <Image src={LoginPageImage} alt="LoginPageImage" layout="fill" />
-          </div>
-          <div className={styles.info}>
-            {appState.provider ? (
-              <div>
-                <SignMessage
+
+          {appState.provider ? (
+              <SignMessage
                   connector={appState.provider}
                   address_to_bind={appState.address_to_bind}
                   chainId={appState.chainId}
-                />
-              </div>
-            ) : (
-              <div className={styles.info_loggedin}>
-                <h2>Connect your NFT Wallet</h2>
-                <div className={styles.info_subheading}>
-                  <ul>
-                    <li>
-                      Make sure you are connecting the wallet that is holding
-                      your NFT collections
-                    </li>
-                    <li>
-                      Each wallet can only be binded once to your web3auth
-                      account
-                    </li>
-                  </ul>
-                </div>
-                <button onClick={connect}>Bind Wallet</button>
-              </div>
-            )}
+              />
+          ) : (
+           <div className={styles.connect}>
+            <span>Connect Your<br/>NFT Wallet</span>
+            <br/>
+            <p className={styles.connect_text}>Make sure you are connecting the wallet that is<br/>holding your NFT collection</p>
+            <p className={styles.connect_text}>Each wallet can only be binded once to you<br/>web3auth account</p>
+            <br/>
+             <button onClick={connect}>Connect Wallet</button>
+
           </div>
-        </div>
+          )}
+
+        {/*<div className={styles.content}>*/}
+        {/*  <div className={styles.lines}>*/}
+        {/*    <div className={styles.lines_top_left_pink_object} />*/}
+        {/*    /!* <div className={styles.lines_top_left_pink} /> *!/*/}
+        {/*    /!* <div className={styles.lines_top_left_grey} /> *!/*/}
+        {/*    <div className={styles.lines_bottom_right_pink} />*/}
+        {/*    <div className={styles.lines_bottom_right_grey} />*/}
+        {/*  </div>*/}
+        {/*  <div className={styles.logo_image}>*/}
+        {/*    <Image src={LoginPageImage} alt="LoginPageImage" layout="fill" />*/}
+        {/*  </div>*/}
+        {/*  <div className={styles.info}>*/}
+        {/*    {appState.provider ? (*/}
+        {/*      <div>*/}
+        {/*        <SignMessage*/}
+        {/*          connector={appState.provider}*/}
+        {/*          address_to_bind={appState.address_to_bind}*/}
+        {/*          chainId={appState.chainId}*/}
+        {/*        />*/}
+        {/*      </div>*/}
+        {/*    ) : (*/}
+        {/*      <div className={styles.info_loggedin}>*/}
+        {/*        <h2>Connect your NFT Wallet</h2>*/}
+        {/*        <div className={styles.info_subheading}>*/}
+        {/*          <ul>*/}
+        {/*            <li>*/}
+        {/*              Make sure you are connecting the wallet that is holding*/}
+        {/*              your NFT collections*/}
+        {/*            </li>*/}
+        {/*            <li>*/}
+        {/*              Each wallet can only be binded once to your web3auth*/}
+        {/*              account*/}
+        {/*            </li>*/}
+        {/*          </ul>*/}
+        {/*        </div>*/}
+        {/*        <button onClick={connect}>Bind Wallet</button>*/}
+        {/*      </div>*/}
+        {/*    )}*/}
+        {/*  </div>*/}
+        {/*</div>*/}
+
       </main>
     </div>
   )

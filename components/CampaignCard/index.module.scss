@@ -3,8 +3,8 @@
 
 .container {
   position: relative;
-  width: 30rem;
-  height: 35rem;
+  width: 40rem;
+  height: 45rem;
 }
 
 .main {
@@ -14,8 +14,8 @@
   align-items: center;
   justify-content: center;
 
-  height: 35rem;
-  width: 30rem;
+  height: 45rem;
+  width: 40rem;
 
   &_top {
     position: relative;
@@ -27,12 +27,107 @@
     &_badges {
       position: relative;
       display: flex;
+      align-items: flex-start;
+      height: 80%;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+
+    &_timeleft {
+      position: absolute;
+      display: flex;
       align-items: center;
+      height: 3.5rem;
+      width: 50%;
+      justify-content: space-between;
+      border-radius: 2rem 0 2rem 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 0 1rem;
+      top: 0;
+
+      & span {
+        color: $white;
+        font-size: 1.2rem;
+      }
+
+      &_icon {
+        color: $white;
+        font-size: 2rem;
+      }
+    }
+
+    &_title {
+      position: absolute;
+      display: flex;
+      align-items: flex-end;
       height: 100%;
+      width: 100%;
+      justify-content: flex-start;
+      padding-left: 2rem;
+      padding-bottom: 1rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.0001) 19.57%, rgba(0, 0, 0, 0.326732) 80.82%);
+      top: 0;
+    }
+
+    & h3 {
+      text-align: left;
+      word-wrap: break-word;
+      font-family: $baseFont;
+      font-size: 2.2rem;
+      margin: 0;
+      color: $white;
     }
   }
 
   &_bottom {
+    width: 100%;
+    height: 50%;
+    background-color: $white;
+    border-radius: 0 0 2rem 2rem;
+    border: 0.1rem solid $white;
+    border-top: none;
+
+    &_p {
+      padding: 2rem;
+      height: 60%;
+      max-height: 60%;
+    }
+
+    & p {
+      margin: 0;
+      font-family: $baseFont;
+      font-size: 1.4rem;
+      text-align: left;
+    }
+
+    & button {
+      background-color: $pink;
+      border-radius: 0.5rem;
+      padding: 0;
+      margin: 0;
+      border: none;
+      cursor: pointer;
+
+      height: 4rem;
+      width: 10.8rem;
+
+      font-family: $baseFont;
+      color: $white;
+      font-size: 1.4rem;
+      font-weight: 700;
+
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+      transition: all 0.5s ease;
+
+      &:hover {
+        transform: translateY(0.2rem);
+        transition: all 0.5s ease;
+      }
+    }
+  }
+
+  &_bottom2 {
     width: 100%;
     height: 50%;
     background-color: $white;
@@ -92,13 +187,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
+    padding: 2rem;
 
     & div {
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
+      justify-content: left;
 
       & p {
         font-family: $baseFont;
@@ -112,6 +208,32 @@
     &_time {
       & p {
         color: #909090;
+      }
+    }
+
+    &_redeemed {
+      flex-direction: column !important;
+
+      & div {
+        width: 100%;
+
+        & p {
+          margin-left: 0.5rem;
+          color: #909090;
+        }
+      }
+
+      &_icon {
+        color: $grey;
+        font-size: 2rem;
+        height: 1.8rem;
+        width: 1.8rem;
+      }
+
+      &_bottom {
+        text-align: left;
+        font-size: 1.5rem;
+        font-weight: bold;
       }
     }
 

@@ -1,0 +1,94 @@
+@import '../../styles/variables.module.scss';
+@import '../../styles/mixin.module.scss';
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  padding: 5rem 5rem;
+  height: 100%;
+
+  &_main {
+    flex-grow: 5;
+    padding-right: 0.25rem;
+
+    &_div {
+      position: relative;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+
+      & span {
+
+      }
+    }
+
+    &_image {
+      margin-bottom: 2rem;
+    }
+
+    &_title {
+      color: $white;
+      font-size: 2rem;
+      font-family: $baseFont;
+      line-height: 3.5rem;
+      margin-bottom: 5rem;
+    }
+
+    &_copyright {
+      font-family: $baseFont;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 3.5rem;
+
+      letter-spacing: 0.42px;
+
+      color: rgba(255, 255, 255, 0.595198);
+    }
+  }
+
+  &_div {
+    flex-grow: 0.75;
+    min-width: 10rem;
+    padding-left: 0.25rem;
+
+    &_title {
+      margin-bottom: 2rem;
+
+      & h3 {
+        text-align: left;
+        word-wrap: break-word;
+        font-family: $baseFont;
+        font-size: 1.8rem;
+        margin: 0;
+        color: $white;
+      }
+    }
+
+    &_items {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      &_item {
+          width: 100%;
+          font-family: $baseFont;
+          font-weight: 400;
+          font-size: 1.5rem;
+          line-height: 3.5rem;
+
+          letter-spacing: 0.42px;
+
+          color: rgba(255, 255, 255, 0.595198);
+      }
+
+      &_icon {
+        line-height: 3.5rem;
+
+        letter-spacing: 0.42px;
+
+        color: rgba(255, 255, 255, 0.595198);
+        font-size: 2rem;
+      }
+    }
+  }
+}

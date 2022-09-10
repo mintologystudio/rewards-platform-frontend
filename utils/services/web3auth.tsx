@@ -1,4 +1,4 @@
-import { ADAPTER_EVENTS, SafeEventEmitterProvider } from '@web3auth/base'
+import {ADAPTER_EVENTS, SafeEventEmitterProvider, WALLET_ADAPTERS} from '@web3auth/base'
 import { Web3Auth } from '@web3auth/web3auth'
 import {
   createContext,
@@ -13,6 +13,8 @@ import { CHAIN_CONFIG, CHAIN_CONFIG_TYPE } from '../config/chainConfig'
 import { WEB3AUTH_NETWORK_TYPE } from '../config/web3AuthNetwork'
 import envConfig from '../envConfig'
 import { getWalletProvider, IWalletProvider } from './walletProvider'
+import {UserContext} from "../../context/UserContext";
+import {useRouter} from "next/router";
 
 export interface IWeb3AuthContext {
   web3Auth: Web3Auth | null
@@ -66,6 +68,8 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
   web3AuthNetwork,
   chain,
 }: IWeb3AuthProps) => {
+  const router = useRouter();
+  const {userState, userDispatch} = useContext(UserContext);
   const [web3Auth, setWeb3Auth] = useState<Web3Auth | null>(null)
   const [provider, setProvider] = useState<IWalletProvider | null>(null)
   const [user, setUser] = useState<unknown | null>(null)
@@ -87,13 +91,17 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
     const subscribeAuthEvents = (web3auth: Web3Auth) => {
       // Can subscribe to all ADAPTER_EVENTS and LOGIN_MODAL_EVENTS
       web3auth.on(ADAPTER_EVENTS.CONNECTED, (data: unknown) => {
-        // console.log("Yeah!, you are successfully logged in", data);
+        console.log("Yeah!, you are successfully logged in", data);
         setUser(data)
         setWalletProvider(web3auth.provider!)
+
+        if (data && !data.reconnected) {
+          router.push('/login');
+        }
       })
 
       web3auth.on(ADAPTER_EVENTS.CONNECTING, () => {
-        // console.log("connecting");
+        console.log("connecting");
       })
 
       web3auth.on(ADAPTER_EVENTS.DISCONNECTED, () => {
@@ -118,6 +126,11 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
           chainConfig: currentChainConfig,
           // get your client id from https://dashboard.web3auth.io
           clientId,
+          authMode: "WALLET",
+          uiConfig: {
+            loginMethodsOrder: ["google", "twitter",],
+            appLogo: "https://mintology-frontend.herokuapp.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmain.bf46baad.png&w=1920&q=75",
+          },
         })
 
         const adapter = new OpenloginAdapter({
@@ -126,7 +139,33 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
         web3AuthInstance.configureAdapter(adapter)
         subscribeAuthEvents(web3AuthInstance)
         setWeb3Auth(web3AuthInstance)
-        await web3AuthInstance.initModal()
+        await web3AuthInstance.initModal({
+          modalConfig: {
+            [WALLET_ADAPTERS.OPENLOGIN]: {
+              loginMethods: {
+                google: {
+                  name: "Google Account",
+                  description: "Google Account",
+                },
+                twitter: {
+                  name: "Twitter",
+                  description: "Twitter Account",
+                },
+                facebook: { showOnModal :false },
+                reddit: { showOnModal :false },
+                discord: { showOnModal :false },
+                twitch: { showOnModal :false },
+                apple: { showOnModal :false },
+                line: { showOnModal :false },
+                github: { showOnModal :false },
+                kakao: { showOnModal :false },
+                linkedin: { showOnModal :false },
+                weibo: { showOnModal :false },
+                wechat: { showOnModal :false },
+              },
+            }
+          }
+        })
       } catch (error) {
         console.error(error)
       } finally {
@@ -144,6 +183,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
     }
     const localProvider = await web3Auth.connect()
     setWalletProvider(localProvider!)
+    // await getUserInfo()
   }
 
   const logout = async () => {
@@ -164,6 +204,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
     }
     const user = await web3Auth.getUserInfo()
     uiConsole(user)
+    // console.log(user)
   }
 
   const getAccounts = async () => {

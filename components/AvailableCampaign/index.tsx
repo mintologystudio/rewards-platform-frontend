@@ -10,42 +10,61 @@ const AvailableCampaign = () => {
     <div className={styles.container}>
       <div className={styles.main}>
         <h2>
-          AVAILABLE CAMPAIGN <span>FOR YOU</span>
+          Hot Brand Deals
         </h2>
-        <ul className={styles.content}>
+        {/*<ul className={styles.content}>*/}
+        {/*  <CampaignCard*/}
+        {/*    campaignId="1"*/}
+        {/*    nft="azuki"*/}
+        {/*    company="nike"*/}
+        {/*    offer="10% OFF FOOTWEAR"*/}
+        {/*    expiration={1655433980000}*/}
+        {/*    redemptionRemaining={100}*/}
+        {/*  />*/}
+        {/*  <CampaignCard*/}
+        {/*    campaignId="2"*/}
+        {/*    nft="karafuru"*/}
+        {/*    company="atmos"*/}
+        {/*    offer="10% OFF STOREWIDE"*/}
+        {/*    expiration={1655433980000}*/}
+        {/*    redemptionRemaining={232}*/}
+        {/*  />*/}
+        {/*  <CampaignCard*/}
+        {/*    campaignId="3"*/}
+        {/*    nft="doodles"*/}
+        {/*    company="whitecastle"*/}
+        {/*    offer="FREE UPSIZE FOR ANY ORDER"*/}
+        {/*    expiration={1655433980000}*/}
+        {/*    redemptionRemaining={9322}*/}
+        {/*  />*/}
+        {/*</ul>*/}
+
+        <div className={styles.contents}>
           <CampaignCard
-            campaignId="1"
-            nft="azuki"
-            company="nike"
-            offer="10% OFF FOOTWEAR"
-            expiration={1655433980000}
-            redemptionRemaining={100}
+              campaignId="1"
+              nft="azuki"
+              company="nike"
+              offer="10% OFF FOOTWEAR"
+              expiration={1655433980000}
+              redemptionRemaining={100}
           />
           <CampaignCard
-            campaignId="2"
-            nft="karafuru"
-            company="atmos"
-            offer="10% OFF STOREWIDE"
-            expiration={1655433980000}
-            redemptionRemaining={232}
+              campaignId="2"
+              nft="karafuru"
+              company="atmos"
+              offer="10% OFF STOREWIDE"
+              expiration={1655433980000}
+              redemptionRemaining={232}
           />
           <CampaignCard
-            campaignId="3"
-            nft="doodles"
-            company="whitecastle"
-            offer="FREE UPSIZE FOR ANY ORDER"
-            expiration={1655433980000}
-            redemptionRemaining={9322}
+              campaignId="3"
+              nft="doodles"
+              company="whitecastle"
+              offer="FREE UPSIZE FOR ANY ORDER"
+              expiration={1655433980000}
+              redemptionRemaining={9322}
           />
-          <CampaignCard
-            campaignId="1"
-            nft="azuki"
-            company="nike"
-            offer="10% OFF FOOTWEAR"
-            expiration={1655433980000}
-            redemptionRemaining={100}
-          />
-        </ul>
+        </div>
       </div>
     </div>
   )

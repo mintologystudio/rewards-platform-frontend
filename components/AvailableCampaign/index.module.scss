@@ -36,17 +36,28 @@
   }
 }
 
+.contents {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  & li {
+    margin: 10px;
+  }
+}
+
 .content {
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-
-  padding: 2rem 0;
-
-  width: 90% !important;
   overflow-x: auto;
+  padding: 2rem 2rem;
+
+  width: 95% !important;
 
   list-style: none;
 

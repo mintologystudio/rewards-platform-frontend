@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.scss'
 import AvailableCampaign from '../components/AvailableCampaign'
 import FeaturedCampaign from '../components/FeaturedCampaign'
 import Navigation from '../components/Navigation'
+import Footer from "../components/Footer/Footer";
 
 const Home: NextPage = () => {
   return (
@@ -15,6 +16,8 @@ const Home: NextPage = () => {
         <FeaturedCampaign />
         <AvailableCampaign />
       </main>
+
+        <Footer />
     </div>
   )
 }

@@ -10,7 +10,8 @@
 .main {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  background-color: #F2F2F2;
 
   display: flex;
   flex-direction: column;
@@ -20,7 +21,7 @@
   padding-top: 6rem;
 
   @include l {
-    padding-top: 9.6rem;
+    padding-top: 6rem;
   }
 }
 
@@ -310,5 +311,366 @@
     height: 0.2rem;
 
     background-color: rgba(255, 255, 255, 1);
+  }
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+
+  color: $black;
+  font-family: $baseFont;
+
+  font-size: 1.8rem;
+  word-wrap: break-word;
+
+  width: 80rem;
+  max-width: 70vw;
+
+  height: 80%;
+
+  //border: 1px solid black;
+  border-radius: 8px;
+  min-height: 10rem;
+
+  padding: 2rem 5rem;
+
+  @include xs {
+    max-width: 80%;
+  }
+
+  @include l {
+    font-size: 2.4rem;
+    width: 60vw;
+    max-width: 70%;
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0;
+    justify-content: center;
+  }
+
+  &_title {
+    width: fit-content;
+    background: rgba(227, 0, 184, 0.2);
+    padding: 1.1rem 3.5rem;
+    align-self: center;
+
+    & p {
+      margin: 0;
+      font-size: 2.2rem;
+      color: $pink;
+      font-weight: 700;
+    }
+  }
+
+  .logo_image {
+    position: relative;
+    height: 26.1rem;
+    width: 29.5rem;
+    margin: 0 0 2rem 0;
+
+    @include l {
+      height: 42.53rem;
+      width: 48rem;
+      margin: 0 5.8rem 0 0;
+    }
+  }
+
+  &_button {
+    border: none !important;;
+    background-color: #E717A7 !important;
+    border-radius: 0.5rem;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    height: 4rem;
+    width: 100%;
+    max-width: 35rem;
+
+    font-family: $baseFont;
+    color: $white !important;;
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-align: center;
+
+    //filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    //transition: all 0.5s ease;
+
+    &:hover {
+      transform: translateY(0.2rem);
+      transition: all 0.5s ease;
+    }
+
+  }
+}
+
+.connect {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: $white;
+
+  color: $black;
+  font-family: $baseFont;
+
+  font-size: 1.8rem;
+  word-wrap: break-word;
+
+  width: 80rem;
+  max-width: 70vw;
+
+  height: 80%;
+
+  //border: 1px solid black;
+  border-radius: 8px;
+  min-height: 10rem;
+
+  padding: 2rem 5rem;
+
+  @include xs {
+    max-width: 80%;
+  }
+
+  @include l {
+    font-size: 2.4rem;
+    width: 60vw;
+    max-width: 70%;
+  }
+
+  & span {
+    width: 100%;
+    font-family: $baseFont;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 7rem;
+
+    letter-spacing: 1.5px;
+
+    @include xs {
+      font-size: 3rem;
+    }
+    @include s {
+      font-size: 5rem;
+    }
+    @include l {
+      font-size: 5rem;
+      width: 70%;
+    }
+  }
+
+  &_text {
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 22px;
+
+    letter-spacing: 0.48px;
+    color: rgba(0, 0, 0, 0.498661);
+  }
+
+  &_connected {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+    background-color: lightgrey;
+    padding: 1rem;
+    border-radius: 4px;
+
+    @include m {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      width: auto;
+      max-width: 100%;
+    }
+    @include l {
+      max-width: 80vh;
+    }
+
+    &_title {
+      margin: 0;
+      width: auto;
+      background-color: grey;
+      height: 100%;
+      padding: 0 1rem;
+      border-radius: 4px;
+
+      //font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 22px;
+      /* or 183% */
+
+      letter-spacing: 0.36px;
+
+      color: rgba(0, 0, 0, 0.802366);
+
+      @include m {
+        margin-right: 1rem;
+      }
+    }
+
+    &_wallet {
+      margin: 0;
+      height: 100%;
+      border-radius: 4px;
+
+      //font-weight: 400;
+      font-size: 1.8rem;
+      line-height: 22px;
+      /* or 183% */
+
+      letter-spacing: 0.36px;
+
+      color: rgba(0, 0, 0, 0.394886);
+
+      overflow-wrap: anywhere;
+
+    }
+
+    &_pending {
+      margin-top: 3rem;
+      font-weight: 700;
+      font-size: 1.6rem;
+      line-height: 24px;
+      letter-spacing: 0.48px;
+      color:#E717A7;
+    }
+
+  }
+
+  & button {
+    border: 1px solid #979797;
+    background-color: $white;
+    border-radius: 0.5rem;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    height: 4rem;
+    width: 100%;
+    max-width: 35rem;
+
+    font-family: $baseFont;
+    color: $black;
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-align: center;
+
+    //filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    //transition: all 0.5s ease;
+
+    &:hover {
+      transform: translateY(0.2rem);
+      transition: all 0.5s ease;
+    }
+
+  }
+
+  &_button {
+    border: none !important;;
+    background-color: #E717A7 !important;
+    border-radius: 0.5rem;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    height: 4rem;
+    width: 100%;
+    max-width: 35rem;
+
+    font-family: $baseFont;
+    color: $white !important;;
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-align: center;
+
+    //filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    //transition: all 0.5s ease;
+
+    &:hover {
+      transform: translateY(0.2rem);
+      transition: all 0.5s ease;
+    }
+
+  }
+
+}
+
+.connected {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50rem;
+  max-width: 70vw;
+
+  margin: 3rem  0;
+
+  @include xs {
+    max-width: 100%;
+  }
+
+  //@include l {
+  //  font-size: 2.4rem;
+  //  width: 60vw;
+  //  max-width: 70%;
+  //}
+
+  @include l {
+    font-size: 5rem;
+    //width: 70%;
+  }
+
+  &_title {
+    width: 100%;
+    font-family: $baseFont;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 7rem;
+
+    letter-spacing: 1.5px;
+
+    @include xs {
+      font-size: 3rem;
+    }
+    @include s {
+      font-size: 3.5rem;
+    }
+    @include m {
+      font-size: 5rem;
+    }
+    @include l {
+      font-size: 5rem;
+      width: 70%;
+    }
+  }
+
+  &_text {
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 22px;
+
+    letter-spacing: 0.48px;
+    color: rgba(0, 0, 0, 0.498661);
+    margin-top: 0;
+  }
+
+  &_icon {
+    color: $green;
+    font-size: 2rem;
+    margin-right: 1rem;
   }
 }

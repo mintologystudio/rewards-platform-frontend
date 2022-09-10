@@ -1,5 +1,12 @@
 @import '../styles/variables.module.scss';
 
+// Extra Small devices
+@mixin xs {
+  @media (min-width: #{$screen-xs}) {
+    @content;
+  }
+}
+
 // Small devices
 @mixin s {
   @media (min-width: #{$screen-s}) {

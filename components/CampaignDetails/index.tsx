@@ -8,12 +8,16 @@ import {
   useState,
 } from 'react'
 import { getTokensFromUser } from '../../utils/api'
-import { IOwnedNFTData, IOwnedNFTDataSelection } from '../../utils/interfaces'
+import {ICampaign, IOwnedNFTData, IOwnedNFTDataSelection} from '../../utils/interfaces'
 import styles from './index.module.scss'
 import Image from 'next/image'
 import NFTCard from '../NFTCard'
 import listOfNftsByCollection from '../../utils/dummyNftCollections'
 import { Web3Context } from '../../context/web3Context'
+import {BsClockFill, BsFillBookmarkCheckFill} from "react-icons/bs";
+import {getReadableTime} from "../../utils";
+import { useWeb3Auth } from '../../utils/services/web3auth'
+import {UserContext} from "../../context/UserContext";
 
 interface IVoucher {
   title: string
@@ -25,19 +29,23 @@ interface IVoucher {
 const mockUserWalletAddress = '0xaf07daD7F6e4ac3eeDB227B6cfCB5E0f476d6dB4'
 
 const CampaignDetails = ({
+  campaign,
   collectionAddr,
   details,
   toggleModal,
 }: {
+  campaign: ICampaign
   collectionAddr: string
   details: IVoucher
   toggleModal: Dispatch<SetStateAction<boolean>>
 }) => {
-  const { appState: Web3State } = useContext(Web3Context)
+  const { userState, userDispatch } = useContext(UserContext);
+  const { appState } = useContext(Web3Context);
   const [availableTokens, setAvailableTokens] = useState<
     IOwnedNFTDataSelection[]
   >([])
   const [selectedNFT, setSelectedNFT] = useState<IOwnedNFTDataSelection>()
+  const { login, logout, provider } = useWeb3Auth()
 
   const retrieveUserNFTs = async () => {
     // const tokens = await getTokensFromUser(
@@ -72,52 +80,133 @@ const CampaignDetails = ({
   }
 
   useEffect(() => {
-    retrieveAndFilterEligibleTokens()
+    retrieveAndFilterEligibleTokens();
   }, [collectionAddr])
+
+  const countDownInMilli = new Date(2022, 10, 10).getTime() - new Date().getTime()
+  const [days, hours] = getReadableTime(countDownInMilli);
 
   return (
     <div className={styles.container}>
-      <div className={styles.main}>
-        <h2>{details.title}</h2>
-        <div className={styles.content}>
-          <p>{details.description}</p>
+      {/*<div className={styles.main}>*/}
+      {/*  <h2>{details.title}</h2>*/}
+      {/*  <div className={styles.content}>*/}
+      {/*    <p>{details.description}</p>*/}
 
-          <div className={styles.content_tnc}>
-            <p className={styles.content_tnc_title}>Terms and conditions</p>
-            <ul>
-              {details.tnc.map((tnc) => (
-                <li key={tnc}>{tnc}</li>
-              ))}
-            </ul>
+      {/*    <div className={styles.content_tnc}>*/}
+      {/*      <p className={styles.content_tnc_title}>Terms and conditions</p>*/}
+      {/*      <ul>*/}
+      {/*        {details.tnc.map((tnc) => (*/}
+      {/*          <li key={tnc}>{tnc}</li>*/}
+      {/*        ))}*/}
+      {/*      </ul>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+
+        {/*{Web3State.address_to_bind ? (*/}
+        {/*  <>*/}
+        {/*    <ul className={styles.tokens}>*/}
+        {/*      {availableTokens.map((_token) => {*/}
+        {/*        return (*/}
+        {/*          <NFTCard*/}
+        {/*            key={`${collectionAddr}_${_token.tokenId}`}*/}
+        {/*            collectionAddr={collectionAddr}*/}
+        {/*            token={_token}*/}
+        {/*            selected={selectedNFT}*/}
+        {/*            handleSelect={handleSelectNFT}*/}
+        {/*          />*/}
+        {/*        )*/}
+        {/*      })}*/}
+        {/*    </ul>*/}
+        {/*    <button*/}
+        {/*      type="button"*/}
+        {/*      className={styles.button}*/}
+        {/*      onClick={() => toggleModal(true)}*/}
+        {/*    >*/}
+        {/*      Redeem Now*/}
+        {/*    </button>*/}
+        {/*  </>*/}
+        {/*) : (*/}
+        {/*  <h2>Connect your wallet to redeem</h2>*/}
+        {/*)}*/}
+      {/*</div>*/}
+
+      <div className={styles.main}>
+        <div className={styles.campaign} style={{ marginTop: '-15rem', marginBottom: '2rem' }}>
+          <div className={styles.campaign_info}>
+            <span className={styles.campaign_info_title}>Location</span>
+            <span className={styles.campaign_info_text}>Worldwide official nike stores</span>
           </div>
+          <div className={styles.campaign_info}>
+            <span className={styles.campaign_info_title}>Start Date</span>
+            <span className={styles.campaign_info_text}>21/04/2022</span>
+          </div>
+          <div className={styles.campaign_info}>
+            <span className={styles.campaign_info_title}>End Date</span>
+            <span className={styles.campaign_info_text}>21/04/2022</span>
+          </div>
+
+          <div className={styles.campaign_timeleft_redeem}>
+            <div className={styles.campaign_timeleft}>
+              <BsClockFill className={styles.campaign_timeleft_icon}/>
+              <span>
+                  Time Left: {days}d {hours}h 33s
+              </span>
+            </div>
+            <div className={styles.campaign_redeem}>
+              <BsFillBookmarkCheckFill className={styles.campaign_redeem_icon} />
+              <span>
+                Redeemed: 282221
+              </span>
+            </div>
+          </div>
+
         </div>
 
-        {Web3State.address_to_bind ? (
-          <>
-            <ul className={styles.tokens}>
-              {availableTokens.map((_token) => {
-                return (
-                  <NFTCard
-                    key={`${collectionAddr}_${_token.tokenId}`}
-                    collectionAddr={collectionAddr}
-                    token={_token}
-                    selected={selectedNFT}
-                    handleSelect={handleSelectNFT}
-                  />
-                )
-              })}
-            </ul>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={() => toggleModal(true)}
-            >
-              Redeem Now
-            </button>
-          </>
-        ) : (
-          <h2>Connect your wallet to redeem</h2>
-        )}
+        <div className={styles.campaign}>
+          <div className={styles.campaign_detail}>
+              <img src={`/assets/nfts/banner/${campaign.nft}.png`} className={styles.campaign_detail_img}/>
+
+              <div className={styles.campaign_detail_top}>
+                <h3 className={styles.content_tnc_title}>{campaign.offer}</h3>
+                <p>{details.description}</p>
+              </div>
+
+            <div className={styles.content_tnc}>
+              <h3 className={styles.content_tnc_title}>Terms and conditions</h3>
+              <ul>
+                {details.tnc.map((tnc) => (
+                    <li key={tnc}>{tnc}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className={styles.content_button}>
+              { !(appState.address_to_bind != '') ?
+                  (<button type="button" onClick={login}>Get It Now</button>)
+                  :
+                  provider && (<button
+                      type="button"
+                      className={styles.button}
+                      onClick={() => toggleModal(true)}>Get It Now</button>)
+              }
+
+                {/*<button type="button" onClick={logout}>Logout</button>*/}
+              {/*<button*/}
+              {/*    type="button"*/}
+              {/*    className={styles.button}*/}
+              {/*    onClick={() => toggleModal(true)}>Get It Now</button>*/}
+              {/*{provider &&*/}
+              {/*<button*/}
+              {/*    type="button"*/}
+              {/*    className={styles.button}*/}
+              {/*    onClick={() => toggleModal(true)}>Get It Now</button>*/}
+              {/*}*/}
+                {/*<button type="button" onClick={getUserInfo}>getUserInfo</button>*/}
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   )
