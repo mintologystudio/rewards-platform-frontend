@@ -15,6 +15,7 @@ import envConfig from '../envConfig'
 import { getWalletProvider, IWalletProvider } from './walletProvider'
 import {UserContext} from "../../context/UserContext";
 import {useRouter} from "next/router";
+import MainLogo from '../../public/assets/misc/main.png'
 
 export interface IWeb3AuthContext {
   web3Auth: Web3Auth | null
@@ -129,7 +130,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
           authMode: "WALLET",
           uiConfig: {
             loginMethodsOrder: ["google", "twitter",],
-            appLogo: "https://mintology-frontend.herokuapp.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmain.bf46baad.png&w=1920&q=75",
+            appLogo: MainLogo.src
           },
         })
 
