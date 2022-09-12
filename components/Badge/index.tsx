@@ -8,15 +8,15 @@ const Badge = ({
   width,
   height,
 }: {
-  company: string,
-  nft: string,
-  width: string,
-  height: string,
+  company?: string,
+  nft?: string,
+  width?: string,
+  height?: string,
 }) => {
-    const src = company ? `/assets/companies/${company}.png` : `/assets/nfts/${nft}.png`;
+    const src = company && company != '' ? `/assets/companies/${company}.png` : `/assets/nfts/${nft}.png`;
 
-    const newWidth = width ? width : '25rem';
-    const newHeight = height ? height : width;
+    const newWidth = width && width != '' ? width : '25rem';
+    const newHeight = height && height != '' ? height : width;
 
     return (
             <Image

@@ -17,7 +17,6 @@ import { Web3Context } from '../../context/web3Context'
 import {BsClockFill, BsFillBookmarkCheckFill} from "react-icons/bs";
 import {getReadableTime} from "../../utils";
 import { useWeb3Auth } from '../../utils/services/web3auth'
-import {UserContext} from "../../context/UserContext";
 
 interface IVoucher {
   title: string
@@ -39,7 +38,6 @@ const CampaignDetails = ({
   details: IVoucher
   toggleModal: Dispatch<SetStateAction<boolean>>
 }) => {
-  const { userState, userDispatch } = useContext(UserContext);
   const { appState } = useContext(Web3Context);
   const [availableTokens, setAvailableTokens] = useState<
     IOwnedNFTDataSelection[]

@@ -14,11 +14,11 @@ const RedemptionModal = ({
   voucher,
   company,
   toggleModal,
-  isEmpty = false
+  isEmpty
 }: {
   voucher: IVoucher
   company: string
-  isEmpty: boolean
+  isEmpty?: boolean
   toggleModal: Dispatch<SetStateAction<boolean>>
 }) => {
   const router = useRouter()
@@ -41,7 +41,7 @@ const RedemptionModal = ({
             <div className={styles.info}>
                 <span className={styles.info_text}>
                     You can review and manage your perks in “My Perks”.
-                    <Link href={'#'}><span className={styles.info_link}>Go here ></span></Link>
+                    <Link href={'#'}><span className={styles.info_link}>Go here {'>'}</span></Link>
                 </span>
             </div>
 
@@ -63,7 +63,7 @@ const RedemptionModal = ({
             </div>
           <div className={styles.info}>
                 <span className={styles.info_text}>
-                    Seems there's no matching eligible NFT are found.
+                  {"Seems there's no matching eligible NFT are found."}
                 </span>
           </div>
 

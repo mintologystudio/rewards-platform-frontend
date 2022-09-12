@@ -28,14 +28,19 @@ export interface IAppContextState {
     redirect: boolean
 }
 
-export const initialState = {
+export const initialState: IAppContextState = {
+    chainId: 0,
+    provider: null,
+    web3ModalProvider: null,
+    address_to_bind: '',
+    address_w3a: '',
     redirect: false
 };
 
 const reducer = (
     state: IAppContextState,
     action: IAction
-) => {
+): IAppContextState => {
     switch (action.type) {
         case ACT_SET_CONNECTED_ADDR:
             return {

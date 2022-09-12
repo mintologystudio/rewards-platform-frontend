@@ -8,6 +8,7 @@ import {useState, useContext, useCallback, useEffect} from 'react'
 import Image from 'next/image'
 import { Web3Context } from '../../context/web3Context'
 import { useRouter } from 'next/router'
+import useWeb3Modal from "../../hooks/useWeb3Modal";
 
 const Routes = {
   Home: '/',
@@ -21,10 +22,14 @@ const FilteredRoutes = {
 }
 
 const Navigation = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { windowDimensions, LARGE_SCREEN_SIZE } = useWindowDimensions()
   const [expanded, setExpanded] = useState<boolean>(false)
-  const { appState, appDispatch } = useContext(Web3Context)
+  const { appState: Web3State } = useContext(Web3Context)
+  const [navRoutes, setNavRoutes] = useState<any>([])
+
+  // Initialize useWeb3Modal on first load of webpage
+  useWeb3Modal();
 
   const loginHandler = () => {
     router.push('/login')
@@ -34,16 +39,24 @@ const Navigation = () => {
     return obj[key];
   };
 
-  let finalRoutes
-  if (appState.address_to_bind && appState.chainId === 1) {
-    finalRoutes = Object.keys(Routes).map((route) => (
-        <li key={`Navigation_${route}`}><Link href={redirectHandler(Routes, route)}>{route}</Link></li>
-    ))
-  } else {
-    finalRoutes = Object.keys(FilteredRoutes).map((route) => (
-        <li key={`Navigation_${route}`}><Link href={redirectHandler(FilteredRoutes, route)}>{route}</Link></li>
-    ))
-  }
+  useEffect(() => {
+    let _routes
+    if (Web3State.address_to_bind) {
+      // If account is logged in
+      _routes = Object.keys(Routes).map((route) => (
+          <li key={`Navigation_${route}`}><Link href={redirectHandler(Routes, route)}>{route}</Link></li>
+      ))
+    } else {
+      // If account is not logged in
+      _routes = Object.keys(FilteredRoutes).map((route) => {
+        if (route !== 'Profile') {
+          return <li key={`Navigation_${route}`}><Link href={redirectHandler(FilteredRoutes, route)}>{route}</Link></li>
+        }
+      })
+    }
+    setNavRoutes(_routes)
+  }, [Web3State.address_to_bind])
+
 
   return (
     <nav className={styles.container}>
@@ -55,14 +68,14 @@ const Navigation = () => {
             }`}
           >
             <div className={styles.nav_mobile_nav}>
-              <ul>{finalRoutes}</ul>
+              <ul>{navRoutes}</ul>
               <div className={styles.nav_mobile_nav_action}>
-                {appState.address_to_bind ? (
-                  appState.chainId === 1 ? (
+                {Web3State.address_to_bind ? (
+                  Web3State.chainId === 1 ? (
                     <button disabled>
-                      {appState.address_to_bind.substring(0, 4)}...
-                      {appState.address_to_bind.substring(
-                        appState.address_to_bind.length - 4
+                      {Web3State.address_to_bind.substring(0, 4)}...
+                      {Web3State.address_to_bind.substring(
+                        Web3State.address_to_bind.length - 4
                       )}
                     </button>
                   ) : (
@@ -97,9 +110,7 @@ const Navigation = () => {
 
             <div className={styles.nav_mobile_header}>
               <div className={styles.nav_mobile_header_img}>
-                <Link href={Routes.Home}>
-                  <Image src={NavLogo} alt="Main Logo" layout="fill" />
-                </Link>
+                  <Image onClick={()=> router.push(Routes.Home)}  src={NavLogo} alt="Main Logo" layout="fill" />
               </div>
               <div
                 id="BurgerMenu"
@@ -117,19 +128,17 @@ const Navigation = () => {
         <div className={styles.main}>
           <div className={styles.nav}>
             <div className={styles.nav_img}>
-              <Link href={Routes.Home}>
-                <Image src={NavLogo} alt="Main Logo" layout="fill" />
-              </Link>
+                <Image onClick={()=> router.push(Routes.Home)} src={NavLogo} alt="Main Logo" layout="fill" />
             </div>
 
             <ul className={styles.sub}>
-              {finalRoutes}
-              {appState.address_to_bind ? (
-                appState.chainId === 1 ? (
+              {navRoutes}
+              {Web3State.address_to_bind ? (
+                Web3State.chainId === 1 ? (
                   <button disabled>
-                    {appState.address_to_bind.substring(0, 4)}...
-                    {appState.address_to_bind.substring(
-                      appState.address_to_bind.length - 4
+                    {Web3State.address_to_bind.substring(0, 4)}...
+                    {Web3State.address_to_bind.substring(
+                      Web3State.address_to_bind.length - 4
                     )}
                   </button>
                 ) : (

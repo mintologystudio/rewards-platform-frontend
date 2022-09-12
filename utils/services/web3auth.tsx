@@ -1,5 +1,5 @@
-import {ADAPTER_EVENTS, SafeEventEmitterProvider, WALLET_ADAPTERS} from '@web3auth/base'
-import { Web3Auth } from '@web3auth/web3auth'
+import {ADAPTER_EVENTS, SafeEventEmitterProvider, WALLET_ADAPTER_TYPE, WALLET_ADAPTERS} from '@web3auth/base'
+import {ModalConfig, Web3Auth} from '@web3auth/web3auth'
 import {
   createContext,
   FunctionComponent,
@@ -13,7 +13,6 @@ import { CHAIN_CONFIG, CHAIN_CONFIG_TYPE } from '../config/chainConfig'
 import { WEB3AUTH_NETWORK_TYPE } from '../config/web3AuthNetwork'
 import envConfig from '../envConfig'
 import { getWalletProvider, IWalletProvider } from './walletProvider'
-import {UserContext} from "../../context/UserContext";
 import {useRouter} from "next/router";
 import MainLogo from '../../public/assets/misc/main.png'
 
@@ -70,7 +69,6 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
   chain,
 }: IWeb3AuthProps) => {
   const router = useRouter();
-  const {userState, userDispatch} = useContext(UserContext);
   const [web3Auth, setWeb3Auth] = useState<Web3Auth | null>(null)
   const [provider, setProvider] = useState<IWalletProvider | null>(null)
   const [user, setUser] = useState<unknown | null>(null)
@@ -91,12 +89,12 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
   useEffect(() => {
     const subscribeAuthEvents = (web3auth: Web3Auth) => {
       // Can subscribe to all ADAPTER_EVENTS and LOGIN_MODAL_EVENTS
-      web3auth.on(ADAPTER_EVENTS.CONNECTED, (data: unknown) => {
+      web3auth.on(ADAPTER_EVENTS.CONNECTED, (data: any) => {
         console.log("Yeah!, you are successfully logged in", data);
         setUser(data)
         setWalletProvider(web3auth.provider!)
 
-        if (data && !data.reconnected) {
+        if (data  && !data.reconnected) {
           router.push('/login');
         }
       })
@@ -140,32 +138,35 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
         web3AuthInstance.configureAdapter(adapter)
         subscribeAuthEvents(web3AuthInstance)
         setWeb3Auth(web3AuthInstance)
-        await web3AuthInstance.initModal({
-          modalConfig: {
-            [WALLET_ADAPTERS.OPENLOGIN]: {
-              loginMethods: {
-                google: {
-                  name: "Google Account",
-                  description: "Google Account",
-                },
-                twitter: {
-                  name: "Twitter",
-                  description: "Twitter Account",
-                },
-                facebook: { showOnModal :false },
-                reddit: { showOnModal :false },
-                discord: { showOnModal :false },
-                twitch: { showOnModal :false },
-                apple: { showOnModal :false },
-                line: { showOnModal :false },
-                github: { showOnModal :false },
-                kakao: { showOnModal :false },
-                linkedin: { showOnModal :false },
-                weibo: { showOnModal :false },
-                wechat: { showOnModal :false },
+        const modalConfig: Record<WALLET_ADAPTER_TYPE, ModalConfig> = {
+          [WALLET_ADAPTERS.OPENLOGIN]: {
+            label: "openlogin",
+            loginMethods: {
+              google: {
+                name: "Google Account",
+                description: "Google Account",
               },
-            }
+              twitter: {
+                name: "Twitter",
+                description: "Twitter Account",
+              },
+              facebook: {name: "facebook", showOnModal: false},
+              reddit: {name: "reddit", showOnModal: false},
+              discord: {name: "discord", showOnModal: false},
+              twitch: {name: "twitch", showOnModal: false},
+              apple: {name: "apple", showOnModal: false},
+              line: {name: "line", showOnModal: false},
+              github: {name: "github", showOnModal: false},
+              kakao: {name: "kakao", showOnModal: false},
+              linkedin: {name: "linkedin", showOnModal: false},
+              weibo: {name: "weibo", showOnModal: false},
+              wechat: {name: "wechat", showOnModal: false},
+            },
+            showOnModal: true,
           }
+        };
+        await web3AuthInstance.initModal({
+          modalConfig: modalConfig
         })
       } catch (error) {
         console.error(error)

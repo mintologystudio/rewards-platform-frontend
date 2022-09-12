@@ -7,7 +7,6 @@ import '../styles/nprogress.scss'
 import { Web3AuthProvider } from '../utils/services/web3auth'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Web3ContextProvider from '../context/web3Context'
-import UserContextProvider from "../context/UserContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -24,13 +23,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <UserContextProvider>
           <Web3AuthProvider chain={chain} web3AuthNetwork={web3AuthNetwork}>
             <Web3ContextProvider >
               <Component {...pageProps}/>
             </Web3ContextProvider>
           </Web3AuthProvider>
-      </UserContextProvider>
     </>
   )
 }

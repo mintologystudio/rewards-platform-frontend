@@ -3,7 +3,7 @@ import {
   SET_WEB3_PROVIDER,
   SET_ADDRESS,
   SET_WEB3AUTH_ADDRESS,
-  RESET_WEB3_PROVIDER,
+  RESET_WEB3_PROVIDER, SET_ADDRESS_PROVIDER,
 } from '../actionType'
 import { InitialAppContextState, IAppContextState } from '.'
 
@@ -19,6 +19,14 @@ export type IAction =
   | {
     type: 'SET_ADDRESS'
     address_to_bind: IAppContextState['address_to_bind']
+  }
+    | {
+    type: 'SET_ADDRESS_PROVIDER'
+    value: {
+      web3ModalProvider: IAppContextState['web3ModalProvider']
+      address_to_bind: IAppContextState['address_to_bind']
+      chainId: IAppContextState['chainId']
+    }
   }
   | {
     type: 'SET_WEB3AUTH_ADDRESS'
@@ -45,6 +53,13 @@ const Web3Reducer = (
         web3ModalProvider: action.web3ModalProvider,
         address_to_bind: action.address_to_bind,
         address_w3a: action.address_w3a,
+      }
+    case SET_ADDRESS_PROVIDER:
+      return {
+        ...state,
+        web3ModalProvider: action.value.web3ModalProvider,
+        address_to_bind: action.value.address_to_bind,
+        chainId: action.value.chainId,
       }
     case SET_ADDRESS:
       return {

@@ -141,7 +141,6 @@ const Campaign: NextPage = () => {
     } else {
       setCampaignDetails(selectedCampaign)
     }
-    console.log("selectedCampaign",selectedCampaign)
   }, [campaignId])
 
   return (
@@ -163,6 +162,7 @@ const Campaign: NextPage = () => {
             toggleModal={setShowRedemptionModal}
             voucher={campaignDetails.voucher}
             company={campaignDetails.company}
+            isEmpty={campaignDetails.isEmpty}
           />
         )}
       </main>
