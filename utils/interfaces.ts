@@ -148,6 +148,18 @@ export interface ICampaign {
   nftCollectionAddr: string
   offer?: string
   isEmpty?: boolean
+  redeemed?: number
+}
+
+export interface IPerk {
+  nft: string
+  company: string
+  location: string
+  startTime: number
+  endTime: number
+  voucher: IVoucher
+  nftCollectionAddr: string
+  isExpired?: boolean
 }
 
 export interface IVoucher {

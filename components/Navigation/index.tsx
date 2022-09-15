@@ -12,8 +12,8 @@ import useWeb3Modal from "../../hooks/useWeb3Modal";
 
 const Routes = {
   Home: '/',
-  Explore: '/',
-  Profile: '/',
+  PERKS: '/perk',
+  MYNFT: '/mynft',
 }
 
 const FilteredRoutes = {
@@ -39,12 +39,22 @@ const Navigation = () => {
     return obj[key];
   };
 
+  const getNavName = (route: string) => {
+    if (route === 'PERKS') {
+      return 'My Perks'
+    }
+    if (route === 'MYNFT') {
+      return 'My NFTs'
+    }
+    return route;
+  }
+
   useEffect(() => {
     let _routes
     if (Web3State.address_to_bind) {
       // If account is logged in
       _routes = Object.keys(Routes).map((route) => (
-          <li key={`Navigation_${route}`}><Link href={redirectHandler(Routes, route)}>{route}</Link></li>
+          <li key={`Navigation_${route}`}><Link href={redirectHandler(Routes, route)}>{getNavName(route)}</Link></li>
       ))
     } else {
       // If account is not logged in

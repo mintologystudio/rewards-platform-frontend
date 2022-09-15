@@ -1,0 +1,462 @@
+@import '../../styles/variables.module.scss';
+@import '../../styles/mixin.module.scss';
+
+
+.container {
+  display: inline-block;
+  position: relative;
+  width: 100vw;
+  height: 100vw;
+
+  @include m {
+    height: 50rem;
+  }
+
+  @include l {
+    height: 70rem;
+  }
+
+  & h2 {
+    text-align: left;
+    word-wrap: break-word;
+    font-family: $baseFont;
+    font-size: 3.2rem;
+    font-weight: 700;
+    //margin: 0;
+    color: rgba(0, 0, 0, 0.895269);
+    line-height: 30px;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & h2 {
+    font-family: $baseFont;
+    font-size: 2.4rem;
+    word-wrap: break-word;
+    text-align: left;
+
+    width: 80vw;
+
+    @include l {
+      font-size: 3.2rem;
+    }
+  }
+}
+
+.perk {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: $white;
+
+  color: $black;
+  font-family: $baseFont;
+
+  font-size: 1.8rem;
+  word-wrap: break-word;
+
+  border-radius: 8px;
+  width: 100%;
+  min-height: 12rem;
+
+  padding: 2rem;
+
+  margin-bottom: 2rem;
+
+  @include m {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  @include l {
+    min-height: 25rem;
+  }
+
+  & div {
+    //border: 1px solid black;
+  }
+
+  &_left, &_right {
+    @include m {
+      height: 15rem;
+    }
+    @include l {
+      min-height: 20rem;
+    }
+  }
+
+  &_left {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+
+    @include m {
+      flex-grow: 7;
+      //flex-direction: row;
+      //align-items: center;
+      justify-content: space-between;
+      width: 70%;
+    }
+
+    @include l {
+      width: 80%;
+    }
+
+    &_upper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      @include m {
+        flex-direction: row;
+        height: 80%;
+        max-height: 9rem;
+      }
+
+      @include l {
+        max-height: 14rem;
+      }
+
+      &_detail {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+        padding: 1rem 1rem;
+
+        &_span {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+        }
+
+        & span {
+          margin-left: 1rem;
+          font-weight: 400;
+          font-size: 1.4rem;
+          //line-height: 30px;
+
+          letter-spacing: 0.42px;
+
+          color: rgba(0, 0, 0, 0.403983);
+
+          @include xl {
+            font-size: 2rem;
+          }
+        }
+
+        & h5 {
+          margin: 0;
+
+          @include xl {
+            font-size: 2.5rem;
+          }
+        }
+      }
+    }
+
+    &_lowerfull {
+      width: 100%;
+      border-top: 1px solid #F1F1F1;
+      //margin-top: 2rem
+    }
+    &_lower {
+      //margin-top: 3rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 100%;
+
+      @include xs {
+        width: 100%;
+      }
+
+      @include s {
+        width: 100%;
+      }
+
+      @include m {
+        flex-direction: row;
+        width: 90%;
+      }
+
+      @include l {
+        width: 70%;
+      }
+
+      &_date {
+        display: flex;
+        align-items: center;
+        height: 3.5rem;
+        width: 100%;
+        justify-content: left;
+        padding: 0;
+
+        & p {
+          margin: 0 1rem;
+          color: rgba(0, 0, 0, 0.895269);
+
+          font-weight: 400;
+          font-size: 1.4rem;
+          //line-height: 30px;
+          /* or 214% */
+
+          letter-spacing: 0.42px;
+
+          color: rgba(0, 0, 0, 0.403983);
+        }
+
+        & span {
+          color: rgba(0, 0, 0, 0.895269);
+          font-weight: 400;
+          font-size: 1.4rem;
+          line-height: 30px;
+          letter-spacing: 0.42px;
+
+          @include xl {
+            font-size: 2rem;
+          }
+        }
+
+      }
+    }
+
+    &_img {
+      position: relative;
+      min-height: 20rem;
+      min-width: 18rem;
+      width: inherit;
+      cursor: pointer;
+
+      @include m {
+        min-height: 8rem;
+        width: 18rem;
+      }
+
+      @include l {
+        width: 45rem;
+      }
+
+      //@include xl {
+      //  width: 45rem;
+      //}
+    }
+  }
+
+  &_right {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+
+    @include m {
+      flex-grow: 3;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 30%;
+    }
+
+    &_upper {
+      display: flex;
+      flex-direction: column;
+
+      @include m {
+        flex-direction: row;
+        align-self: flex-end;
+        height: 80%;
+      }
+
+      &_button {
+        border: none !important;;
+        background-color: #E717A7 !important;
+        border-radius: 0.5rem;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+
+        height: 4rem;
+        width: 8rem;
+        max-width: 35rem;
+
+        font-family: $baseFont;
+        color: $white !important;;
+        font-size: 1.6rem;
+        font-weight: 400;
+        text-align: center;
+
+        //filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+        //transition: all 0.5s ease;
+
+        &:hover {
+          transform: translateY(0.2rem);
+          transition: all 0.5s ease;
+        }
+
+      }
+    }
+
+    &_lower {
+      //margin-top: 3rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 100%;
+
+      //@include xs {
+      //  width: 100%;
+      //}
+      //
+      //@include s {
+      //  width: 100%;
+      //}
+      //
+      @include m {
+      //  flex-direction: row;
+      //  width: 70%;
+        border-top: 1px solid #F1F1F1;
+      }
+      //
+      //@include l {
+      //  width: 70%;
+      //}
+
+      &_timeleft {
+        display: flex;
+        align-items: center;
+        height: 3.5rem;
+        width: 100%;
+        justify-content: left;
+        padding: 0;
+        margin: 0 1rem;
+
+        @include m {
+          margin: 0;
+          justify-content: flex-end;
+        }
+
+        & span {
+          color: rgba(0, 0, 0, 0.895269);
+          font-weight: 400;
+          font-size: 1.4rem;
+          letter-spacing: 0.42px;
+
+          @include xl {
+            font-size: 1.8rem;
+          }
+        }
+
+        &_icon {
+          color: #D8D8D8;
+          font-size: 2rem;
+          margin-right: 1rem;
+        }
+      }
+
+      &_date {
+        display: flex;
+        align-items: center;
+        height: 3.5rem;
+        width: 100%;
+        justify-content: left;
+        padding: 0;
+
+        & p {
+          margin: 0 1rem;
+          color: rgba(0, 0, 0, 0.895269);
+
+          font-weight: 400;
+          font-size: 1.4rem;
+          line-height: 30px;
+          /* or 214% */
+
+          letter-spacing: 0.42px;
+
+          color: rgba(0, 0, 0, 0.403983);
+        }
+
+        & span {
+          color: rgba(0, 0, 0, 0.895269);
+          font-weight: 400;
+          font-size: 1.4rem;
+          line-height: 30px;
+          letter-spacing: 0.42px;
+
+        }
+
+      }
+    }
+  }
+
+}
+.perks {
+  //position: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  //background-color: $white;
+
+  color: $black;
+  font-family: $baseFont;
+
+  font-size: 1.8rem;
+  word-wrap: break-word;
+
+  width: 85%;
+  //max-width: 70vw;
+
+  border-radius: 8px;
+  min-height: 10rem;
+
+  padding: 2rem;
+
+  @include xs {
+    max-width: 85%;
+  }
+
+  @include m {
+    min-height: 50rem;
+  }
+
+  @include l {
+    font-size: 2.4rem;
+    width: 80vw;
+    max-width: 80%;
+    min-height: 60rem;
+  }
+
+  //@include xl {
+  //  //font-size: 2.4rem;
+  //  width: 70vw;
+  //  max-width: 70%;
+  //  min-height: 80rem;
+  //}
+}
+
+.background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.36;
+}
+
+.expiredtext {
+  color: rgba(255, 160, 21, 0.896389) !important;
+}

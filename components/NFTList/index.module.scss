@@ -1,0 +1,201 @@
+@import '../../styles/variables.module.scss';
+@import '../../styles/mixin.module.scss';
+
+
+.container {
+  display: inline-block;
+  position: relative;
+  width: 100vw;
+  height: 100vw;
+
+  @include m {
+    height: 50rem;
+  }
+
+  @include l {
+    height: 70rem;
+  }
+
+  & h2 {
+    text-align: left;
+    word-wrap: break-word;
+    font-family: $baseFont;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.895269);
+    line-height: 30px;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & h2 {
+    padding-left: 1rem;
+    font-family: $baseFont;
+    font-size: 2.4rem;
+    word-wrap: break-word;
+    text-align: left;
+
+    width: 80vw;
+
+    @include l {
+      font-size: 3.2rem;
+    }
+  }
+}
+
+.nft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $white;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 1rem;
+
+  @include xs {
+    width: 40rem;
+    max-width: 40rem;
+    height: 50rem;
+  }
+
+  @include s {
+    width: 35rem;
+    height: 45rem;
+  }
+
+  @include m {
+    width: 26rem;
+    max-width: 30rem;
+    height: 38rem;
+  }
+  @include l {
+    max-width: 35rem;
+    max-height: 45rem;
+  }
+
+  @include xl {
+    //width: 30rem;
+    //max-width: 35rem;
+    //height: 45rem;
+  }
+
+  &_imgholder {
+    position: relative;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
+  &_img {
+    position: relative;
+    min-height: 20rem;
+    min-width: 18rem;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  &_detail {
+    width: 100%;
+    min-height: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+
+    @include m {
+      min-height: 10rem;
+    }
+  }
+
+  &_title {
+    width: 100%;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 18px;
+    letter-spacing: 0.015px;
+    color: $black;
+
+    @include m {
+      font-size: 1.8rem;
+      line-height: 24px;
+    }
+  }
+
+  &_desc {
+    width: 100%;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 16px;
+    letter-spacing: 0.0133333px;
+    color: rgba(0, 0, 0, 0.400377);
+
+    @include m {
+      font-size: 1.6rem;
+      line-height: 24px;
+    }
+  }
+}
+
+.nfts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  color: $black;
+  font-family: $baseFont;
+
+  font-size: 1.8rem;
+  word-wrap: break-word;
+
+  width: 85%;
+
+  border-radius: 8px;
+  min-height: 10rem;
+
+  padding: 2rem;
+
+  @include xs {
+    max-width: 85%;
+  }
+
+  @include m {
+    min-height: 50rem;
+  }
+
+  @include l {
+    font-size: 2.4rem;
+    max-width: 85%;
+    min-height: 60rem;
+  }
+
+}
+
+.nftscontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  @include l {
+    max-width: 100%;
+  }
+
+}
+
+.background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.36;
+}
+

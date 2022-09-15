@@ -100,6 +100,29 @@ export const getReadableTime = (time: number) => {
   return [_days, _hours, _minutes, _seconds]
 }
 
+export const getTimeDate = (time: number) => {
+  if (time === Infinity) return ['-', '-', '-', '-']
+  if (time < 0) return ['0', '00', '00', '00']
+
+  const date = new Date(time);
+
+  let day = date.getDate();
+  let month = date.getMonth();
+  const year = date.getFullYear();
+
+  let _day = String(day)
+  let _month = String(month)
+
+  if (_day.length < 2) {
+    _day = '0'.concat(_day)
+  }
+  if (_month.length < 2) {
+    _month = '0'.concat(_month)
+  }
+
+  return [_day, _month, year]
+}
+
 export const getDisplayAddress = (
   address: string | null | undefined
 ): string => {

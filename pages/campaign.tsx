@@ -36,13 +36,14 @@ const data = (index: string) => {
           ],
           code: '23cv-f34c-xc123',
         },
-        isEmpty: false
+        isEmpty: false,
+        redeemed: 100
       }
     case '2':
       return {
         nft: 'karafuru',
         company: 'atmos',
-        location: 'Worldwide Official Nike Stores',
+        location: 'Worldwide Official karafuru Stores',
         startTime: 1657887360000,
         endTime: 1658319360000,
         nftCollectionAddr: '0xd2F668a8461D6761115dAF8Aeb3cDf5F40C532C6',
@@ -59,13 +60,14 @@ const data = (index: string) => {
           ],
           code: '56gg-sd56-sfdg4',
         },
-        isEmpty: true
+        isEmpty: true,
+        redeemed: 232
       }
     case '3':
       return {
         nft: 'doodles',
         company: 'whitecastle',
-        location: 'Worldwide Official Nike Stores',
+        location: 'Worldwide Official doodles Stores',
         startTime: 1657887360000,
         endTime: 1658319360000,
         nftCollectionAddr: '0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e',
@@ -82,7 +84,8 @@ const data = (index: string) => {
           ],
           code: '11uf-df78-kgsf5',
         },
-        isEmpty: false
+        isEmpty: false,
+        redeemed: 9322
       }
     default:
       return {
@@ -120,7 +123,8 @@ const Campaign: NextPage = () => {
       tnc: [],
       code: '',
     },
-    isEmpty: false
+    isEmpty: false,
+    redeemed: 1
   })
   const [showRedemptionModal, setShowRedemptionModal] = useState<boolean>(false)
 
@@ -155,6 +159,7 @@ const Campaign: NextPage = () => {
           details={campaignDetails.voucher}
           collectionAddr={campaignDetails.nftCollectionAddr}
           toggleModal={setShowRedemptionModal}
+          redemptionRemaining={campaignDetails.redeemed}
         />
 
         {showRedemptionModal && (

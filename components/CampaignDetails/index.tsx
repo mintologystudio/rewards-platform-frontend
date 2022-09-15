@@ -15,7 +15,7 @@ import NFTCard from '../NFTCard'
 import listOfNftsByCollection from '../../utils/dummyNftCollections'
 import { Web3Context } from '../../context/web3Context'
 import {BsClockFill, BsFillBookmarkCheckFill} from "react-icons/bs";
-import {getReadableTime} from "../../utils";
+import {getReadableTime, getTimeDate} from "../../utils";
 import { useWeb3Auth } from '../../utils/services/web3auth'
 
 interface IVoucher {
@@ -32,11 +32,13 @@ const CampaignDetails = ({
   collectionAddr,
   details,
   toggleModal,
+  redemptionRemaining
 }: {
   campaign: ICampaign
   collectionAddr: string
   details: IVoucher
   toggleModal: Dispatch<SetStateAction<boolean>>
+  redemptionRemaining: number
 }) => {
   const { appState } = useContext(Web3Context);
   const [availableTokens, setAvailableTokens] = useState<
@@ -83,6 +85,9 @@ const CampaignDetails = ({
 
   const countDownInMilli = new Date(2022, 10, 10).getTime() - new Date().getTime()
   const [days, hours] = getReadableTime(countDownInMilli);
+
+  const [sday, smonth, syear] = getTimeDate(campaign.startTime);
+  const [eday, emonth, eyear] = getTimeDate(campaign.endTime);
 
   return (
     <div className={styles.container}>
@@ -133,15 +138,15 @@ const CampaignDetails = ({
         <div className={styles.campaign} style={{ marginTop: '-15rem', marginBottom: '2rem' }}>
           <div className={styles.campaign_info}>
             <span className={styles.campaign_info_title}>Location</span>
-            <span className={styles.campaign_info_text}>Worldwide official nike stores</span>
+            <span className={styles.campaign_info_text}>{campaign.location}</span>
           </div>
           <div className={styles.campaign_info}>
             <span className={styles.campaign_info_title}>Start Date</span>
-            <span className={styles.campaign_info_text}>21/04/2022</span>
+            <span className={styles.campaign_info_text}>{sday}/{smonth}/{syear}</span>
           </div>
           <div className={styles.campaign_info}>
             <span className={styles.campaign_info_title}>End Date</span>
-            <span className={styles.campaign_info_text}>21/04/2022</span>
+            <span className={styles.campaign_info_text}>{eday}/{emonth}/{eyear}</span>
           </div>
 
           <div className={styles.campaign_timeleft_redeem}>
@@ -154,7 +159,7 @@ const CampaignDetails = ({
             <div className={styles.campaign_redeem}>
               <BsFillBookmarkCheckFill className={styles.campaign_redeem_icon} />
               <span>
-                Redeemed: 282221
+                Redeemed: {redemptionRemaining}
               </span>
             </div>
           </div>
