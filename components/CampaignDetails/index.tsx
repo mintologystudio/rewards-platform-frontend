@@ -38,7 +38,7 @@ const CampaignDetails = ({
   collectionAddr: string
   details: IVoucher
   toggleModal: Dispatch<SetStateAction<boolean>>
-  redemptionRemaining: number
+  redemptionRemaining: number | undefined
 }) => {
   const { appState } = useContext(Web3Context);
   const [availableTokens, setAvailableTokens] = useState<

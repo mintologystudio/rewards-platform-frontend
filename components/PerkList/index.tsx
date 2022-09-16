@@ -153,7 +153,7 @@ const PerkList = ({ }) => {
           <h2>My Perks</h2>
 
           {ListOfPerks.map(perk => (
-              <Perk perkDetail={perk}/>
+              <Perk perkDetail={perk} key={perk.nft}/>
           ))}
 
         </div>

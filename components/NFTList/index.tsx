@@ -59,7 +59,7 @@ const NFTList = ({ }) => {
             <h2>My NFTs</h2>
             <div className={styles.nftscontainer}>
             {ListOfNFTs.map(nft => (
-                <NFTGallery nft={nft}/>
+                <NFTGallery nft={nft} key={nft.title}/>
             ))}
             </div>
         </div>
