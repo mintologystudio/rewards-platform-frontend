@@ -100,6 +100,10 @@ export const getReadableTime = (time: number) => {
   return [_days, _hours, _minutes, _seconds]
 }
 
+export const getUSFormatDate = (day: number | string, month: number | string, year: number | string ) => {
+  return month + '/'+ day + '/' + year;
+}
+
 export const getTimeDate = (time: number) => {
   if (time === Infinity) return ['-', '-', '-', '-']
   if (time < 0) return ['0', '00', '00', '00']

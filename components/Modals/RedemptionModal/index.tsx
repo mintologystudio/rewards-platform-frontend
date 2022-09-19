@@ -41,7 +41,7 @@ const RedemptionModal = ({
             <div className={styles.info}>
                 <span className={styles.info_text}>
                     You can review and manage your perks in “My Perks”.
-                    <Link href={'#'}><span className={styles.info_link}>Go here {'>'}</span></Link>
+                    <Link href={'/perk'}><span className={styles.info_link}>Go there</span></Link>
                 </span>
             </div>
 
@@ -57,13 +57,13 @@ const RedemptionModal = ({
         </>
      ) : (
         <>
-          <p>No eligible NFTs</p>
+          <p>{"Not eligible for this offer"}</p>
             <div className={styles.logo_image}>
               <Image src={NftSearch} alt="Nft Search" layout="fill" />
             </div>
           <div className={styles.info}>
                 <span className={styles.info_text}>
-                  {"Seems there's no matching eligible NFT are found."}
+                  {"We couldn't find any qualifying NFTs in your wallet."}
                 </span>
           </div>
 

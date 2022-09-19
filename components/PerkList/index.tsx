@@ -4,7 +4,7 @@ import Image from "next/image";
 import Badge from "../Badge";
 import {BsClockFill} from "react-icons/bs";
 import {IPerk} from "../../utils/interfaces";
-import {getTimeDate, upperCaseString} from "../../utils";
+import {getTimeDate, getUSFormatDate, upperCaseString} from "../../utils";
 
 const delay = 500000000
 
@@ -80,6 +80,8 @@ const Perk = ({ perkDetail }: {
 
   const [sday, smonth, syear] = getTimeDate(perkDetail.startTime);
   const [eday, emonth, eyear] = getTimeDate(perkDetail.endTime);
+  const usStartDate = getUSFormatDate(sday, smonth, syear);
+  const usEndDate = getUSFormatDate(eday, emonth, eyear);
 
   return (
       <div className={styles.perk}>
@@ -101,13 +103,13 @@ const Perk = ({ perkDetail }: {
               <div className={styles.perk_left_lower_date}>
                 <p>start date</p>
                 <span>
-                  {sday}/{smonth}/{syear}
+                  {usStartDate}
                 </span>
               </div>
               <div className={styles.perk_left_lower_date}>
                 <p>end date</p>
                 <span>
-                  {eday}/{emonth}/{eyear}
+                  {usEndDate}
                 </span>
               </div>
             </div>

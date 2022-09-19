@@ -6,6 +6,8 @@ import Image from "next/image";
 
 const Footer = () => {
 
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer>
             <div className={styles.footer}>
@@ -14,13 +16,13 @@ const Footer = () => {
                         <span className={styles.footer_main_image}>
                             <Image src={FooterLogo} alt="Main Logo" width={200} height={30}/>
                         </span>
-                        <span className={styles.footer_main_title}>Bringing Brands with NFT Users</span>
-                        <span className={styles.footer_main_copyright}>&copy; 2021 Mintology. All Rights Reserved</span>
+                        <span className={styles.footer_main_title}>Enjoy real life brand benefits with your NFTs.</span>
+                        <span className={styles.footer_main_copyright}>&copy; {currentYear} Mintology. All Rights Reserved</span>
                     </div>
                 </div>
                 <div className={styles.footer_div}>
                     <div className={styles.footer_div_title}>
-                        <h3>Quick Link</h3>
+                        <h3>Quick Links</h3>
                     </div>
                     <div className={styles.footer_div_items}>
                         <span className={styles.footer_div_items_item}>Request a demo</span>

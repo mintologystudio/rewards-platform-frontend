@@ -15,7 +15,7 @@ import NFTCard from '../NFTCard'
 import listOfNftsByCollection from '../../utils/dummyNftCollections'
 import { Web3Context } from '../../context/web3Context'
 import {BsClockFill, BsFillBookmarkCheckFill} from "react-icons/bs";
-import {getReadableTime, getTimeDate} from "../../utils";
+import {getReadableTime, getTimeDate, getUSFormatDate} from "../../utils";
 import { useWeb3Auth } from '../../utils/services/web3auth'
 
 interface IVoucher {
@@ -88,6 +88,8 @@ const CampaignDetails = ({
 
   const [sday, smonth, syear] = getTimeDate(campaign.startTime);
   const [eday, emonth, eyear] = getTimeDate(campaign.endTime);
+  const usStartDate = getUSFormatDate(sday, smonth, syear);
+  const usEndDate = getUSFormatDate(eday, emonth, eyear);
 
   return (
     <div className={styles.container}>
@@ -142,11 +144,11 @@ const CampaignDetails = ({
           </div>
           <div className={styles.campaign_info}>
             <span className={styles.campaign_info_title}>Start Date</span>
-            <span className={styles.campaign_info_text}>{sday}/{smonth}/{syear}</span>
+            <span className={styles.campaign_info_text}>{usStartDate}</span>
           </div>
           <div className={styles.campaign_info}>
             <span className={styles.campaign_info_title}>End Date</span>
-            <span className={styles.campaign_info_text}>{eday}/{emonth}/{eyear}</span>
+            <span className={styles.campaign_info_text}>{usEndDate}</span>
           </div>
 
           <div className={styles.campaign_timeleft_redeem}>
@@ -188,7 +190,7 @@ const CampaignDetails = ({
               { !(appState.address_to_bind != '') ?
                   (<button type="button" onClick={login}>Get It Now</button>)
                   :
-                  provider && (<button
+                  appState.chainId === 1 && (<button
                       type="button"
                       className={styles.button}
                       onClick={() => toggleModal(true)}>Get It Now</button>)

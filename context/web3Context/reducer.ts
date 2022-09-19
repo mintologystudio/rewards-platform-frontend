@@ -23,6 +23,7 @@ export type IAction =
     | {
     type: 'SET_ADDRESS_PROVIDER'
     value: {
+      provider: IAppContextState['provider']
       web3ModalProvider: IAppContextState['web3ModalProvider']
       address_to_bind: IAppContextState['address_to_bind']
       chainId: IAppContextState['chainId']
@@ -57,6 +58,7 @@ const Web3Reducer = (
     case SET_ADDRESS_PROVIDER:
       return {
         ...state,
+        provider: action.value.provider,
         web3ModalProvider: action.value.web3ModalProvider,
         address_to_bind: action.value.address_to_bind,
         chainId: action.value.chainId,

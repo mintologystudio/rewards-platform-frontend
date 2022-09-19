@@ -51,7 +51,7 @@ const useWeb3Modal = () => {
       )
       await web3Modal.clearCachedProvider()
       const web3ModalProvider = await web3Modal.connect()
-      console.log('[useWeb3Modal] Web3ModalProvider: ', web3ModalProvider)
+      // console.log('[useWeb3Modal] Web3ModalProvider: ', web3ModalProvider)
       // Only require wallet address from Web3Modal
       const provider = new ethers.providers.Web3Provider(web3ModalProvider)
       const signer = provider.getSigner()
@@ -61,6 +61,7 @@ const useWeb3Modal = () => {
       appDispatch({
         type: SET_ADDRESS_PROVIDER,
         value: {
+          provider: web3ModalProvider,
           web3ModalProvider: provider,
           address_to_bind: address,
           chainId: network.chainId,
@@ -75,16 +76,18 @@ const useWeb3Modal = () => {
     try {
       console.log('[useWeb3Modal] Initiating past connection with Web3Modal.')
       const web3ModalProvider = await web3Modal.connect()
-
+      // console.log('[useWeb3Modal] Web3ModalProvider: ', web3ModalProvider)
       // Only require wallet address from Web3Modal
       const provider = new ethers.providers.Web3Provider(web3ModalProvider)
       const signer = provider.getSigner()
       const address = await signer.getAddress()
       const network = await provider.getNetwork()
+      // console.log('provider: ', provider)
       console.log('Address: ', address)
       appDispatch({
         type: SET_ADDRESS_PROVIDER,
         value: {
+          provider: web3ModalProvider,
           web3ModalProvider: provider,
           address_to_bind: address,
           chainId: network.chainId,
