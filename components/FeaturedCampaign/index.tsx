@@ -27,20 +27,20 @@ const ListOfFeaturedCampaigns = [
     percentage: '15',
     description: 'off storewide footwear',
   },
-  {
-    campaignId: 2,
-    nft: 'karafuru',
-    company: 'atmos',
-    percentage: '20',
-    description: 'off storewide',
-  },
-  {
-    campaignId: 3,
-    nft: 'doodles',
-    company: 'whitecastle',
-    percentage: '10',
-    description: 'off storewide footwear',
-  },
+  // {
+  //   campaignId: 2,
+  //   nft: 'karafuru',
+  //   company: 'atmos',
+  //   percentage: '20',
+  //   description: 'off storewide',
+  // },
+  // {
+  //   campaignId: 3,
+  //   nft: 'doodles',
+  //   company: 'whitecastle',
+  //   percentage: '10',
+  //   description: 'off storewide footwear',
+  // },
 ]
 
 const FeaturedCampaignItem = ({
@@ -89,43 +89,49 @@ const FeaturedCampaignItem = ({
 
         <div className={styles.layer}>
           <div
-            className={styles.background}
+            className={styles.backgroundFake}
             style={{
-              backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%), url(assets/campaign/${company}.png)`,
-              opacity: 0.6,
+              backgroundImage: `url(assets/main-banner.jpg)`
             }}
           />
-          <div className={styles.content}>
-            <div className={styles.content_center}>
-              <div className={styles.content_center_sub}>
-                  <div className={styles.content_center_discount}>
-                    <p className={styles.content_center_percentage}>{percentage}</p>
-                      <div className={styles.content_center_discount_tag}>
-                          <Image src={DiscountTag} alt="Main Logo" layout="fill" />
-                          <span className={styles.content_center_discount_tag_text}>{percentage}% off</span>
-                      </div>
-                  </div>
-                <p className={styles.content_center_desc}>{description}</p>
-              </div>
-              <div className={styles.wrap}>
-                <div className={styles.wrap_left}>
-                    <div className={styles.wrap_left_item}>
-                      <Badge company={company} width={'35rem'}/> <span className={styles.badgeText_bold}>{upperCaseString(company)}</span>
-                      <span className={styles.badgeText}>X</span>
-                      <Badge nft={nft} width={'35rem'}/> <span className={styles.badgeText_bold}>{upperCaseString(nft)}</span>
-                  </div>
+          {/*<div*/}
+          {/*  className={styles.background}*/}
+          {/*  style={{*/}
+          {/*    backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%), url(assets/campaign/${company}.png)`,*/}
+          {/*    opacity: 0.6,*/}
+          {/*  }}*/}
+          {/*/>*/}
+          {/*<div className={styles.content}>*/}
+          {/*  <div className={styles.content_center}>*/}
+          {/*    <div className={styles.content_center_sub}>*/}
+          {/*        <div className={styles.content_center_discount}>*/}
+          {/*          <p className={styles.content_center_percentage}>{percentage}</p>*/}
+          {/*            <div className={styles.content_center_discount_tag}>*/}
+          {/*                <Image src={DiscountTag} alt="Main Logo" layout="fill" />*/}
+          {/*                <span className={styles.content_center_discount_tag_text}>{percentage}% off</span>*/}
+          {/*            </div>*/}
+          {/*        </div>*/}
+          {/*      <p className={styles.content_center_desc}>{description}</p>*/}
+          {/*    </div>*/}
+          {/*    <div className={styles.wrap}>*/}
+          {/*      <div className={styles.wrap_left}>*/}
+          {/*          <div className={styles.wrap_left_item}>*/}
+          {/*            <Badge company={company} width={'35rem'}/> <span className={styles.badgeText_bold}>{upperCaseString(company)}</span>*/}
+          {/*            <span className={styles.badgeText}>X</span>*/}
+          {/*            <Badge nft={nft} width={'35rem'}/> <span className={styles.badgeText_bold}>{upperCaseString(nft)}</span>*/}
+          {/*        </div>*/}
 
-                </div>
-                  <div className={styles.wrap_right}>
-                <Link href={`${Routes.VIEW_CAMPAIGN}?campaignId=${campaignId}`}>
-                  <button type="button" className={styles.content_center_button}>
-                    Learn More
-                  </button>
-                </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/*      </div>*/}
+          {/*        <div className={styles.wrap_right}>*/}
+          {/*      <Link href={`${Routes.VIEW_CAMPAIGN}?campaignId=${campaignId}`}>*/}
+          {/*        <button type="button" className={styles.content_center_button}>*/}
+          {/*          Learn More*/}
+          {/*        </button>*/}
+          {/*      </Link>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
       </div>
     </div>
   )

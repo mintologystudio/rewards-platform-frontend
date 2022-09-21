@@ -4,46 +4,53 @@ import {
   renderSvgIcon,
   IconEnum,
   getReadableTime,
-  upperCaseString,
+  upperCaseString, getTimeDate, getUSFormatDate,
 } from '../../utils/index'
 import { BsClockFill, BsFillBookmarkCheckFill } from 'react-icons/bs';
 import Badge from "../Badge";
 import Link from 'next/link'
 import Routes from '../../utils/constants/routes'
+import {ICampaign} from "../../utils/interfaces";
 
-const CampaignCard = ({
-  campaignId,
-  nft,
-  company,
-  offer,
-  expiration,
-  redemptionRemaining,
-}: {
-  campaignId: string
-  nft: string
-  company: string
-  offer: string
-  expiration: number
-  redemptionRemaining: number
-}) => {
-  const countDownInMilli = expiration - new Date().getTime()
-  const [days, hours] = getReadableTime(countDownInMilli)
+const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
+
+  const {campaignId, company, nft, offer,suboffer, redeemed, startTime, endTime, expiration, bgUrl} = campaign;
+
+  const [sday, smonth, syear] = getTimeDate(startTime);
+  const [eday, emonth, eyear] = getTimeDate(endTime);
+  const usStartDate = getUSFormatDate(sday, smonth, syear);
+  const usEndDate = getUSFormatDate(eday, emonth, eyear);
+
+  const countDownInMilli = (expiration? expiration : new Date(1668950741000).getTime()) - new Date().getTime()
+  const [days, hours, mins, seconds] = getReadableTime(countDownInMilli);
+
+  const backgroundImg = bgUrl? `url(${bgUrl})` : `url(assets/nfts/banner/${nft}.png)`;
+
+  const isExpired = new Date(endTime) < new Date();
 
   return (
     <li className={styles.container}>
       <div className={styles.main}>
         <div
           className={styles.main_top}
-          style={{ backgroundImage: `url(assets/nfts/banner/${nft}.png)` }}
+          style={{ backgroundImage: backgroundImg, backgroundRepeat: 'no-repeat', backgroundSize:'cover' }}
         >
           <div className={styles.main_top_badges}>
             <Badge company={company} width={'35rem'}/>
           </div>
           <div className={styles.main_top_timeleft}>
-            <BsClockFill className={styles.main_top_timeleft_icon}/>
-            <span>
-                Time Left: {days}d {hours}h 33s
-              </span>
+            {
+              !isExpired? (
+                  <>
+                    <BsClockFill className={styles.main_top_timeleft_icon}/>
+                    <span>
+                      Time Left: {days}d {hours}h {seconds}s
+                    </span>
+                  </>
+              )
+                  : <span>Expired</span>
+            }
+
           </div>
           <div className={styles.main_top_title}>
             <h3>
@@ -54,6 +61,9 @@ const CampaignCard = ({
         <div className={styles.main_bottom}>
           <div className={styles.main_bottom_p}>
             <p>{offer}</p>
+            {
+              suboffer? (<p dangerouslySetInnerHTML={{ __html: suboffer }}></p>) : ''
+            }
           </div>
           <div className={styles.main_info}>
             <div className={styles.main_info_redeemed}>
@@ -62,7 +72,7 @@ const CampaignCard = ({
                 <p>redeemed</p>
               </div>
               <div className={styles.main_info_redeemed_bottom}>
-                {redemptionRemaining}
+                {redeemed}
               </div>
             </div>
             <div className={styles.main_info_redemption}>

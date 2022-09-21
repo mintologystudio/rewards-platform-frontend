@@ -139,6 +139,7 @@ export interface IOwnedNFTDataSelection extends IOwnedNFTData {
 }
 
 export interface ICampaign {
+  campaignId?: string | number
   nft: string
   company: string
   location: string
@@ -147,11 +148,15 @@ export interface ICampaign {
   voucher: IVoucher
   nftCollectionAddr: string
   offer?: string
+  suboffer?: string
   isEmpty?: boolean
   redeemed?: number
+  bgUrl?: string
+  expiration?: number
 }
 
 export interface IPerk {
+  campaignId?: string | number
   nft: string
   company: string
   location: string
@@ -160,6 +165,7 @@ export interface IPerk {
   voucher: IVoucher
   nftCollectionAddr: string
   isExpired?: boolean
+  expiration?: number
 }
 
 export interface IVoucher {

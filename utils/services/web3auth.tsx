@@ -15,6 +15,7 @@ import envConfig from '../envConfig'
 import { getWalletProvider, IWalletProvider } from './walletProvider'
 import {useRouter} from "next/router";
 import MainLogo from '../../public/assets/misc/main.png'
+import Routes from "../constants/routes";
 
 export interface IWeb3AuthContext {
   web3Auth: Web3Auth | null
@@ -74,6 +75,12 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
   const [user, setUser] = useState<unknown | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
+  let newCampaignId = '';
+  if (router && router.query && router.query.campaignId) {
+    newCampaignId = (router.query.campaignId as string);
+    console.log('newCampaignId', newCampaignId);
+  };
+
   const setWalletProvider = useCallback(
     (web3authProvider: SafeEventEmitterProvider) => {
       const walletProvider = getWalletProvider(
@@ -87,6 +94,15 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
   )
 
   useEffect(() => {
+
+    const redirect = () => {
+      if (newCampaignId && newCampaignId != '') {
+        router.push(`/login?campaignId=${newCampaignId}`);
+      } else {
+        router.push('/login');
+      }
+    }
+
     const subscribeAuthEvents = (web3auth: Web3Auth) => {
       // Can subscribe to all ADAPTER_EVENTS and LOGIN_MODAL_EVENTS
       web3auth.on(ADAPTER_EVENTS.CONNECTED, (data: any) => {
@@ -95,7 +111,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
         setWalletProvider(web3auth.provider!)
 
         if (data  && !data.reconnected) {
-          router.push('/login');
+          redirect();
         }
       })
 
@@ -175,7 +191,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
       }
     }
     init()
-  }, [chain, web3AuthNetwork, setWalletProvider])
+  }, [chain, web3AuthNetwork, setWalletProvider, newCampaignId])
 
   const login = async () => {
     if (!web3Auth) {
@@ -185,7 +201,6 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
     }
     const localProvider = await web3Auth.connect()
     setWalletProvider(localProvider!)
-    // await getUserInfo()
   }
 
   const logout = async () => {
@@ -206,7 +221,6 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
     }
     const user = await web3Auth.getUserInfo()
     uiConsole(user)
-    // console.log(user)
   }
 
   const getAccounts = async () => {

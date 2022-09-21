@@ -7,6 +7,7 @@ import { useWeb3Auth } from '../../utils/services/web3auth'
 import styles from '../../styles/Login.module.scss'
 import { Web3Context } from '../../context/web3Context'
 import {BsFillCheckCircleFill} from "react-icons/bs";
+import Routes from "../../utils/constants/routes";
 
 interface Props {
   connector: any
@@ -73,7 +74,14 @@ const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
   }
 
   const homeHandler = () => {
-    router.push('/')
+    if (router && router.query && router.query.campaignId) {
+      const _campaignId = (router.query.campaignId as string) || '';
+      if (_campaignId && _campaignId !== '') {
+        router.push(`${Routes.VIEW_CAMPAIGN}?campaignId=${_campaignId}`);
+      }
+    } else {
+      router.push('/')
+    }
   }
 
   return (

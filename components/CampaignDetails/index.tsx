@@ -83,13 +83,15 @@ const CampaignDetails = ({
     retrieveAndFilterEligibleTokens();
   }, [collectionAddr])
 
-  const countDownInMilli = new Date(2022, 10, 10).getTime() - new Date().getTime()
-  const [days, hours] = getReadableTime(countDownInMilli);
+  const countDownInMilli = (campaign.expiration? campaign.expiration : new Date(1668950741000).getTime()) - new Date().getTime()
+  const [days, hours, mins, seconds] = getReadableTime(countDownInMilli);
 
   const [sday, smonth, syear] = getTimeDate(campaign.startTime);
   const [eday, emonth, eyear] = getTimeDate(campaign.endTime);
   const usStartDate = getUSFormatDate(sday, smonth, syear);
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
+
+  const isExpired = new Date(campaign.endTime) < new Date();
 
   return (
     <div className={styles.container}>
@@ -153,10 +155,18 @@ const CampaignDetails = ({
 
           <div className={styles.campaign_timeleft_redeem}>
             <div className={styles.campaign_timeleft}>
-              <BsClockFill className={styles.campaign_timeleft_icon}/>
-              <span>
-                  Time Left: {days}d {hours}h 33s
-              </span>
+              {
+                !isExpired? (
+                    <>
+                      <BsClockFill className={styles.campaign_timeleft_icon}/>
+                      <span>
+                          Time Left: {days}d {hours}h {seconds}s
+                      </span>
+                    </>
+                ) :
+                    <span className={styles.expiredtext}>Expired</span>
+              }
+
             </div>
             <div className={styles.campaign_redeem}>
               <BsFillBookmarkCheckFill className={styles.campaign_redeem_icon} />
@@ -170,7 +180,8 @@ const CampaignDetails = ({
 
         <div className={styles.campaign}>
           <div className={styles.campaign_detail}>
-              <img src={`/assets/nfts/banner/${campaign.nft}.png`} className={styles.campaign_detail_img}/>
+              {/*<img src={`/assets/nfts/banner/${campaign.nft}.png`} className={styles.campaign_detail_img}/>*/}
+              <img src={`/assets/details1.png`} alt={'details1'} className={styles.campaign_detail_img}/>
 
               <div className={styles.campaign_detail_top}>
                 <h3 className={styles.content_tnc_title}>{campaign.offer}</h3>
@@ -187,10 +198,10 @@ const CampaignDetails = ({
             </div>
 
             <div className={styles.content_button}>
-              { !(appState.address_to_bind != '') ?
+              { !isExpired && !(appState.address_to_bind != '') ?
                   (<button type="button" onClick={login}>Get It Now</button>)
                   :
-                  appState.chainId === 1 && (<button
+                  !isExpired && appState.chainId === 1 && (<button
                       type="button"
                       className={styles.button}
                       onClick={() => toggleModal(true)}>Get It Now</button>)

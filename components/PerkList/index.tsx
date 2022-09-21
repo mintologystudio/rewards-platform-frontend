@@ -4,84 +4,31 @@ import Image from "next/image";
 import Badge from "../Badge";
 import {BsClockFill} from "react-icons/bs";
 import {IPerk} from "../../utils/interfaces";
-import {getTimeDate, getUSFormatDate, upperCaseString} from "../../utils";
+import {getReadableTime, getTimeDate, getUSFormatDate, upperCaseString} from "../../utils";
+import {PERK_DATA} from "../../utils/mockdata";
+import {useRouter} from "next/router";
+import Routes from "../../utils/constants/routes";
 
 const delay = 500000000
 
-const ListOfPerks: Array<IPerk> = [
-  {
-    nft: 'azuki',
-    company: 'nike',
-    location: 'Worldwide Official Nike Stores',
-    startTime: 1657887360000,
-    endTime: 1658319360000,
-    nftCollectionAddr: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
-    voucher: {
-      title: '10% Off Footwear',
-      description:
-          '10% off footwear when you purchase any footwear in-store!',
-      tnc: [
-        'Limited to 1 redemption per user. Limited redemptions available for the period',
-        'Promo is valid from now until 30th June 2022 or redemption lasts, whichever is sooner',
-        'Applicable only for in-store purchases',
-        'Other Nike T&Cs apply',
-      ],
-      code: '23cv-f34c-xc123',
-    },
-  },
-  {
-    nft: 'karafuru',
-    company: 'atmos',
-    location: 'Worldwide Official karafuru Stores',
-    startTime: 1657887360000,
-    endTime: 1658319360000,
-    nftCollectionAddr: '0xd2F668a8461D6761115dAF8Aeb3cDf5F40C532C6',
-    voucher: {
-      title: '10% OFF FOOTWEAR',
-      description:
-          '10% off footwear when you purchase any footwear in-store!',
-      tnc: [
-        'Limited to 1 redemption per user. Limited redemptions available for the period',
-        'Promo is valid from now until 30th June 2022 or redemption lasts, whichever is sooner',
-        'Applicable only for in-store purchases',
-        'Other Nike T&Cs apply',
-      ],
-      code: '56gg-sd56-sfdg4',
-    },
-    isExpired: true
-  },
-  {
-    nft: 'doodles',
-    company: 'whitecastle',
-    location: 'Worldwide Official whitecastle Stores',
-    startTime: 1657887360000,
-    endTime: 1658319360000,
-    nftCollectionAddr: '0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e',
-    voucher: {
-      title: '10% OFF FOOTWEAR',
-      description:
-          '10% off footwear when you purchase any footwear in-store!',
-      tnc: [
-        'Limited to 1 redemption per user. Limited redemptions available for the period',
-        'Promo is valid from now until 30th June 2022 or redemption lasts, whichever is sooner',
-        'Applicable only for in-store purchases',
-        'Other Nike T&Cs apply',
-      ],
-      code: '11uf-df78-kgsf5',
-    }
-  },
+const ListOfPerks: Array<IPerk> = PERK_DATA;
 
-]
-
-const Perk = ({ perkDetail }: {
+const Perk = ({ perkDetail, redirectHandler }: {
   perkDetail: IPerk
+  redirectHandler: Function
 }) => {
-  const nft = `/assets/nfts/banner/${perkDetail.nft || 'default'}.png`;
+  // const nft = `/assets/nfts/banner/${perkDetail.nft || 'default'}.png`;
+  const nft = `/assets/perk1.png`;
+
+  const countDownInMilli = (perkDetail.expiration? perkDetail.expiration : new Date(1668950741000).getTime()) - new Date().getTime()
+  const [days, hours, mins, seconds] = getReadableTime(countDownInMilli);
 
   const [sday, smonth, syear] = getTimeDate(perkDetail.startTime);
   const [eday, emonth, eyear] = getTimeDate(perkDetail.endTime);
   const usStartDate = getUSFormatDate(sday, smonth, syear);
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
+
+  const isExpired = new Date(perkDetail.endTime) < new Date();
 
   return (
       <div className={styles.perk}>
@@ -118,8 +65,8 @@ const Perk = ({ perkDetail }: {
         <div className={styles.perk_right}>
           <div className={styles.perk_right_upper}>
             {
-              !perkDetail.isExpired && (
-                      <button className={styles.perk_right_upper_button}>
+              !isExpired && (
+                      <button className={styles.perk_right_upper_button} onClick={() => redirectHandler(perkDetail.campaignId)}>
                         View
                       </button>
                   )
@@ -128,11 +75,11 @@ const Perk = ({ perkDetail }: {
           <div className={styles.perk_right_lower}>
             <div className={styles.perk_right_lower_timeleft}>
               {
-                !perkDetail.isExpired ? (
+                !isExpired ? (
                     <>
                     <BsClockFill className={styles.perk_right_lower_timeleft_icon}/>
                     <span>
-                      Time Left: 33d 22h 33s
+                      Time Left: {days}d {hours}h {seconds}s
                     </span>
                     </>
                 ) : (
@@ -148,6 +95,13 @@ const Perk = ({ perkDetail }: {
 }
 
 const PerkList = ({ }) => {
+
+  const router = useRouter();
+
+  const toDetail = (campaignId: any) => {
+    router.push(`${Routes.VIEW_CAMPAIGN}?campaignId=${campaignId}`);
+  }
+
   return (
     //{/*<div className={styles.container}>*/}
       <div className={styles.main}>
@@ -155,7 +109,7 @@ const PerkList = ({ }) => {
           <h2>My Perks</h2>
 
           {ListOfPerks.map(perk => (
-              <Perk perkDetail={perk} key={perk.nft}/>
+              <Perk perkDetail={perk} key={perk.nft} redirectHandler={toDetail}/>
           ))}
 
         </div>

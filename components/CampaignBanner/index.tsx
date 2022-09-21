@@ -22,14 +22,20 @@ const CampaignBanner = ({ campaign }: { campaign: ICampaign }) => {
     <div className={styles.container}>
         <div className={styles.layer}>
       <div
-        className={styles.background}
+        className={styles.backgroundFake}
         style={{
-          backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 100%), url(assets/nfts/banner/${
-            campaign.nft || 'default'
-          }.png)`,
-          opacity: 0.6,
+          backgroundImage: `url(assets/detail-banner.jpg)`,
         }}
       />
+      {/*<div*/}
+      {/*  className={styles.background}*/}
+      {/*  style={{*/}
+      {/*    backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 100%), url(assets/nfts/banner/${*/}
+      {/*      campaign.nft || 'default'*/}
+      {/*    }.png)`,*/}
+      {/*    opacity: 0.6,*/}
+      {/*  }}*/}
+      {/*/>*/}
       {/*<div className={styles.content}>*/}
       {/*  <div className={styles.content_left}>*/}
       {/*    <h2 className={styles.content_left_title}>*/}

@@ -158,6 +158,10 @@
     }
 
     @include l {
+      width: 70%;
+    }
+
+    @include xl {
       width: 50%;
     }
   }
@@ -286,4 +290,8 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
   }
+}
+
+.expiredtext {
+  color: rgba(255, 160, 21, 0.896389) !important;
 }
