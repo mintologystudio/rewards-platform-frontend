@@ -25,12 +25,12 @@ const Navigation = () => {
   const router = useRouter();
   const { windowDimensions, LARGE_SCREEN_SIZE } = useWindowDimensions()
   const [expanded, setExpanded] = useState<boolean>(false)
-  const { appState: Web3State } = useContext(Web3Context)
-  const [navRoutes, setNavRoutes] = useState<any>([])
+  const { appState: Web3State, appDispatch } = useContext(Web3Context)
+  const [navRoutes, setNavRoutes] = useState<any>([]);
 
   // Initialize useWeb3Modal on first load of webpage
   useWeb3Modal();
-
+// console.log("Web3State",Web3State);
   const loginHandler = () => {
     router.push('/login')
   }
@@ -64,9 +64,8 @@ const Navigation = () => {
         }
       })
     }
-    setNavRoutes(_routes)
-  }, [Web3State.address_to_bind])
-
+    setNavRoutes(_routes);
+  }, [Web3State.address_to_bind]);;
 
   return (
     <nav className={styles.container}>

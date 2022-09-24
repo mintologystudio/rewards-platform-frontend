@@ -1,5 +1,5 @@
-import {ADAPTER_EVENTS, SafeEventEmitterProvider, WALLET_ADAPTER_TYPE, WALLET_ADAPTERS} from '@web3auth/base'
-import {ModalConfig, Web3Auth} from '@web3auth/web3auth'
+import {ADAPTER_EVENTS, SafeEventEmitterProvider} from '@web3auth/base'
+import {Web3Auth} from '@web3auth/web3auth'
 import {
   createContext,
   FunctionComponent,
@@ -14,8 +14,7 @@ import { WEB3AUTH_NETWORK_TYPE } from '../config/web3AuthNetwork'
 import envConfig from '../envConfig'
 import { getWalletProvider, IWalletProvider } from './walletProvider'
 import {useRouter} from "next/router";
-import MainLogo from '../../public/assets/misc/main.png'
-import Routes from "../constants/routes";
+import {getWeb3AuthConfig, MODAL_CONFIG} from "../config/web3Auth/config";
 
 export interface IWeb3AuthContext {
   web3Auth: Web3Auth | null
@@ -78,7 +77,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
   let newCampaignId = '';
   if (router && router.query && router.query.campaignId) {
     newCampaignId = (router.query.campaignId as string);
-    console.log('newCampaignId', newCampaignId);
+    // console.log('newCampaignId', newCampaignId);
   };
 
   const setWalletProvider = useCallback(
@@ -110,9 +109,10 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
         setUser(data)
         setWalletProvider(web3auth.provider!)
 
-        if (data  && !data.reconnected) {
+        if (data && !data.reconnected) {
           redirect();
         }
+
       })
 
       web3auth.on(ADAPTER_EVENTS.CONNECTING, () => {
@@ -137,16 +137,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
         const { OpenloginAdapter } = await import('@web3auth/openlogin-adapter')
         const clientId = envConfig.WEB3_AUTH_CLIENT_ID
         setIsLoading(true)
-        const web3AuthInstance = new Web3Auth({
-          chainConfig: currentChainConfig,
-          // get your client id from https://dashboard.web3auth.io
-          clientId,
-          authMode: "WALLET",
-          uiConfig: {
-            loginMethodsOrder: ["google", "twitter",],
-            appLogo: MainLogo.src
-          },
-        })
+        const web3AuthInstance = new Web3Auth(getWeb3AuthConfig(chain));
 
         const adapter = new OpenloginAdapter({
           adapterSettings: { network: web3AuthNetwork, clientId },
@@ -154,35 +145,8 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
         web3AuthInstance.configureAdapter(adapter)
         subscribeAuthEvents(web3AuthInstance)
         setWeb3Auth(web3AuthInstance)
-        const modalConfig: Record<WALLET_ADAPTER_TYPE, ModalConfig> = {
-          [WALLET_ADAPTERS.OPENLOGIN]: {
-            label: "openlogin",
-            loginMethods: {
-              google: {
-                name: "Google Account",
-                description: "Google Account",
-              },
-              twitter: {
-                name: "Twitter",
-                description: "Twitter Account",
-              },
-              facebook: {name: "facebook", showOnModal: false},
-              reddit: {name: "reddit", showOnModal: false},
-              discord: {name: "discord", showOnModal: false},
-              twitch: {name: "twitch", showOnModal: false},
-              apple: {name: "apple", showOnModal: false},
-              line: {name: "line", showOnModal: false},
-              github: {name: "github", showOnModal: false},
-              kakao: {name: "kakao", showOnModal: false},
-              linkedin: {name: "linkedin", showOnModal: false},
-              weibo: {name: "weibo", showOnModal: false},
-              wechat: {name: "wechat", showOnModal: false},
-            },
-            showOnModal: true,
-          }
-        };
         await web3AuthInstance.initModal({
-          modalConfig: modalConfig
+          modalConfig: MODAL_CONFIG
         })
       } catch (error) {
         console.error(error)

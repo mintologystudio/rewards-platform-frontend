@@ -10,27 +10,7 @@ import {
   SET_ADDRESS_PROVIDER,
   SET_WEB3_PROVIDER,
 } from '../context/actionType'
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
-
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      rpc: {
-        1: `https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
-      },
-    },
-  },
-  coinbasewallet: {
-    package: CoinbaseWalletSDK,
-    options: {
-      rpc: {
-        1: `https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
-      },
-    },
-  },
-}
+import providerOptions from '../utils/config/web3Modal/Web3ProviderOptions'
 
 let web3Modal: any
 if (typeof window !== 'undefined') {
@@ -40,6 +20,8 @@ if (typeof window !== 'undefined') {
     providerOptions,
   })
 }
+
+const BIND_MSG = (address_w3a: string, chainId: number, address_to_bind: string) => `Bind Account ${address_w3a} on chainId ${chainId} to ${address_to_bind}`;
 
 const useWeb3Modal = () => {
   const { appState, appDispatch } = useContext(Web3Context)
@@ -53,10 +35,10 @@ const useWeb3Modal = () => {
       const web3ModalProvider = await web3Modal.connect()
       // console.log('[useWeb3Modal] Web3ModalProvider: ', web3ModalProvider)
       // Only require wallet address from Web3Modal
-      const provider = new ethers.providers.Web3Provider(web3ModalProvider)
-      const signer = provider.getSigner()
-      const address = await signer.getAddress()
-      const network = await provider.getNetwork()
+      const provider = new ethers.providers.Web3Provider(web3ModalProvider);
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      const network = await provider.getNetwork();
       console.log('[useWeb3Modal] Wallet Address: ', provider)
       appDispatch({
         type: SET_ADDRESS_PROVIDER,
@@ -70,7 +52,7 @@ const useWeb3Modal = () => {
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, []);
 
   const connect = useCallback(async () => {
     try {
@@ -79,9 +61,9 @@ const useWeb3Modal = () => {
       // console.log('[useWeb3Modal] Web3ModalProvider: ', web3ModalProvider)
       // Only require wallet address from Web3Modal
       const provider = new ethers.providers.Web3Provider(web3ModalProvider)
-      const signer = provider.getSigner()
-      const address = await signer.getAddress()
-      const network = await provider.getNetwork()
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      const network = await provider.getNetwork();
       // console.log('provider: ', provider)
       console.log('Address: ', address)
       appDispatch({

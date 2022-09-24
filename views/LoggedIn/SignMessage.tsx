@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { ethers } from 'ethers'
 import Web3 from 'web3'
 import axios from 'axios'
@@ -8,6 +8,7 @@ import styles from '../../styles/Login.module.scss'
 import { Web3Context } from '../../context/web3Context'
 import {BsFillCheckCircleFill} from "react-icons/bs";
 import Routes from "../../utils/constants/routes";
+import {signMessageForBinding} from "../../utils/api/niftyRewards";
 
 interface Props {
   connector: any
@@ -16,11 +17,12 @@ interface Props {
 }
 
 const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
+  const { appDispatch } = useContext(Web3Context);
   const { web3Auth } = useWeb3Auth()
   const [address_w3a, setAddressW3A] = useState('')
   const [loadingSignature, setLoadingSignature] = useState('')
   const [fullAddress, setFullAddress] = useState(window.innerWidth >= 410)
-
+  const [binded, setBinded] = useState<boolean>(false)
   const router = useRouter()
 
   const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -53,21 +55,45 @@ const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
   const signTypedMessage = async () => {
     try {
       //sign message
-      setLoadingSignature('loading')
-      const address = address_w3a
-      const address_to_bind_chain = chainId
+      setLoadingSignature('loading');
+      const address = address_w3a;
+      const address_to_bind_chain = chainId;
       const message = `Bind Account ${address_to_bind} on chainId ${address_to_bind_chain} to ${address}`
-      const signature = await signer.signMessage(message)
-      setLoadingSignature('done')
-      console.log(signature)
-      axios
-        .post(
-          `https://nifty-rewards.herokuapp.com/users/bind/${address_w3a}/${address_to_bind}`
-        )
-        .then((res) => {
-          console.log(res)
-          console.log(res.data)
-        })
+      const signature = await signer.signMessage(message);
+
+      // Send signature to backend
+      setLoadingSignature('done');
+      // console.log(signature);
+      if (signature) {
+        const apiResponse = await signMessageForBinding(
+            address_w3a,
+            address_to_bind,
+            1,
+            message,
+            signature
+        );
+        // setRes(apiResponse);
+        if (apiResponse && apiResponse.status) {
+          // Successfully binded
+          setBinded(true)
+        } else {
+        //   // Failed to bind
+          setBinded(false)
+        }
+
+
+      }
+      // old
+      // setLoadingSignature('done')
+      // console.log(signature)
+      // axios
+      //   .post(
+      //     `https://nifty-rewards.herokuapp.com/users/bind/${address_w3a}/${address_to_bind}`
+      //   )
+      //   .then((res) => {
+      //     console.log(res)
+      //     console.log(res.data)
+      //   })
     } catch (err) {
       console.log(err)
     }
@@ -103,8 +129,8 @@ const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
               )}
             </div>
             <br/>
-            <p className={styles.connect_text}>Signing the message essentially proves that<br/>are indeed the owner of the wallet address</p>
-            <p className={styles.connect_text}>Mintology will not perform any transactions or<br/>require any approval from you</p>
+            <p className={styles.connect_text}>Signing the message essentially proves that you<br/>are indeed the owner of the wallet address</p>
+            <p className={styles.connect_text}>Mintology will not perform any transactions or<br/>require any approval from you.</p>
 
             <p className={styles.connect_connected_pending}>Pending signature...</p>
           </>
@@ -145,8 +171,8 @@ const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
               )}
           </div>
             <br/>
-            <p className={styles.connect_text}>Signing the message essentially proves that<br/>are indeed the owner of the wallet address</p>
-            <p className={styles.connect_text}>Mintology will not perform any transactions or<br/>require any approval from you</p>
+            <p className={styles.connect_text}>Signing the message essentially proves that you<br/>are indeed the owner of the wallet address</p>
+            <p className={styles.connect_text}>Mintology will not perform any transactions or<br/>require any approval from you.</p>
             <br/>
 
           <button className={styles.connect_button} onClick={signTypedMessage}>Sign Message</button>

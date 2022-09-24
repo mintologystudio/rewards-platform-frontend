@@ -174,3 +174,9 @@ export interface IVoucher {
   tnc: string[]
   code: string
 }
+
+export interface INFT {
+  url: string,
+  title: string,
+  desc: string,
+}

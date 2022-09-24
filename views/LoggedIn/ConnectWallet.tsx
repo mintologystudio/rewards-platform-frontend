@@ -2,8 +2,6 @@ import { useCallback, useEffect, useContext } from 'react'
 import SignMessage from './SignMessage'
 import { providers } from 'ethers'
 import Web3Modal from 'web3modal'
-import WalletConnectProvider from '@walletconnect/web3-provider'
-import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
 import Meta from '../../components/Meta'
 import Navigation from '../../components/Navigation'
 import styles from '../../styles/Login.module.scss'
@@ -12,26 +10,7 @@ import Image from 'next/image'
 import { Web3Context } from '../../context/web3Context'
 import { useWeb3Auth } from '../../utils/services/web3auth'
 import Web3 from 'web3'
-
-//providerOptions
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      rpc: {
-        1: `https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
-      },
-    },
-  },
-  coinbasewallet: {
-    package: CoinbaseWalletSDK,
-    options: {
-      rpc: {
-        1: `https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
-      },
-    },
-  },
-}
+import providerOptions from '../../utils/config/web3Modal/Web3ProviderOptions'
 
 // create new web3modal
 let web3Modal: Web3Modal

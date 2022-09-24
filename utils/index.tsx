@@ -1,3 +1,5 @@
+import {INFT} from "./interfaces";
+
 export enum IconEnum {
   HOURGLASS,
   GIFT,
@@ -139,4 +141,44 @@ export const getDisplayAddress = (
 
 export const upperCaseString = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+export const extractMetaData = (nfts: Array<{}>) => {
+  let nftWithUrl: Array<INFT> = [];
+
+  nfts.forEach((nft:any) => {
+    if (nft['metadata']) {
+      const meta = nft.metadata[0];
+      // console.log('1', meta);
+      if (meta != null && meta['metadata'] && meta['metadata']['image']) {
+        const imgMeta:string = meta['metadata']['image'] || '';
+        const nameMeta:string = meta['metadata']['name'] || '';
+        const descMeta:string = meta['metadata']['description'] || '';
+        // console.log('2',imgMeta,descMeta);
+
+        let imgUrl:string = '';
+        //ipfs
+        if (imgMeta) {
+          if (imgMeta.includes('ipfs://')) {
+            imgUrl = imgMeta.replace("ipfs://", "https://ipfs.io/ipfs/");
+          }
+          if (imgMeta.startsWith('https://') || imgMeta.startsWith('http://')) {
+            imgUrl = imgMeta;
+          }
+        }
+
+        // check same url
+        if (!nftWithUrl.find(nwu => nwu.url === imgUrl)) {
+          nftWithUrl.push({
+            url: imgUrl,
+            title: nameMeta,
+            desc: descMeta
+          });
+        }
+
+      }
+    }
+  });
+
+  return nftWithUrl;
 }
