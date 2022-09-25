@@ -52,9 +52,6 @@ export const getNFTs = async (
     const response: any = await api.get(`/api/v1/user/nfts?address=${bindAddress}`)
     if (response.status == 200) {
       console.log("success NiftyReward", response);
-      // const bindAddress = (response.data.message)
-      //     .split(DELIMETER)[(response.data.message).split(DELIMETER).length-1];
-      // console.log("bindAddress", bindAddress);
       return { status: true, nfts: response.data.nfts};
     } else {
       console.log("failed NiftyReward", response);

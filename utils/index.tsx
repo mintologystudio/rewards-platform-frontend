@@ -168,13 +168,13 @@ export const extractMetaData = (nfts: Array<{}>) => {
         }
 
         // check same url
-        if (!nftWithUrl.find(nwu => nwu.url === imgUrl)) {
+        // if (!nftWithUrl.find(nwu => nwu.url === imgUrl)) {
           nftWithUrl.push({
             url: imgUrl,
             title: nameMeta,
             desc: descMeta
           });
-        }
+        // }
 
       }
     }
