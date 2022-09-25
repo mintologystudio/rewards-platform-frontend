@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from 'axios'
 import envConfig from '../envConfig'
 
-const apiUrl = envConfig.API_URL
+// const apiUrl = envConfig.API_URL
+const apiUrl = `https://nifty-rewards-backend.herokuapp.com/`
 
 const api: AxiosInstance = axios.create({
   baseURL: apiUrl,
