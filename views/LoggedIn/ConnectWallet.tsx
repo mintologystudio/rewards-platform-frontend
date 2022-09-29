@@ -53,7 +53,7 @@ const ConnectWallet = () => {
       chainId: network.chainId,
     });
 
-  }, [])
+  }, [appState.provider])
 
   const disconnect = useCallback(
     async function () {
@@ -124,6 +124,7 @@ const ConnectWallet = () => {
                   connector={appState.provider}
                   address_to_bind={appState.address_to_bind}
                   chainId={appState.chainId}
+                  w3provider={provider}
               />
           ) : (
            <div className={styles.connect}>

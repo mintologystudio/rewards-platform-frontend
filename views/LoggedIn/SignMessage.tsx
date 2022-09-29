@@ -14,10 +14,10 @@ interface Props {
   connector: any
   address_to_bind: string
   chainId: number
+  w3provider?: any
 }
 
-const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
-  const { appDispatch } = useContext(Web3Context);
+const SignMessage = ({ connector, address_to_bind, chainId, w3provider }: Props) => {
   const { web3Auth } = useWeb3Auth()
   const [address_w3a, setAddressW3A] = useState('')
   const [loadingSignature, setLoadingSignature] = useState('')
@@ -25,7 +25,8 @@ const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
   const [binded, setBinded] = useState<boolean>(false)
   const router = useRouter()
 
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  // const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const provider = new ethers.providers.Web3Provider(w3provider);
   const signer = provider.getSigner()
 
   const formatWalletAddress = () => {
@@ -149,7 +150,7 @@ const SignMessage = ({ connector, address_to_bind, chainId }: Props) => {
               </p>
             </div>
 
-            <button className={styles.connect_button} onClick={homeHandler}>Go to home</button>
+            <button className={styles.connect_button} onClick={homeHandler}>Go back</button>
           </>
 
       )}

@@ -12,7 +12,7 @@ import {
 } from '../context/actionType'
 import providerOptions from '../utils/config/web3Modal/Web3ProviderOptions'
 
-let web3Modal: any
+let web3Modal: Web3Modal
 if (typeof window !== 'undefined') {
   web3Modal = new Web3Modal({
     network: 'mainnet',
@@ -20,6 +20,8 @@ if (typeof window !== 'undefined') {
     providerOptions,
   })
 }
+
+// TODO: 1. set address to localstorage, 2. Retrieve when refresh, 3. Connect if click to nft / perks if no provider
 
 const BIND_MSG = (address_w3a: string, chainId: number, address_to_bind: string) => `Bind Account ${address_w3a} on chainId ${chainId} to ${address_to_bind}`;
 
