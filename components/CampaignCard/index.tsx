@@ -44,7 +44,7 @@ const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
                   <>
                     <BsClockFill className={styles.main_top_timeleft_icon}/>
                     <span>
-                      Time Left: {days}d {hours}h {seconds}s
+                      Time Left: {days}d {hours}h {mins}m
                     </span>
                   </>
               )

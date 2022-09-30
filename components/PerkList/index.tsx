@@ -79,7 +79,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
                     <>
                     <BsClockFill className={styles.perk_right_lower_timeleft_icon}/>
                     <span>
-                      Time Left: {days}d {hours}h {seconds}s
+                      Time Left: {days}d {hours}h {mins}m
                     </span>
                     </>
                 ) : (
