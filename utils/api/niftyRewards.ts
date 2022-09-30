@@ -46,6 +46,24 @@ export const signMessageForBinding = async (
   }
 }
 
+export const refreshAddress = async (
+  bindAddress: string
+) => {
+  try {
+    const response: any = await api.get(`/api/v1/user/refresh?address=${bindAddress}`)
+    if (response.status == 200) {
+      console.log("success refreshAddress", response);
+      return { status: true, data: response.data.message};
+    } else {
+      console.log("failed refreshAddress", response);
+      return { status: false, data: response.data.message};
+    }
+  } catch (error) {
+    console.log('[Error from refreshAddress API]: ', error)
+    return { status: false};
+  }
+}
+
 export const getNFTs = async (
   bindAddress: string
 ) => {

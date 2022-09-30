@@ -8,7 +8,7 @@ import styles from '../../styles/Login.module.scss'
 import { Web3Context } from '../../context/web3Context'
 import {BsFillCheckCircleFill} from "react-icons/bs";
 import Routes from "../../utils/constants/routes";
-import {signMessageForBinding} from "../../utils/api/niftyRewards";
+import {refreshAddress, signMessageForBinding} from "../../utils/api/niftyRewards";
 
 interface Props {
   connector: any
@@ -22,7 +22,8 @@ const SignMessage = ({ connector, address_to_bind, chainId, w3provider }: Props)
   const [address_w3a, setAddressW3A] = useState('')
   const [loadingSignature, setLoadingSignature] = useState('')
   const [fullAddress, setFullAddress] = useState(window.innerWidth >= 410)
-  const [binded, setBinded] = useState<boolean>(false)
+  const [binded, setBinded] = useState<boolean>(false);
+  const [failMsg, setFailMsg] = useState('')
   const router = useRouter()
 
   // const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -56,6 +57,7 @@ const SignMessage = ({ connector, address_to_bind, chainId, w3provider }: Props)
   const signTypedMessage = async () => {
     try {
       //sign message
+      setFailMsg('');
       setLoadingSignature('loading');
       const address = address_w3a;
       const address_to_bind_chain = chainId;
@@ -63,7 +65,6 @@ const SignMessage = ({ connector, address_to_bind, chainId, w3provider }: Props)
       const signature = await signer.signMessage(message);
 
       // Send signature to backend
-      setLoadingSignature('done');
       // console.log(signature);
       if (signature) {
         const apiResponse = await signMessageForBinding(
@@ -75,10 +76,14 @@ const SignMessage = ({ connector, address_to_bind, chainId, w3provider }: Props)
         );
         // setRes(apiResponse);
         if (apiResponse && apiResponse.status) {
+          setLoadingSignature('done');
           // Successfully binded
           setBinded(true)
+          await refreshAddress(address);
         } else {
         //   // Failed to bind
+          setLoadingSignature('');
+          setFailMsg('FAILED TO BIND WALLET');
           setBinded(false)
         }
 
@@ -174,6 +179,11 @@ const SignMessage = ({ connector, address_to_bind, chainId, w3provider }: Props)
             <br/>
             <p className={styles.connect_text}>Signing the message essentially proves that you<br/>are indeed the owner of the wallet address</p>
             <p className={styles.connect_text}>Mintology will not perform any transactions or<br/>require any approval from you.</p>
+            {
+              failMsg === '' ? (<></>) : (
+                  <p className={styles.connect_connected_pending}>{failMsg}</p>
+              )
+            }
             <br/>
 
           <button className={styles.connect_button} onClick={signTypedMessage}>Sign Message</button>
