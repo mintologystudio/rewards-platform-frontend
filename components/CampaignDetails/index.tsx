@@ -83,13 +83,14 @@ const CampaignDetails = ({
     retrieveAndFilterEligibleTokens();
   }, [collectionAddr])
 
-  const countDownInMilli = (campaign.expiration? campaign.expiration : new Date(1668950741000).getTime()) - new Date().getTime()
-  const [days, hours, mins, seconds] = getReadableTime(countDownInMilli);
-
   const [sday, smonth, syear] = getTimeDate(campaign.startTime);
   const [eday, emonth, eyear] = getTimeDate(campaign.endTime);
   const usStartDate = getUSFormatDate(sday, smonth, syear);
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
+  const countdownDate = new Date(usEndDate);
+
+  const countDownInMilli = (campaign.expiration? campaign.expiration : new Date(1666224000000).getTime()) - new Date().getTime()
+  const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
 
   const isExpired = new Date(campaign.endTime) < new Date();
 

@@ -20,13 +20,14 @@ const Perk = ({ perkDetail, redirectHandler }: {
   // const nft = `/assets/nfts/banner/${perkDetail.nft || 'default'}.png`;
   const nft = `/assets/perk1.png`;
 
-  const countDownInMilli = (perkDetail.expiration? perkDetail.expiration : new Date(1668950741000).getTime()) - new Date().getTime()
-  const [days, hours, mins, seconds] = getReadableTime(countDownInMilli);
-
   const [sday, smonth, syear] = getTimeDate(perkDetail.startTime);
   const [eday, emonth, eyear] = getTimeDate(perkDetail.endTime);
   const usStartDate = getUSFormatDate(sday, smonth, syear);
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
+  const countdownDate = new Date(usEndDate);
+
+  const countDownInMilli = (perkDetail.expiration? perkDetail.expiration : new Date(1666224000000).getTime()) - new Date().getTime()
+  const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
 
   const isExpired = new Date(perkDetail.endTime) < new Date();
 

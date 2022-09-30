@@ -25,7 +25,7 @@ export const MOCK_DATA: Array<ICampaign> = [
             ],
             code: '23cv-f34c-xc123',
         },
-        expiration: 1668950741000
+        expiration: 1666224000000
     },
     {
         campaignId: "2",
@@ -77,7 +77,7 @@ export const MOCK_DATA: Array<ICampaign> = [
             ],
             code: '11uf-df78-kgsf5',
         },
-        expiration: 1668950741000,
+        expiration: 1666224000000,
         isEmpty: true
     }
 ]

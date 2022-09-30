@@ -20,9 +20,10 @@ const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
   const [eday, emonth, eyear] = getTimeDate(endTime);
   const usStartDate = getUSFormatDate(sday, smonth, syear);
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
+  const countdownDate = new Date(usEndDate);
 
-  const countDownInMilli = (expiration? expiration : new Date(1668950741000).getTime()) - new Date().getTime()
-  const [days, hours, mins, seconds] = getReadableTime(countDownInMilli);
+  const countDownInMilli = (expiration? expiration : new Date(1666224000000).getTime()) - new Date().getTime()
+  const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
 
   const backgroundImg = bgUrl? `url(${bgUrl})` : `url(assets/nfts/banner/${nft}.png)`;
 
