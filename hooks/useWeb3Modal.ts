@@ -8,9 +8,11 @@ import {
   RESET_WEB3_PROVIDER,
   SET_ADDRESS,
   SET_ADDRESS_PROVIDER,
-  SET_WEB3_PROVIDER,
+  SET_WEB3_PROVIDER, SET_WEB3AUTH_ADDRESS,
 } from '../context/actionType'
 import providerOptions from '../utils/config/web3Modal/Web3ProviderOptions'
+import Web3 from "web3";
+import {useWeb3Auth} from "../utils/services/web3auth";
 
 let web3Modal: Web3Modal
 if (typeof window !== 'undefined') {
@@ -26,7 +28,8 @@ if (typeof window !== 'undefined') {
 const BIND_MSG = (address_w3a: string, chainId: number, address_to_bind: string) => `Bind Account ${address_w3a} on chainId ${chainId} to ${address_to_bind}`;
 
 const useWeb3Modal = () => {
-  const { appState, appDispatch } = useContext(Web3Context)
+  const { appState, appDispatch } = useContext(Web3Context);
+  const { web3Auth, user } = useWeb3Auth();
 
   const initialConnect = useCallback(async () => {
     try {
@@ -56,6 +59,30 @@ const useWeb3Modal = () => {
     }
   }, []);
 
+  const getInfos = async () => {
+    if (!web3Auth || !web3Auth.provider) return ''
+    const web3 = new Web3(web3Auth.provider as any)
+    const accounts = await web3.eth.getAccounts()
+    // const authUser = await web3Auth.getUserInfo();
+    // console.log("authUser", authUser, accounts);
+    return accounts[0]
+    // console.log("🚀 | getInfos | accounts", accounts[0]);
+  }
+  // getInfos();
+
+  const getWeb3AuthAddress = useCallback(async () => {
+    // console.log("getWeb3AuthAddress", appState.address_w3a, !appState.address_w3a)
+    if (!appState.address_w3a) {
+      const address_w3a = await getInfos();
+      // console.log("getWeb3AuthAddress", address_w3a)
+      appDispatch({
+        type: SET_WEB3AUTH_ADDRESS,
+        address_w3a: address_w3a,
+      });
+    }
+
+  }, [user]);
+
   const connect = useCallback(async () => {
     try {
       console.log('[useWeb3Modal] Initiating past connection with Web3Modal.')
@@ -79,6 +106,7 @@ const useWeb3Modal = () => {
       })
     } catch (error) {
       console.log(error)
+      disconnect();
     }
   }, [])
 
@@ -93,7 +121,7 @@ const useWeb3Modal = () => {
 
     appDispatch({
       type: RESET_WEB3_PROVIDER,
-    })
+    });
   }, [appState.provider])
 
   useEffect(() => {
@@ -104,6 +132,11 @@ const useWeb3Modal = () => {
   }, [])
 
   useEffect(() => {
+    if (appState.provider) {
+      // console.log("getWeb3AuthAddress call")
+      getWeb3AuthAddress();
+    }
+
     if (appState.web3ModalProvider?.on) {
       const handleAccountsChanged = (accounts: string[]) => {
         console.log('accountsChanged', accounts)
@@ -146,9 +179,9 @@ const useWeb3Modal = () => {
         }
       }
     }
-  }, [appState.provider, disconnect])
+  }, [appState.provider, disconnect, user])
 
-  return { initialConnect, disconnect }
+  return { initialConnect, disconnect, web3Modal }
 }
 
 export default useWeb3Modal

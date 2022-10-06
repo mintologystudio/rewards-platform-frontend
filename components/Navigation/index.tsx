@@ -9,11 +9,13 @@ import Image from 'next/image'
 import { Web3Context } from '../../context/web3Context'
 import { useRouter } from 'next/router'
 import useWeb3Modal from "../../hooks/useWeb3Modal";
+import {getDisplayAddress} from "../../utils";
+import {useWeb3Auth} from "../../utils/services/web3auth";
 
 const Routes = {
   Home: '/',
   PERKS: '/perk',
-  MYNFT: '/mynft',
+  // MYNFT: '/mynft',
 }
 
 const FilteredRoutes = {
@@ -29,10 +31,16 @@ const Navigation = () => {
   const [navRoutes, setNavRoutes] = useState<any>([]);
 
   // Initialize useWeb3Modal on first load of webpage
-  useWeb3Modal();
-// console.log("Web3State",Web3State);
+  const {disconnect} = useWeb3Modal();
+  const {logout} = useWeb3Auth();
   const loginHandler = () => {
     router.push('/login')
+  }
+  const logoutHandler = async () => {
+    console.log("logout");
+    await disconnect();
+    await logout();
+    router.replace('/')
   }
 
   const redirectHandler = (obj: any, key: string) => {
@@ -65,7 +73,7 @@ const Navigation = () => {
       })
     }
     setNavRoutes(_routes);
-  }, [Web3State.address_to_bind]);;
+  }, [Web3State.address_to_bind]);
 
   return (
     <nav className={styles.container}>
@@ -81,11 +89,10 @@ const Navigation = () => {
               <div className={styles.nav_mobile_nav_action}>
                 {Web3State.address_to_bind ? (
                   Web3State.chainId === 1 ? (
-                    <button disabled>
-                      {Web3State.address_to_bind.substring(0, 4)}...
-                      {Web3State.address_to_bind.substring(
-                        Web3State.address_to_bind.length - 4
-                      )}
+                    <button onClick={logoutHandler} className={styles.blackBtn}>
+                      {
+                        getDisplayAddress(Web3State.address_to_bind)
+                      }
                     </button>
                   ) : (
                     <button className={`${styles.lwidth}`}>
@@ -144,11 +151,10 @@ const Navigation = () => {
               {navRoutes}
               {Web3State.address_to_bind ? (
                 Web3State.chainId === 1 ? (
-                  <button disabled>
-                    {Web3State.address_to_bind.substring(0, 4)}...
-                    {Web3State.address_to_bind.substring(
-                      Web3State.address_to_bind.length - 4
-                    )}
+                  <button onClick={logoutHandler} className={styles.blackBtn}>
+                    {
+                      getDisplayAddress(Web3State.address_to_bind)
+                    }
                   </button>
                 ) : (
                   <button className={styles.lwidth}>Wrong Network</button>

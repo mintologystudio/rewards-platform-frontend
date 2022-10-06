@@ -25,7 +25,7 @@ const Register: NextPage = () => {
               <p>Mintology</p>
             </div>
             <p className={styles.info_subheading}>
-              Bridging Brands with NFT Users
+              Enjoy real life brand benefits with your NFTs
             </p>
           </div>
           {isLoading ? (

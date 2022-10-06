@@ -79,6 +79,11 @@ const CampaignDetails = ({
     setSelectedNFT(token)
   }
 
+  const loginHandler = async () => {
+    if (!isExpired && !(appState.address_to_bind)) await logout();
+    login();
+  }
+
   useEffect(() => {
     retrieveAndFilterEligibleTokens();
   }, [collectionAddr])
@@ -200,7 +205,7 @@ const CampaignDetails = ({
 
             <div className={styles.content_button}>
               { !isExpired && !(appState.address_to_bind != '') ?
-                  (<button type="button" onClick={login}>Get It Now</button>)
+                  (<button type="button" onClick={loginHandler}>Get It Now</button>)
                   :
                   !isExpired && appState.chainId === 1 && (<button
                       type="button"

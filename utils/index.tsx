@@ -135,7 +135,7 @@ export const getDisplayAddress = (
   if (!address) {
     return ''
   } else {
-    return `${address.toString().slice(0, 3)}...${address.toString().slice(-4)}`
+    return `${address.toString().slice(0, 4)}...${address.toString().slice(-4)}`
   }
 }
 

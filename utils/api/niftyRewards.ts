@@ -6,7 +6,7 @@ const apiUrl = `https://nifty-rewards-backend.herokuapp.com/`
 
 const api: AxiosInstance = axios.create({
   baseURL: apiUrl,
-  timeout: 10000,
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
   },

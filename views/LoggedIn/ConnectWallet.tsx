@@ -10,22 +10,13 @@ import Image from 'next/image'
 import { Web3Context } from '../../context/web3Context'
 import { useWeb3Auth } from '../../utils/services/web3auth'
 import Web3 from 'web3'
-import providerOptions from '../../utils/config/web3Modal/Web3ProviderOptions'
-
-// create new web3modal
-let web3Modal: Web3Modal
-if (typeof window !== 'undefined') {
-  web3Modal = new Web3Modal({
-    network: 'mainnet', // optional
-    cacheProvider: true,
-    providerOptions, // required
-  })
-}
+import useWeb3Modal from "../../hooks/useWeb3Modal";
 
 const ConnectWallet = () => {
   const { appState, appDispatch } = useContext(Web3Context)
   const { provider } = appState
   const { web3Auth } = useWeb3Auth()
+  const { web3Modal } = useWeb3Modal()
 
   //get web3auth address
   const getInfos = async () => {

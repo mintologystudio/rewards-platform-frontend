@@ -1,4 +1,4 @@
-import {ADAPTER_EVENTS, SafeEventEmitterProvider} from '@web3auth/base'
+import {ADAPTER_EVENTS, CONNECTED_EVENT_DATA, SafeEventEmitterProvider} from '@web3auth/base'
 import {Web3Auth} from '@web3auth/web3auth'
 import {
   createContext,
@@ -104,7 +104,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
 
     const subscribeAuthEvents = (web3auth: Web3Auth) => {
       // Can subscribe to all ADAPTER_EVENTS and LOGIN_MODAL_EVENTS
-      web3auth.on(ADAPTER_EVENTS.CONNECTED, (data: any) => {
+      web3auth.on(ADAPTER_EVENTS.CONNECTED, (data: CONNECTED_EVENT_DATA) => {
         console.log("Yeah!, you are successfully logged in", data);
         setUser(data)
         setWalletProvider(web3auth.provider!)
@@ -113,6 +113,14 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
           redirect();
         }
 
+      })
+
+      web3auth.on(ADAPTER_EVENTS.NOT_READY, () => {
+        console.log("not ready");
+      })
+
+      web3auth.on(ADAPTER_EVENTS.READY, () => {
+        console.log("ready");
       })
 
       web3auth.on(ADAPTER_EVENTS.CONNECTING, () => {
@@ -173,8 +181,10 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({
       uiConsole('web3auth not initialized yet')
       return
     }
-    await web3Auth.logout()
-    setProvider(null)
+    if (!!provider) {
+      await web3Auth.logout()
+      setProvider(null)
+    }
   }
 
   const getUserInfo = async () => {
