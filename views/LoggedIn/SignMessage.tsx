@@ -82,9 +82,22 @@ const SignMessage = ({ connector, address_to_bind, chainId, w3provider }: Props)
           await refreshAddress(address);
         } else {
         //   // Failed to bind
-          setLoadingSignature('');
-          setFailMsg('FAILED TO BIND WALLET');
-          setBinded(false)
+
+          if (apiResponse && apiResponse.message) {
+            if (apiResponse.message.includes('already bound')) {
+              setLoadingSignature('done');
+              // binded b4
+              setBinded(true)
+            } else {
+              setLoadingSignature('');
+              setFailMsg('FAILED TO BIND WALLET');
+              setBinded(false)
+            }
+          } else {
+            setLoadingSignature('');
+            setFailMsg('FAILED TO BIND WALLET');
+            setBinded(false)
+          }
         }
 
 

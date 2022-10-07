@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, {AxiosError, AxiosInstance} from 'axios'
 import envConfig from '../envConfig'
 
 // const apiUrl = envConfig.API_URL
@@ -42,7 +42,8 @@ export const signMessageForBinding = async (
     }
   } catch (error) {
     console.log('[Error from niftyRewards API]: ', error)
-    return { status: false};
+    const data: any = (error as AxiosError)?.response?.data;
+    return { status: false, message: data?.message};
   }
 }
 
