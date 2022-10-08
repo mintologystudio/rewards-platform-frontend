@@ -62,7 +62,7 @@ export const MOCK_DATA: Array<ICampaign> = [
             'Other Atmos T&Cs apply.'
         ],
         voucher: {
-            title: '10% OFF FOOTWEAR',
+            title: '10% Off Footwear',
             description:
                 '10% off when you purchase any footwear on atmosusa.com!',
             tnc: [
@@ -84,7 +84,7 @@ export const MOCK_DATA: Array<ICampaign> = [
         startTime: 1657887360000,
         endTime: 1668950741000,
         nftCollectionAddr: '0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e',
-        offer: '10% Off footwear',
+        offer: '20% Off Clothing',
         suboffer: 'Free one month membership',
         remaining: 198,
         totalCoupon: 10000,
@@ -99,7 +99,7 @@ export const MOCK_DATA: Array<ICampaign> = [
             'Other ASOS T&Cs apply.'
         ],
         voucher: {
-            title: '10% OFF FOOTWEAR',
+            title: '20% OFF Clothing',
             description:
                 '20% off when you purchase any merchandise on asos.com!',
             tnc: [
