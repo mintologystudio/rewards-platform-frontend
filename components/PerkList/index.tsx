@@ -19,6 +19,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
 }) => {
   // const nft = `/assets/nfts/banner/${perkDetail.nft || 'default'}.png`;
   const nft = `/assets/perk1.png`;
+  const imgUrl = '/' + perkDetail.bgUrl || nft;
 
   const [sday, smonth, syear] = getTimeDate(perkDetail.startTime);
   const [eday, emonth, eyear] = getTimeDate(perkDetail.endTime);
@@ -36,10 +37,10 @@ const Perk = ({ perkDetail, redirectHandler }: {
         <div className={styles.perk_left}>
           <div className={styles.perk_left_upper}>
             <div className={styles.perk_left_img}>
-              <Image src={nft} alt={perkDetail.nft} layout="fill" />
+              <Image src={imgUrl} alt={perkDetail.nft} layout="fill" />
             </div>
             <div className={styles.perk_left_upper_detail}>
-              <h5>{perkDetail.voucher.title} {upperCaseString(perkDetail.nft)} x {upperCaseString(perkDetail.company)}</h5>
+              <h5>{perkDetail.voucher.title} @{upperCaseString(perkDetail.company)}</h5>
               <div className={styles.perk_left_upper_detail_span}>
                 <Badge company={perkDetail.company} width={'20rem'} />
                 <span>Location: {perkDetail.location}</span>
@@ -65,13 +66,9 @@ const Perk = ({ perkDetail, redirectHandler }: {
         </div>
         <div className={styles.perk_right}>
           <div className={styles.perk_right_upper}>
-            {
-              !isExpired && (
-                      <button className={styles.perk_right_upper_button} onClick={() => redirectHandler(perkDetail.campaignId)}>
-                        View
-                      </button>
-                  )
-            }
+            <button className={styles.perk_right_upper_button} onClick={() => redirectHandler(perkDetail.campaignId)}>
+              View
+            </button>
           </div>
           <div className={styles.perk_right_lower}>
             <div className={styles.perk_right_lower_timeleft}>
@@ -84,7 +81,12 @@ const Perk = ({ perkDetail, redirectHandler }: {
                     </span>
                     </>
                 ) : (
-                    <span className={styles.expiredtext}>Expired</span>
+                    <>
+                      <BsClockFill className={styles.perk_right_lower_timeleft_icon}/>
+                      <span>
+                        Claim period ended
+                      </span>
+                    </>
                 )
               }
 

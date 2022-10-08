@@ -88,7 +88,6 @@ const CampaignBanner = ({ campaign }: { campaign: ICampaign }) => {
         <div className={styles.content_center}>
           <Badge company={campaign.company} width={'40rem'} />
           <h2 className={styles.content_center_title}>
-            {upperCaseString(campaign.nft) || <Skeleton />} x{' '}
             {upperCaseString(campaign.company) || <Skeleton />}
           </h2>
         </div>

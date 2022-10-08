@@ -140,30 +140,40 @@ export interface IOwnedNFTDataSelection extends IOwnedNFTData {
 
 export interface ICampaign {
   campaignId?: string | number
+  title?: string
+  description?: string
   nft: string
   company: string
+  website: string
   location: string
   startTime: number
   endTime: number
   voucher: IVoucher
   nftCollectionAddr: string
+  offers?: string[]
   offer?: string
   suboffer?: string
   isEmpty?: boolean
-  redeemed?: number
+  remaining?: number
+  totalCoupon?: number
   bgUrl?: string
+  tnc?: string[]
   expiration?: number
 }
 
 export interface IPerk {
   campaignId?: string | number
+  title?: string
+  description?: string
   nft: string
   company: string
   location: string
+  website?: string
   startTime: number
   endTime: number
   voucher: IVoucher
   nftCollectionAddr: string
+  bgUrl?: string
   isExpired?: boolean
   expiration?: number
 }

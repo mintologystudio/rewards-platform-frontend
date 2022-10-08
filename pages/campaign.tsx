@@ -27,6 +27,7 @@ const data = (index: string) => {
         nft: 'NOT FOUND',
         company: '',
         location: '',
+        website: '',
         startTime: 0,
         endTime: 0,
         nftCollectionAddr: '',
@@ -48,6 +49,7 @@ const Campaign: NextPage = () => {
     nft: '',
     company: '',
     location: '',
+    website: '',
     startTime: 0,
     endTime: 0,
     nftCollectionAddr: '',
@@ -59,7 +61,7 @@ const Campaign: NextPage = () => {
       code: '',
     },
     isEmpty: false,
-    redeemed: 1
+    remaining: 1
   })
   const [showRedemptionModal, setShowRedemptionModal] = useState<boolean>(false)
 
@@ -94,11 +96,12 @@ const Campaign: NextPage = () => {
           details={campaignDetails.voucher}
           collectionAddr={campaignDetails.nftCollectionAddr}
           toggleModal={setShowRedemptionModal}
-          redemptionRemaining={campaignDetails.redeemed}
+          redemptionRemaining={campaignDetails.remaining}
         />
 
         {showRedemptionModal && (
           <RedemptionModal
+            website={campaignDetails.website}
             toggleModal={setShowRedemptionModal}
             voucher={campaignDetails.voucher}
             company={campaignDetails.company}

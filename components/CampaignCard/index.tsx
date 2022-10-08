@@ -14,7 +14,7 @@ import {ICampaign} from "../../utils/interfaces";
 
 const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
 
-  const {campaignId, company, nft, offer,suboffer, redeemed, startTime, endTime, expiration, bgUrl} = campaign;
+  const {campaignId, company, nft, offers, offer,suboffer, remaining, startTime, endTime, expiration, bgUrl} = campaign;
 
   const [sday, smonth, syear] = getTimeDate(startTime);
   const [eday, emonth, eyear] = getTimeDate(endTime);
@@ -49,31 +49,43 @@ const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
                     </span>
                   </>
               )
-                  : <span>Expired</span>
+                  : (
+                      <>
+                        <BsClockFill className={styles.main_top_timeleft_icon}/>
+                        <span>
+                          Claim period ended
+                        </span>
+                      </>
+                  )
             }
 
           </div>
           <div className={styles.main_top_title}>
             <h3>
-              {upperCaseString(nft)} x {upperCaseString(company)}
+              {upperCaseString(company)}
             </h3>
           </div>
         </div>
         <div className={styles.main_bottom}>
           <div className={styles.main_bottom_p}>
+
+            {/*{ offers && offers.map((off: string) => (*/}
+            {/*    <p dangerouslySetInnerHTML={{ __html: off }}></p>*/}
+            {/*))}*/}
+
             <p>{offer}</p>
-            {
-              suboffer? (<p dangerouslySetInnerHTML={{ __html: suboffer }}></p>) : ''
-            }
+            {/*{*/}
+            {/*  suboffer? (<p dangerouslySetInnerHTML={{ __html: suboffer }}></p>) : ''*/}
+            {/*}*/}
           </div>
           <div className={styles.main_info}>
             <div className={styles.main_info_redeemed}>
               <div style={{ marginBottom: '0.5rem'}}>
                 <BsFillBookmarkCheckFill className={styles.main_info_redeemed_icon} />
-                <p>redeemed</p>
+                <p>Remaining</p>
               </div>
               <div className={styles.main_info_redeemed_bottom}>
-                {redeemed}
+                {remaining}
               </div>
             </div>
             <div className={styles.main_info_redemption}>

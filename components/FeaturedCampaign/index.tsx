@@ -91,7 +91,7 @@ const FeaturedCampaignItem = ({
           <div
             className={styles.backgroundFake}
             style={{
-              backgroundImage: `url(assets/main-banner.jpg)`
+              backgroundImage: `url(assets/main-banner.png)`
             }}
           />
           {/*<div*/}

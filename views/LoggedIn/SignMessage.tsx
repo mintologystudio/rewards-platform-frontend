@@ -122,10 +122,10 @@ const SignMessage = ({ connector, address_to_bind, chainId, w3provider }: Props)
     if (router && router.query && router.query.campaignId) {
       const _campaignId = (router.query.campaignId as string) || '';
       if (_campaignId && _campaignId !== '') {
-        router.push(`${Routes.VIEW_CAMPAIGN}?campaignId=${_campaignId}`);
+        router.replace(`${Routes.VIEW_CAMPAIGN}?campaignId=${_campaignId}`);
       }
     } else {
-      router.push('/')
+      router.replace('/')
     }
   }
 

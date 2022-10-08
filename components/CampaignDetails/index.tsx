@@ -84,6 +84,14 @@ const CampaignDetails = ({
     login();
   }
 
+  const offerDisplay = (offers: string[] | undefined) => {
+    if (offers && offers.length > 0) {
+      return <h3 className={styles.content_tnc_title}>{offers[0]}</h3>;
+    } else {
+      return <h3 className={styles.content_tnc_title}></h3>
+    }
+  }
+
   useEffect(() => {
     retrieveAndFilterEligibleTokens();
   }, [collectionAddr])
@@ -159,7 +167,7 @@ const CampaignDetails = ({
             <span className={styles.campaign_info_text}>{usEndDate}</span>
           </div>
 
-          <div className={styles.campaign_timeleft_redeem}>
+          <div className={styles.campaign_timeleft_redeem_expired}>
             <div className={styles.campaign_timeleft}>
               {
                 !isExpired? (
@@ -170,15 +178,25 @@ const CampaignDetails = ({
                       </span>
                     </>
                 ) :
-                    <span className={styles.expiredtext}>Expired</span>
+                    <>
+                      <BsClockFill className={styles.campaign_timeleft_icon}/>
+                      <span>Claim period ended</span>
+                    </>
               }
 
             </div>
             <div className={styles.campaign_redeem}>
               <BsFillBookmarkCheckFill className={styles.campaign_redeem_icon} />
               <span>
-                Redeemed: {redemptionRemaining}
+                Remaining: {redemptionRemaining}
               </span>
+            </div>
+            <div className={styles.campaign_soldout}>
+              {(isExpired || (redemptionRemaining && redemptionRemaining <= 0)) &&
+              <span className={styles.soldout}>
+                Sold Out
+              </span>
+              }
             </div>
           </div>
 
@@ -187,10 +205,11 @@ const CampaignDetails = ({
         <div className={styles.campaign}>
           <div className={styles.campaign_detail}>
               {/*<img src={`/assets/nfts/banner/${campaign.nft}.png`} className={styles.campaign_detail_img}/>*/}
-              <img src={`/assets/details1.png`} alt={'details1'} className={styles.campaign_detail_img}/>
+              <img src={campaign.bgUrl} alt={'details1'} className={styles.campaign_detail_img}/>
 
               <div className={styles.campaign_detail_top}>
-                <h3 className={styles.content_tnc_title}>{campaign.offer}</h3>
+                {offerDisplay(campaign.offers)}
+                {/*<h3 className={styles.content_tnc_title}>{campaign.offer}</h3>*/}
                 <p>{details.description}</p>
               </div>
 
@@ -213,18 +232,16 @@ const CampaignDetails = ({
                       onClick={() => toggleModal(true)}>Get It Now</button>)
               }
 
-                {/*<button type="button" onClick={logout}>Logout</button>*/}
-              {/*<button*/}
-              {/*    type="button"*/}
-              {/*    className={styles.button}*/}
-              {/*    onClick={() => toggleModal(true)}>Get It Now</button>*/}
-              {/*{provider &&*/}
-              {/*<button*/}
-              {/*    type="button"*/}
-              {/*    className={styles.button}*/}
-              {/*    onClick={() => toggleModal(true)}>Get It Now</button>*/}
-              {/*}*/}
-                {/*<button type="button" onClick={getUserInfo}>getUserInfo</button>*/}
+              {(isExpired || (redemptionRemaining && redemptionRemaining <= 0)) &&
+                (
+                    <button
+                        type="button"
+                        disabled
+                        className={styles.button}
+                    >Sold Out</button>
+                )
+              }
+
             </div>
           </div>
 
