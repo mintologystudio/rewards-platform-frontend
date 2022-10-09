@@ -150,7 +150,6 @@ export interface ICampaign {
   endTime: number
   voucher: IVoucher
   nftCollectionAddr: string
-  offers?: string[]
   offer?: string
   suboffer?: string
   isEmpty?: boolean

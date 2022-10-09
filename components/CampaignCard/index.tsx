@@ -14,7 +14,7 @@ import {ICampaign} from "../../utils/interfaces";
 
 const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
 
-  const {campaignId, company, nft, offers, offer,suboffer, remaining, startTime, endTime, expiration, bgUrl} = campaign;
+  const {campaignId, company, nft, offer, remaining, startTime, endTime, expiration, bgUrl} = campaign;
 
   const [sday, smonth, syear] = getTimeDate(startTime);
   const [eday, emonth, eyear] = getTimeDate(endTime);

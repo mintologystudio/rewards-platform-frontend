@@ -15,9 +15,6 @@ export const MOCK_DATA: Array<ICampaign> = [
         remaining: 100,
         totalCoupon: 500,
         bgUrl: 'assets/product1.png',
-        offers: [
-            '10% Off footwear',
-        ],
         tnc: [
             'Limited to 1 redemption per user. Limited redemptions are available for the period',
             'Claims are available until October 20, 2022, or while supplies last.',
@@ -52,9 +49,6 @@ export const MOCK_DATA: Array<ICampaign> = [
         remaining: 0,
         totalCoupon: 400,
         bgUrl: 'assets/product2.png',
-        offers: [
-            '10% off when you purchase any footwear on atmosusa.com!'
-        ],
         tnc: [
             'Limited to 1 redemption per user. Limited redemptions are available for the period.',
             'Claims are available until June 20, 2022, or while supplies last.',
@@ -89,13 +83,10 @@ export const MOCK_DATA: Array<ICampaign> = [
         remaining: 198,
         totalCoupon: 10000,
         bgUrl: 'assets/product3.png',
-        offers: [
-            '20% off when you purchase any merchandise on asos.com!'
-        ],
         tnc: [
             'Limited to 1 redemption per user. Limited redemptions are available for the period.',
             'Claims are available until October 20, 2022, or while supplies last.',
-            'Applicable only for online purchases on atmosusa.com.',
+            'Applicable only for online purchases on asos.com.',
             'Other ASOS T&Cs apply.'
         ],
         voucher: {
@@ -105,7 +96,7 @@ export const MOCK_DATA: Array<ICampaign> = [
             tnc: [
                 'Limited to 1 redemption per user. Limited redemptions are available for the period.',
                 'Claims are available until October 20, 2022, or while supplies last.',
-                'Applicable only for online purchases on atmosusa.com.',
+                'Applicable only for online purchases on asos.com.',
                 'Other ASOS T&Cs apply.'
             ],
             code: '11uf-df78-kgsf5',

@@ -208,8 +208,8 @@ const CampaignDetails = ({
               <img src={campaign.bgUrl} alt={'details1'} className={styles.campaign_detail_img}/>
 
               <div className={styles.campaign_detail_top}>
-                {offerDisplay(campaign.offers)}
-                {/*<h3 className={styles.content_tnc_title}>{campaign.offer}</h3>*/}
+                {/*{offerDisplay(campaign.offers)}*/}
+                <h3 className={styles.content_tnc_title}>{campaign.offer}</h3>
                 <p>{details.description}</p>
               </div>
 
