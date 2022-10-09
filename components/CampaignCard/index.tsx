@@ -4,7 +4,7 @@ import {
   renderSvgIcon,
   IconEnum,
   getReadableTime,
-  upperCaseString, getTimeDate, getUSFormatDate,
+  upperCaseString, getTimeDate, getUSFormatDate, BigNumberFormatter,
 } from '../../utils/index'
 import { BsClockFill, BsFillBookmarkCheckFill } from 'react-icons/bs';
 import Badge from "../Badge";
@@ -85,7 +85,7 @@ const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
                 <p>Remaining</p>
               </div>
               <div className={styles.main_info_redeemed_bottom}>
-                {remaining}
+                {BigNumberFormatter(remaining)}
               </div>
             </div>
             <div className={styles.main_info_redemption}>

@@ -37,7 +37,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
         <div className={styles.perk_left}>
           <div className={styles.perk_left_upper}>
             <div className={styles.perk_left_img}>
-              <Image src={imgUrl} alt={perkDetail.nft} layout="fill" />
+              <Image src={imgUrl} alt={perkDetail.company} layout="fill" style={{ borderRadius: '5px'}}/>
             </div>
             <div className={styles.perk_left_upper_detail}>
               <h5>{perkDetail.voucher.title} @{upperCaseString(perkDetail.company)}</h5>

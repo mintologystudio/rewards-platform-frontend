@@ -15,7 +15,7 @@ import NFTCard from '../NFTCard'
 import listOfNftsByCollection from '../../utils/dummyNftCollections'
 import { Web3Context } from '../../context/web3Context'
 import {BsClockFill, BsFillBookmarkCheckFill} from "react-icons/bs";
-import {getReadableTime, getTimeDate, getUSFormatDate} from "../../utils";
+import {BigNumberFormatter, getReadableTime, getTimeDate, getUSFormatDate} from "../../utils";
 import { useWeb3Auth } from '../../utils/services/web3auth'
 
 interface IVoucher {
@@ -188,7 +188,7 @@ const CampaignDetails = ({
             <div className={styles.campaign_redeem}>
               <BsFillBookmarkCheckFill className={styles.campaign_redeem_icon} />
               <span>
-                Remaining: {redemptionRemaining}
+                Remaining: {BigNumberFormatter(redemptionRemaining)}
               </span>
             </div>
             <div className={styles.campaign_soldout}>

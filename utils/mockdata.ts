@@ -10,7 +10,7 @@ export const MOCK_DATA: Array<ICampaign> = [
         startTime: 1657887360000,
         endTime: 1668950741000,
         nftCollectionAddr: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
-        offer: '10% Off footwear',
+        offer: '10% off footwear',
         suboffer: 'Free one month membership',
         remaining: 100,
         totalCoupon: 500,
@@ -47,7 +47,7 @@ export const MOCK_DATA: Array<ICampaign> = [
         startTime: 1657887360000,
         endTime: 1658319360000,
         nftCollectionAddr: '0xd2F668a8461D6761115dAF8Aeb3cDf5F40C532C6',
-        offer: '10% Off footwear',
+        offer: '10% off footwear',
         suboffer: 'Free one month membership',
         remaining: 0,
         totalCoupon: 400,
@@ -84,7 +84,7 @@ export const MOCK_DATA: Array<ICampaign> = [
         startTime: 1657887360000,
         endTime: 1668950741000,
         nftCollectionAddr: '0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e',
-        offer: '20% Off Clothing',
+        offer: '20% off apparels',
         suboffer: 'Free one month membership',
         remaining: 198,
         totalCoupon: 10000,
@@ -99,7 +99,7 @@ export const MOCK_DATA: Array<ICampaign> = [
             'Other ASOS T&Cs apply.'
         ],
         voucher: {
-            title: '20% OFF Clothing',
+            title: '20% Off Clothing',
             description:
                 '20% off when you purchase any merchandise on asos.com!',
             tnc: [
