@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import useWeb3Modal from "../../hooks/useWeb3Modal";
 import {getDisplayAddress} from "../../utils";
 import {useWeb3Auth} from "../../utils/services/web3auth";
+import LogoutModal from "../Modals/LogoutModal";
 
 const Routes = {
   Home: '/',
@@ -29,6 +30,7 @@ const Navigation = () => {
   const [expanded, setExpanded] = useState<boolean>(false)
   const { appState: Web3State, appDispatch } = useContext(Web3Context)
   const [navRoutes, setNavRoutes] = useState<any>([]);
+  const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false)
 
   // Initialize useWeb3Modal on first load of webpage
   const {disconnect} = useWeb3Modal();
@@ -38,9 +40,14 @@ const Navigation = () => {
   }
   const logoutHandler = async () => {
     console.log("logout");
+    setShowLogoutModal(false);
     await disconnect();
     await logout();
     router.replace('/')
+  }
+
+  const showLogoutPopup = () => {
+    setShowLogoutModal(true);
   }
 
   const redirectHandler = (obj: any, key: string) => {
@@ -89,7 +96,7 @@ const Navigation = () => {
               <div className={styles.nav_mobile_nav_action}>
                 {Web3State.address_to_bind ? (
                   Web3State.chainId === 1 ? (
-                    <button onClick={logoutHandler} className={styles.blackBtn}>
+                    <button onClick={showLogoutPopup} className={styles.blackBtn}>
                       {
                         getDisplayAddress(Web3State.address_to_bind)
                       }
@@ -151,7 +158,7 @@ const Navigation = () => {
               {navRoutes}
               {Web3State.address_to_bind ? (
                 Web3State.chainId === 1 ? (
-                  <button onClick={logoutHandler} className={styles.blackBtn}>
+                  <button onClick={showLogoutPopup} className={styles.blackBtn}>
                     {
                       getDisplayAddress(Web3State.address_to_bind)
                     }
@@ -166,6 +173,13 @@ const Navigation = () => {
           </div>
         </div>
       )}
+
+      {showLogoutModal &&
+      <LogoutModal
+          logout={logoutHandler}
+          toggleModal={setShowLogoutModal}
+      />
+      }
     </nav>
   )
 }
