@@ -102,7 +102,7 @@ const Navigation = () => {
                       }
                     </button>
                   ) : (
-                    <button className={`${styles.lwidth}`}>
+                    <button className={`${styles.lwidth}`} onClick={logoutHandler}>
                       Wrong Network
                     </button>
                   )
@@ -164,7 +164,7 @@ const Navigation = () => {
                     }
                   </button>
                 ) : (
-                  <button className={styles.lwidth}>Wrong Network</button>
+                  <button className={styles.lwidth} onClick={logoutHandler}>Wrong Network</button>
                 )
               ) : (
                 <button onClick={loginHandler}>Login</button>
@@ -176,6 +176,7 @@ const Navigation = () => {
 
       {showLogoutModal &&
       <LogoutModal
+          address={Web3State.address_to_bind}
           logout={logoutHandler}
           toggleModal={setShowLogoutModal}
       />
