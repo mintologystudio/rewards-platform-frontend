@@ -102,7 +102,7 @@ export const MOCK_DATA: Array<ICampaign> = [
             code: '11uf-df78-kgsf5',
         },
         expiration: 1666224000000,
-        // isEmpty: true
+        isEmpty: true
     }
 ]
 

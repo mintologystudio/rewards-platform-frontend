@@ -2,12 +2,12 @@ const MetaDetails = {
   TITLE: 'Mintology',
   META_TITLE: 'Mintology',
   DESCRIPTION:
-    'Building NFT-commerce platform that bridging brands with NFT users.',
+    'Enjoy real life brand benefits with your NFTs.',
   OG_TYPE: 'website',
   OG_TITLE: 'Mintology',
   OG_URL: 'https://mintology-staging-user-ui.herokuapp.com/',
   OG_DESC:
-    'Building NFT-commerce platform that bridging brands with NFT users.',
+    'Enjoy real life brand benefits with your NFTs.',
   OG_IMG: 'https://mintology-staging-user-ui.herokuapp.com/banner.png',
   OG_LOCALE: 'en_US',
   OG_SITENAME: 'Mintology',
@@ -15,7 +15,7 @@ const MetaDetails = {
   TWITTER_URL: 'https://twitter.com/mintologystudio',
   TWITTER_TITLE: 'Mintology',
   TWITTER_DESC:
-    'Building NFT-commerce platform that bridging brands with NFT users.',
+    'Enjoy real life brand benefits with your NFTs.',
   TWITTER_CREATOR: '@MintologyStudio',
   KEYWORDS: '',
 }
