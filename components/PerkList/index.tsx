@@ -8,6 +8,8 @@ import {getReadableTime, getTimeDate, getUSFormatDate, upperCaseString} from "..
 import {PERK_DATA} from "../../utils/mockdata";
 import {useRouter} from "next/router";
 import Routes from "../../utils/constants/routes";
+import {IoCopyOutline} from "react-icons/io5";
+import {useState} from "react";
 
 const delay = 500000000
 
@@ -17,6 +19,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
   perkDetail: IPerk
   redirectHandler: Function
 }) => {
+  const [copied, setCopied] = useState(false);
   // const nft = `/assets/nfts/banner/${perkDetail.nft || 'default'}.png`;
   const nft = `/assets/perk1.png`;
   const imgUrl = '/' + perkDetail.bgUrl || nft;
@@ -31,6 +34,14 @@ const Perk = ({ perkDetail, redirectHandler }: {
   const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
 
   const isExpired = new Date(perkDetail.endTime) < new Date();
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false)
+    }, 2000);
+  }
 
   return (
       <div className={styles.perk}>
@@ -66,6 +77,20 @@ const Perk = ({ perkDetail, redirectHandler }: {
         </div>
         <div className={styles.perk_right}>
           <div className={styles.perk_right_upper}>
+
+            <div className={styles.code}>
+              <span>
+                {!copied ? (
+                    perkDetail.voucher.code
+                ) : (
+                    'Copied!'
+                )}
+              </span>
+              <button className={styles.copyBtn} onClick={() => copyToClipboard(perkDetail.voucher.code)}>
+                <IoCopyOutline className={styles.copy_icon}/>
+              </button>
+            </div>
+
             <button className={styles.perk_right_upper_button} onClick={() => redirectHandler(perkDetail.campaignId)}>
               View
             </button>

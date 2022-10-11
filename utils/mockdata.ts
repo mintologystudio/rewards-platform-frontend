@@ -7,8 +7,8 @@ export const MOCK_DATA: Array<ICampaign> = [
         company: 'nike',
         location: 'nike.com',
         website: 'https://www.nike.com',
-        startTime: 1657887360000,
-        endTime: 1668950741000,
+        startTime: 1655222400000,
+        endTime: 1666195200000,
         nftCollectionAddr: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
         offer: '10% off footwear',
         suboffer: 'Free one month membership',
@@ -31,7 +31,7 @@ export const MOCK_DATA: Array<ICampaign> = [
                 'Applicable only for online purchases on nike.com.',
                 'Other Nike T&Cs apply.'
             ],
-            code: '23cv-f34c-xc123',
+            code: 'ZXF28372929',
         },
         expiration: 1666224000000
     },
@@ -41,8 +41,8 @@ export const MOCK_DATA: Array<ICampaign> = [
         company: 'atmos',
         location: 'atmosusa.com',
         website: 'https://www.atmosusa.com',
-        startTime: 1657887360000,
-        endTime: 1658319360000,
+        startTime: 1655222400000,
+        endTime: 1655654400000,
         nftCollectionAddr: '0xd2F668a8461D6761115dAF8Aeb3cDf5F40C532C6',
         offer: '10% off footwear',
         suboffer: 'Free one month membership',
@@ -65,7 +65,7 @@ export const MOCK_DATA: Array<ICampaign> = [
                 'Applicable only for online purchases on atmosusa.com.',
                 'Other Atmos T&Cs apply.'
             ],
-            code: '56gg-sd56-sfdg4',
+            code: 'Q1238372421',
         },
         expiration: 1658319360000
     },
@@ -75,8 +75,8 @@ export const MOCK_DATA: Array<ICampaign> = [
         company: 'ASOS',
         location: 'asos.com',
         website: 'https://www.asos.com',
-        startTime: 1657887360000,
-        endTime: 1668950741000,
+        startTime: 1655222400000,
+        endTime: 1666195200000,
         nftCollectionAddr: '0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e',
         offer: '20% off apparels',
         suboffer: 'Free one month membership',
@@ -99,7 +99,7 @@ export const MOCK_DATA: Array<ICampaign> = [
                 'Applicable only for online purchases on asos.com.',
                 'Other ASOS T&Cs apply.'
             ],
-            code: '11uf-df78-kgsf5',
+            code: 'RAS2837023',
         },
         expiration: 1666224000000,
         isEmpty: true

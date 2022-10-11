@@ -101,11 +101,12 @@ const CampaignDetails = ({
   const usStartDate = getUSFormatDate(sday, smonth, syear);
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
   const countdownDate = new Date(usEndDate);
-
   const countDownInMilli = (campaign.expiration? campaign.expiration : new Date(1666224000000).getTime()) - new Date().getTime()
   const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
 
   const isExpired = new Date(campaign.endTime) < new Date();
+
+  const showSoldOld = redemptionRemaining !== undefined && redemptionRemaining === 0;
 
   return (
     <div className={styles.container}>
@@ -188,14 +189,14 @@ const CampaignDetails = ({
             <div className={styles.campaign_redeem}>
               <BsFillBookmarkCheckFill className={styles.campaign_redeem_icon} />
               <span>
-                Remaining: {BigNumberFormatter(redemptionRemaining)}
+                Remaining: { isExpired? 0 : BigNumberFormatter(redemptionRemaining)}
               </span>
             </div>
             <div className={styles.campaign_soldout}>
-              {(isExpired || (redemptionRemaining && redemptionRemaining <= 0)) &&
+              {showSoldOld ?
               <span className={styles.soldout}>
                 Sold Out
-              </span>
+              </span> : (<></>)
               }
             </div>
           </div>
@@ -223,16 +224,26 @@ const CampaignDetails = ({
             </div>
 
             <div className={styles.content_button}>
-              { !isExpired && !(appState.address_to_bind != '') ?
+              { !isExpired && !showSoldOld && !(appState.address_to_bind != '') ?
                   (<button type="button" onClick={loginHandler}>Get It Now</button>)
                   :
-                  !isExpired && appState.chainId === 1 && (<button
+                  !isExpired && !showSoldOld && appState.chainId === 1 && (<button
                       type="button"
                       className={styles.button}
                       onClick={() => toggleModal(true)}>Get It Now</button>)
               }
 
-              {(isExpired || (redemptionRemaining && redemptionRemaining <= 0)) &&
+              {isExpired && !showSoldOld &&
+                (
+                    <button
+                        type="button"
+                        disabled
+                        className={styles.button}
+                    >Claim period ended</button>
+                )
+              }
+
+              {showSoldOld &&
                 (
                     <button
                         type="button"

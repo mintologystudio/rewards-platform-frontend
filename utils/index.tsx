@@ -113,7 +113,7 @@ export const getTimeDate = (time: number) => {
   const date = new Date(time);
 
   let day = date.getDate();
-  let month = date.getMonth();
+  let month = date.getMonth()+1;
   const year = date.getFullYear();
 
   let _day = String(day)
