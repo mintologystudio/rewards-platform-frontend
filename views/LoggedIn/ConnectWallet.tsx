@@ -44,7 +44,7 @@ const ConnectWallet = () => {
       chainId: network.chainId,
     });
 
-  }, [appState.provider])
+  }, [])
 
   const disconnect = useCallback(
     async function () {
