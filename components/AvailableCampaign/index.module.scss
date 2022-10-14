@@ -34,6 +34,14 @@
       font-size: 3.2rem;
     }
   }
+
+  &_empty {
+    color: $black;
+    font-family: $baseFont;
+    font-size: 3rem;
+    word-wrap: break-word;
+    text-align: center;
+  }
 }
 
 .contents {

@@ -46,6 +46,14 @@
       font-size: 3.2rem;
     }
   }
+
+  &_empty {
+    color: $black;
+    font-family: $baseFont;
+    font-size: 3rem;
+    word-wrap: break-word;
+    text-align: center;
+  }
 }
 
 .perk {
@@ -430,6 +438,7 @@
   padding: 2rem;
 
   @include xs {
+    min-height: 40rem;
     max-width: 85%;
   }
 
@@ -441,7 +450,7 @@
     font-size: 2.4rem;
     width: 80vw;
     max-width: 80%;
-    min-height: 60rem;
+    min-height: 70rem;
   }
 
   //@include xl {

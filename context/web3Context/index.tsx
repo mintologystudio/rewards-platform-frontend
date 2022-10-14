@@ -6,6 +6,18 @@ export interface IAppContextState {
   address_to_bind: string //web3 address
   address_w3a: string //web3auth address
   chainId: number
+  campaign: ICampaignDetail
+  perk: IPerkDetail
+}
+
+export interface ICampaignDetail {
+  campaigns: any
+  isLoading: boolean
+}
+
+export interface IPerkDetail {
+  perks: any
+  isLoading: boolean
 }
 
 export interface InitialContextProps {
@@ -19,6 +31,8 @@ export const InitialAppContextState: IAppContextState = {
   web3ModalProvider: null,
   address_to_bind: '',
   address_w3a: '',
+  campaign: {campaigns: [], isLoading: false},
+  perk: {perks: [], isLoading: false},
 }
 
 export const Web3Context = createContext({} as InitialContextProps)

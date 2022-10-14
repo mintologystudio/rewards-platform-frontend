@@ -10,11 +10,16 @@ import { BsClockFill, BsFillBookmarkCheckFill } from 'react-icons/bs';
 import Badge from "../Badge";
 import Link from 'next/link'
 import Routes from '../../utils/constants/routes'
-import {ICampaign} from "../../utils/interfaces";
+import {ICampaignNew} from "../../utils/interfaces";
+import Skeleton from 'react-loading-skeleton'
 
-const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
+const CampaignCard = ({campaign}: {campaign: ICampaignNew}) => {
 
-  const {campaignId, company, nft, offer, remaining, startTime, endTime, expiration, bgUrl} = campaign;
+  // const {campaignId, company, nft, offer, remaining, startTime, endTime, expiration, bgUrl} = campaign;
+  const {_id, company, offer, remaining, startDate, endDate, bgUrl} = campaign;
+
+  const startTime = new Date(startDate).getTime();
+  const endTime = new Date(endDate).getTime();
 
   const [sday, smonth, syear] = getTimeDate(startTime);
   const [eday, emonth, eyear] = getTimeDate(endTime);
@@ -22,10 +27,9 @@ const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
   const countdownDate = new Date(usEndDate);
 
-  const countDownInMilli = (expiration? expiration : new Date(1666224000000).getTime()) - new Date().getTime()
   const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
 
-  const backgroundImg = bgUrl? `url(${bgUrl})` : `url(assets/nfts/banner/${nft}.png)`;
+  const backgroundImg = bgUrl? `url(${bgUrl})` : `url(assets/no-image.jpeg)`;
 
   const isExpired = new Date(endTime) < new Date();
 
@@ -73,7 +77,7 @@ const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
             {/*    <p dangerouslySetInnerHTML={{ __html: off }}></p>*/}
             {/*))}*/}
 
-            <p>{offer}</p>
+            <p>{offer || <Skeleton width={100}/>}</p>
             {/*{*/}
             {/*  suboffer? (<p dangerouslySetInnerHTML={{ __html: suboffer }}></p>) : ''*/}
             {/*}*/}
@@ -89,7 +93,7 @@ const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
               </div>
             </div>
             <div className={styles.main_info_redemption}>
-              <Link href={`${Routes.VIEW_CAMPAIGN}?campaignId=${campaignId}`}>
+              <Link href={`${Routes.VIEW_CAMPAIGN}?campaignId=${_id}`}>
                 <button type="button">View</button>
               </Link>
             </div>
@@ -101,3 +105,42 @@ const CampaignCard = ({campaign}: {campaign: ICampaign}) => {
 }
 
 export default CampaignCard
+
+export const CampaignCardSkeleton = () => {
+
+  return (
+      <li className={styles.container}>
+        <div className={styles.main}>
+          <div
+              className={styles.main_top}
+          >
+            <Skeleton height={'100%'} className={styles.main_top}/>
+            <div className={styles.main_top_title}>
+              <h3>
+                <Skeleton width={100}/>
+              </h3>
+            </div>
+          </div>
+          <div className={styles.main_bottom}>
+            <div className={styles.main_bottom_p}>
+              <p><Skeleton width={100}/></p>
+            </div>
+            <div className={styles.main_info}>
+              <div className={styles.main_info_redeemed}>
+                <div style={{ marginBottom: '0.5rem'}}>
+                  <BsFillBookmarkCheckFill className={styles.main_info_redeemed_icon} />
+                  <p><Skeleton width={100}/></p>
+                </div>
+                <div className={styles.main_info_redeemed_bottom}>
+                  <Skeleton width={50}/>
+                </div>
+              </div>
+              <div className={styles.main_info_redemption}>
+                <Skeleton width={100} height={30}/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+  )
+}

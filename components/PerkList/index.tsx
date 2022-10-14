@@ -4,12 +4,14 @@ import Image from "next/image";
 import Badge from "../Badge";
 import {BsClockFill} from "react-icons/bs";
 import {IPerk} from "../../utils/interfaces";
-import {getReadableTime, getTimeDate, getUSFormatDate, upperCaseString} from "../../utils";
+import {getImageUrl, getReadableTime, getTimeDate, getUSFormatDate, upperCaseString} from "../../utils";
 import {PERK_DATA} from "../../utils/mockdata";
 import {useRouter} from "next/router";
 import Routes from "../../utils/constants/routes";
 import {IoCopyOutline} from "react-icons/io5";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import Skeleton from 'react-loading-skeleton'
+import {Web3Context} from "../../context/web3Context";
 
 const delay = 500000000
 
@@ -19,21 +21,24 @@ const Perk = ({ perkDetail, redirectHandler }: {
   perkDetail: IPerk
   redirectHandler: Function
 }) => {
+  const {_id, company, location, startDate, endDate, bgUrl, voucher} = perkDetail;
   const [copied, setCopied] = useState(false);
   // const nft = `/assets/nfts/banner/${perkDetail.nft || 'default'}.png`;
-  const nft = `/assets/perk1.png`;
-  const imgUrl = '/' + perkDetail.bgUrl || nft;
+  const defaultImg = `/assets/no-image.jpeg`;
 
-  const [sday, smonth, syear] = getTimeDate(perkDetail.startTime);
-  const [eday, emonth, eyear] = getTimeDate(perkDetail.endTime);
+  const imgUrl = bgUrl ? getImageUrl(bgUrl) : defaultImg;
+  const startTime = new Date(startDate).getTime();
+  const endTime = new Date(endDate).getTime();
+
+  const [sday, smonth, syear] = getTimeDate(startTime);
+  const [eday, emonth, eyear] = getTimeDate(endTime);
   const usStartDate = getUSFormatDate(sday, smonth, syear);
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
   const countdownDate = new Date(usEndDate);
 
-  const countDownInMilli = (perkDetail.expiration? perkDetail.expiration : new Date(1666224000000).getTime()) - new Date().getTime()
   const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
 
-  const isExpired = new Date(perkDetail.endTime) < new Date();
+  const isExpired = new Date(endTime) < new Date();
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -48,13 +53,13 @@ const Perk = ({ perkDetail, redirectHandler }: {
         <div className={styles.perk_left}>
           <div className={styles.perk_left_upper}>
             <div className={styles.perk_left_img}>
-              <Image src={imgUrl} alt={perkDetail.company} layout="fill" style={{ borderRadius: '5px'}}/>
+              <Image src={imgUrl} alt={company} layout="fill" style={{ borderRadius: '5px'}}/>
             </div>
             <div className={styles.perk_left_upper_detail}>
-              <h5>{perkDetail.voucher.title} @{upperCaseString(perkDetail.company)}</h5>
+              <h5>{voucher?.title} @{upperCaseString(company)}</h5>
               <div className={styles.perk_left_upper_detail_span}>
-                <Badge company={perkDetail.company} width={'20rem'} />
-                <span>Location: {perkDetail.location}</span>
+                <Badge company={company} width={'20rem'} />
+                <span>Location: {location}</span>
               </div>
             </div>
           </div>
@@ -81,17 +86,17 @@ const Perk = ({ perkDetail, redirectHandler }: {
             <div className={styles.code}>
               <span>
                 {!copied ? (
-                    perkDetail.voucher.code
+                    voucher?.code
                 ) : (
                     'Copied!'
                 )}
               </span>
-              <button className={styles.copyBtn} onClick={() => copyToClipboard(perkDetail.voucher.code)}>
+              <button className={styles.copyBtn} onClick={() => copyToClipboard((voucher?voucher.code:''))}>
                 <IoCopyOutline className={styles.copy_icon}/>
               </button>
             </div>
 
-            <button className={styles.perk_right_upper_button} onClick={() => redirectHandler(perkDetail.campaignId)}>
+            <button className={styles.perk_right_upper_button} onClick={() => redirectHandler(_id)}>
               View
             </button>
           </div>
@@ -122,27 +127,84 @@ const Perk = ({ perkDetail, redirectHandler }: {
   )
 }
 
-const PerkList = ({ }) => {
 
+const PerkSkeleton = () => {
+  return (
+      <div className={styles.perk}>
+        <div className={styles.perk_left}>
+          <div className={styles.perk_left_upper}>
+            <div className={styles.perk_left_img}>
+              <Skeleton height={80} style={{ borderRadius: '5px', width: '100%'}}/>
+            </div>
+            <div className={styles.perk_left_upper_detail}>
+              <Skeleton width={120}/>
+              <Skeleton width={100}/>
+            </div>
+          </div>
+          <div className={styles.perk_left_lowerfull}>
+            <div className={styles.perk_left_lower}>
+              <div className={styles.perk_left_lower_date}>
+                <Skeleton  style={{ width: '100%', height: '100%'}}/>
+              </div>
+              <div className={styles.perk_left_lower_date}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.perk_right}>
+          <div className={styles.perk_right_upper}>
+            <Skeleton width={200} height={30}/>
+          </div>
+          <div className={styles.perk_right_lower}>
+            <div className={styles.perk_right_lower_timeleft}>
+            </div>
+          </div>
+        </div>
+      </div>
+  )
+}
+
+
+const PerkList = ({ }) => {
   const router = useRouter();
+
+  const { appState } = useContext(Web3Context);
+  const { perk } = appState;
 
   const toDetail = (campaignId: any) => {
     router.push(`${Routes.VIEW_CAMPAIGN}?campaignId=${campaignId}`);
   }
 
   return (
-    //{/*<div className={styles.container}>*/}
       <div className={styles.main}>
         <div className={styles.perks}>
           <h2>My Perks</h2>
 
-          {ListOfPerks.map(perk => (
-              <Perk perkDetail={perk} key={perk.nft} redirectHandler={toDetail}/>
-          ))}
+          {/*{*/}
+          {/*  !perk.isLoading && perk.perks.length == 0 ?*/}
+          {/*      <p className={styles.main_empty}>No Redeemed Coupon</p>*/}
+          {/*      : <></>*/}
+          {/*}*/}
 
+          {/*{*/}
+          {/*  perk.isLoading ? (*/}
+          {/*      Array(3).fill(3)*/}
+          {/*          .map((item, index) => <PerkSkeleton key={index}/>)*/}
+          {/*  ): (*/}
+          {/*      <></>*/}
+          {/*  )*/}
+          {/*}*/}
+
+          {
+            // !perk.isLoading && perk.perks.length > 0 ? (
+                ListOfPerks.map(vperk => (
+                    <Perk perkDetail={vperk} key={vperk.company} redirectHandler={toDetail}/>
+                ))
+                // )
+                // : <></>
+          }
         </div>
       </div>
-    // </div>
 
   )
 }

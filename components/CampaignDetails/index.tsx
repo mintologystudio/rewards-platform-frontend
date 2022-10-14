@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react'
 import { getTokensFromUser } from '../../utils/api'
-import {ICampaign, IOwnedNFTData, IOwnedNFTDataSelection} from '../../utils/interfaces'
+import {ICampaignNew, IOwnedNFTData, IOwnedNFTDataSelection} from '../../utils/interfaces'
 import styles from './index.module.scss'
 import Image from 'next/image'
 import NFTCard from '../NFTCard'
@@ -32,13 +32,15 @@ const CampaignDetails = ({
   collectionAddr,
   details,
   toggleModal,
-  redemptionRemaining
+  redemptionRemaining,
+  redeemCampaign
 }: {
-  campaign: ICampaign
-  collectionAddr: string
-  details: IVoucher
+  campaign: ICampaignNew
+  collectionAddr?: string
+  details?: IVoucher
   toggleModal: Dispatch<SetStateAction<boolean>>
   redemptionRemaining: number | undefined
+  redeemCampaign: Function
 }) => {
   const { appState } = useContext(Web3Context);
   const [availableTokens, setAvailableTokens] = useState<
@@ -47,37 +49,41 @@ const CampaignDetails = ({
   const [selectedNFT, setSelectedNFT] = useState<IOwnedNFTDataSelection>()
   const { login, logout, provider } = useWeb3Auth()
 
-  const retrieveUserNFTs = async () => {
-    // const tokens = await getTokensFromUser(
-    //   mockUserWalletAddress,
-    //   collectionAddr
-    // )
+  const {_id, company, offer, remaining, startDate, endDate, bgUrl} = campaign;
+  const startTime = new Date(startDate).getTime();
+  const endTime = new Date(endDate).getTime();
 
-    // Mock return some basic images
-    const tokens = listOfNftsByCollection(collectionAddr)
-    return tokens
-  }
-
-  const retrieveAndFilterEligibleTokens = async () => {
-    // Query Moralis to detect all NFTs that this user owned
-    const userTokens = await retrieveUserNFTs()
-
-    // Query backend to detect NFTs that are already claimed for this voucher
-    const mockRedeemedTokenIds = [896]
-
-    const filteredTokens = userTokens.map((_token) => {
-      return {
-        ..._token,
-        redeemed: mockRedeemedTokenIds.includes(_token.tokenId),
-      }
-    })
-    setAvailableTokens(filteredTokens)
-  }
-
-  const handleSelectNFT = (token: IOwnedNFTDataSelection) => {
-    if (token.redeemed) return
-    setSelectedNFT(token)
-  }
+  // const retrieveUserNFTs = async () => {
+  //   // const tokens = await getTokensFromUser(
+  //   //   mockUserWalletAddress,
+  //   //   collectionAddr
+  //   // )
+  //
+  //   // Mock return some basic images
+  //   const tokens = listOfNftsByCollection(collectionAddr)
+  //   return tokens
+  // }
+  //
+  // const retrieveAndFilterEligibleTokens = async () => {
+  //   // Query Moralis to detect all NFTs that this user owned
+  //   const userTokens = await retrieveUserNFTs()
+  //
+  //   // Query backend to detect NFTs that are already claimed for this voucher
+  //   const mockRedeemedTokenIds = [896]
+  //
+  //   const filteredTokens = userTokens.map((_token) => {
+  //     return {
+  //       ..._token,
+  //       redeemed: mockRedeemedTokenIds.includes(_token.tokenId),
+  //     }
+  //   })
+  //   setAvailableTokens(filteredTokens)
+  // }
+  //
+  // const handleSelectNFT = (token: IOwnedNFTDataSelection) => {
+  //   if (token.redeemed) return
+  //   setSelectedNFT(token)
+  // }
 
   const loginHandler = async () => {
     if (!isExpired && !(appState.address_to_bind)) await logout();
@@ -92,19 +98,18 @@ const CampaignDetails = ({
     }
   }
 
-  useEffect(() => {
-    retrieveAndFilterEligibleTokens();
-  }, [collectionAddr])
+  // useEffect(() => {
+  //   retrieveAndFilterEligibleTokens();
+  // }, [collectionAddr])
 
-  const [sday, smonth, syear] = getTimeDate(campaign.startTime);
-  const [eday, emonth, eyear] = getTimeDate(campaign.endTime);
+  const [sday, smonth, syear] = getTimeDate(startTime);
+  const [eday, emonth, eyear] = getTimeDate(endTime);
   const usStartDate = getUSFormatDate(sday, smonth, syear);
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
   const countdownDate = new Date(usEndDate);
-  const countDownInMilli = (campaign.expiration? campaign.expiration : new Date(1666224000000).getTime()) - new Date().getTime()
   const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
 
-  const isExpired = new Date(campaign.endTime) < new Date();
+  const isExpired = new Date(endTime) < new Date();
 
   const showSoldOld = redemptionRemaining !== undefined && redemptionRemaining === 0;
 
@@ -211,13 +216,13 @@ const CampaignDetails = ({
               <div className={styles.campaign_detail_top}>
                 {/*{offerDisplay(campaign.offers)}*/}
                 <h3 className={styles.content_tnc_title}>{campaign.offer}</h3>
-                <p>{details.description}</p>
+                <p>{campaign.description}</p>
               </div>
 
             <div className={styles.content_tnc}>
               <h3 className={styles.content_tnc_title}>Terms and conditions</h3>
               <ul>
-                {details.tnc.map((tnc) => (
+                {campaign.tnc.map((tnc) => (
                     <li key={tnc}>{tnc}</li>
                 ))}
               </ul>
@@ -230,7 +235,7 @@ const CampaignDetails = ({
                   !isExpired && !showSoldOld && appState.chainId === 1 && (<button
                       type="button"
                       className={styles.button}
-                      onClick={() => toggleModal(true)}>Get It Now</button>)
+                      onClick={()=>redeemCampaign(_id)}>Get It Now</button>)
               }
 
               {isExpired && !showSoldOld &&

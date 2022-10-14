@@ -1,26 +1,33 @@
-import {ICampaign, IPerk} from "./interfaces";
+import {ICampaign, ICampaignNew, IPerk} from "./interfaces";
 
-export const MOCK_DATA: Array<ICampaign> = [
+export const MOCK_DATA: Array<ICampaignNew> = [
     {
-        campaignId: "1",
-        nft: 'azuki',
+        _id: "1",
+        merchantId: "62a825c555ead66f43ba2286",
+        merchantAddress: "0xc1C9D88A4E58B5E395675ded16960Ffca265bA52",
+        collectionIdentifiers: [
+            "1-0x75E9Abc7E69fc46177d2F3538C0B92d89054eC91",
+            "1-0x165a2eD732eb15B54b5E8C057CbcE6251370D6e8"
+        ],
+        title: 'NIKE',
         company: 'nike',
+        companyLogoUrl: "https://static.nike.com/a/images/f_jpg,q_auto:eco/61b4738b-e1e1-4786-8f6c-26aa0008e80b/swoosh-logo-black.png",
+        offer: '10% off footwear',
+        description: '10% off when you purchase any footwear on nike.com!',
+        bgUrl: 'assets/product1.png',
         location: 'nike.com',
         website: 'https://www.nike.com',
-        startTime: 1655222400000,
-        endTime: 1666195200000,
-        nftCollectionAddr: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
-        offer: '10% off footwear',
-        suboffer: 'Free one month membership',
-        remaining: 100,
-        totalCoupon: 500,
-        bgUrl: 'assets/product1.png',
         tnc: [
             'Limited to 1 redemption per user. Limited redemptions are available for the period',
             'Claims are available until October 20, 2022, or while supplies last.',
             'Applicable only for online purchases on nike.com.',
             'Other Nike T&Cs apply.'
         ],
+        startDate: '2022-06-15T00:00:00.000Z',
+        endDate: '2022-10-20T00:00:00.000Z',
+        status: 'active',
+        remaining: 100,
+        totalCoupon: 500,
         voucher: {
             title: '10% Off Footwear',
             description:
@@ -33,28 +40,34 @@ export const MOCK_DATA: Array<ICampaign> = [
             ],
             code: 'ZXF28372929',
         },
-        expiration: 1666224000000
     },
     {
-        campaignId: "2",
-        nft: 'karafuru',
+        _id: "2",
+        merchantId: "62a825c555ead66f43ba2286",
+        merchantAddress: "0xc1C9D88A4E58B5E395675ded16960Ffca265bA52",
+        collectionIdentifiers: [
+            "1-0x75E9Abc7E69fc46177d2F3538C0B92d89054eC91",
+            "1-0x165a2eD732eb15B54b5E8C057CbcE6251370D6e8"
+        ],
+        title: 'ATMOS',
         company: 'atmos',
+        companyLogoUrl: "https://static.nike.com/a/images/f_jpg,q_auto:eco/61b4738b-e1e1-4786-8f6c-26aa0008e80b/swoosh-logo-black.png",
+        offer: '10% off footwear',
+        description: '10% off when you purchase any footwear on atmosusa.com!',
+        bgUrl: 'assets/product2.png',
         location: 'atmosusa.com',
         website: 'https://www.atmosusa.com',
-        startTime: 1655222400000,
-        endTime: 1655654400000,
-        nftCollectionAddr: '0xd2F668a8461D6761115dAF8Aeb3cDf5F40C532C6',
-        offer: '10% off footwear',
-        suboffer: 'Free one month membership',
-        remaining: 0,
-        totalCoupon: 400,
-        bgUrl: 'assets/product2.png',
         tnc: [
             'Limited to 1 redemption per user. Limited redemptions are available for the period.',
             'Claims are available until June 20, 2022, or while supplies last.',
             'Applicable only for online purchases on atmosusa.com.',
             'Other Atmos T&Cs apply.'
         ],
+        startDate: '2022-06-15T00:00:00.000Z',
+        endDate: '2022-06-20T00:00:00.000Z',
+        status: 'active',
+        remaining: 0,
+        totalCoupon: 400,
         voucher: {
             title: '10% Off Footwear',
             description:
@@ -67,28 +80,34 @@ export const MOCK_DATA: Array<ICampaign> = [
             ],
             code: 'Q1238372421',
         },
-        expiration: 1658319360000
     },
     {
-        campaignId: "3",
-        nft: 'doodles',
+        _id: "3",
+        merchantId: "62a825c555ead66f43ba2286",
+        merchantAddress: "0xc1C9D88A4E58B5E395675ded16960Ffca265bA52",
+        collectionIdentifiers: [
+            "1-0x75E9Abc7E69fc46177d2F3538C0B92d89054eC91",
+            "1-0x165a2eD732eb15B54b5E8C057CbcE6251370D6e8"
+        ],
+        title: 'ASOS',
         company: 'ASOS',
+        companyLogoUrl: "https://static.nike.com/a/images/f_jpg,q_auto:eco/61b4738b-e1e1-4786-8f6c-26aa0008e80b/swoosh-logo-black.png",
+        offer: '20% off apparels',
+        description: '20% off when you purchase any merchandise on asos.com!',
+        bgUrl: 'assets/product3.png',
         location: 'asos.com',
         website: 'https://www.asos.com',
-        startTime: 1655222400000,
-        endTime: 1666195200000,
-        nftCollectionAddr: '0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e',
-        offer: '20% off apparels',
-        suboffer: 'Free one month membership',
-        remaining: 198,
-        totalCoupon: 10000,
-        bgUrl: 'assets/product3.png',
         tnc: [
             'Limited to 1 redemption per user. Limited redemptions are available for the period.',
             'Claims are available until October 20, 2022, or while supplies last.',
             'Applicable only for online purchases on asos.com.',
             'Other ASOS T&Cs apply.'
         ],
+        startDate: '2022-06-15T00:00:00.000Z',
+        endDate: '2022-10-20T00:00:00.000Z',
+        status: 'active',
+        remaining: 198,
+        totalCoupon: 10000,
         voucher: {
             title: '20% Off Clothing',
             description:
@@ -101,13 +120,11 @@ export const MOCK_DATA: Array<ICampaign> = [
             ],
             code: 'RAS2837023',
         },
-        expiration: 1666224000000,
-        isEmpty: true
-    }
+    },
 ]
 
 
-export const CAMPAIGN_DATA: Array<ICampaign> = MOCK_DATA;
+export const CAMPAIGN_DATA: Array<ICampaignNew> = MOCK_DATA;
 
 
 export const PERK_DATA: Array<IPerk> = MOCK_DATA;

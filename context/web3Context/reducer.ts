@@ -3,9 +3,9 @@ import {
   SET_WEB3_PROVIDER,
   SET_ADDRESS,
   SET_WEB3AUTH_ADDRESS,
-  RESET_WEB3_PROVIDER, SET_ADDRESS_PROVIDER,
+  RESET_WEB3_PROVIDER, SET_ADDRESS_PROVIDER, CAMPAIGN_LIST, CAMPAIGN_LOADING, PERK_LIST, PERK_LOADING,
 } from '../actionType'
-import { InitialAppContextState, IAppContextState } from '.'
+import {InitialAppContextState, IAppContextState, ICampaignDetail, IPerkDetail} from '.'
 
 export type IAction =
   | {
@@ -40,6 +40,22 @@ export type IAction =
   | {
     type: 'RESET_WEB3_PROVIDER'
   }
+  | {
+    type: 'CAMPAIGN_LIST'
+    campaign: ICampaignDetail
+  }
+  | {
+    type: 'CAMPAIGN_LOADING'
+    isLoading: ICampaignDetail['isLoading']
+  }
+  | {
+    type: 'PERK_LIST'
+    perk: IPerkDetail
+  }
+  | {
+    type: 'PERK_LOADING'
+    isLoading: IPerkDetail['isLoading']
+  }
 
 const Web3Reducer = (
   state: IAppContextState,
@@ -73,8 +89,31 @@ const Web3Reducer = (
         ...state,
         address_w3a: action.address_w3a,
       }
+    case CAMPAIGN_LIST:
+      return {
+        ...state,
+        campaign: action.campaign,
+      }
+    case CAMPAIGN_LOADING:
+      return {
+        ...state,
+        campaign: { ...state.campaign, isLoading: action.isLoading},
+      }
+    case PERK_LIST:
+      return {
+        ...state,
+        perk: action.perk,
+      }
+    case PERK_LOADING:
+      return {
+        ...state,
+        perk: { ...state.perk, isLoading: action.isLoading},
+      }
     case RESET_WEB3_PROVIDER:
-      return InitialAppContextState
+      return {
+        ...InitialAppContextState,
+        campaign: {...state.campaign}
+      }
     default:
       return state
   }
