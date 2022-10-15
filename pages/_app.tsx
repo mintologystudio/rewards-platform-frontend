@@ -8,11 +8,14 @@ import { Web3AuthProvider } from '../utils/services/web3auth'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Web3ContextProvider from '../context/web3Context'
 import ReactGA from 'react-ga';
+import useReactGA from "../hooks/useReactGA";
 
 const TRACKING_ID = "UA-245602425-2"; // OUR_TRACKING_ID
+// const TRACKING_ID = "UA-245602425-3"; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useReactGA();
   const router = useRouter()
   NProgress.configure({ showSpinner: false })
 
@@ -23,9 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     router.events.on('routeChangeStart', () => NProgress.start())
     router.events.on('routeChangeComplete', () => NProgress.done())
     router.events.on('routeChangeError', () => NProgress.done())
-
-    ReactGA.pageview(window.location.pathname + window.location.search);
-
   }, [])
 
   return (

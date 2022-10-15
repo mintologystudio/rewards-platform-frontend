@@ -5,8 +5,10 @@ import AvailableCampaign from '../components/AvailableCampaign'
 import FeaturedCampaign from '../components/FeaturedCampaign'
 import Navigation from '../components/Navigation'
 import Footer from "../components/Footer/Footer";
+import useReactGA from "../hooks/useReactGA";
 
 const Home: NextPage = () => {
+    useReactGA();
   return (
     <div className={styles.container}>
       <Meta />

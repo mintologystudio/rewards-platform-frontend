@@ -13,6 +13,7 @@ import Routes from '../utils/constants/routes'
 import { ICampaign, IVoucher } from '../utils/interfaces'
 import Footer from "../components/Footer/Footer";
 import {MOCK_DATA} from "../utils/mockdata";
+import useReactGA from "../hooks/useReactGA";
 
 const data = (index: string) => {
   switch (index) {
@@ -43,6 +44,7 @@ const data = (index: string) => {
 }
 
 const Campaign: NextPage = () => {
+  useReactGA();
   const router = useRouter();
   const [campaignId, setCampaignId] = useState<string>('')
   const [campaignDetails, setCampaignDetails] = useState<ICampaign>({
