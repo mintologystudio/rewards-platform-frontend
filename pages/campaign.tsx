@@ -16,6 +16,7 @@ import {MOCK_DATA} from "../utils/mockdata";
 import CampaignDetailSkeleton from "../components/CampaignDetails/CampaignDetailSkeleton";
 import {Web3Context} from "../context/web3Context";
 import {getCampaign, redeemCampaign} from "../utils/api/niftyRewards";
+import useReactGA from "../hooks/useReactGA";
 
 const data = (index: string) => {
   switch (index) {
@@ -71,6 +72,7 @@ const emptyICampaignNew = {
 };
 
 const Campaign: NextPage = () => {
+  useReactGA();
   const { appState } = useContext(Web3Context);
   const router = useRouter();
   const [campaignId, setCampaignId] = useState<string>('')

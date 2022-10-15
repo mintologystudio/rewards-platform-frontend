@@ -10,8 +10,10 @@ import {useContext, useEffect} from "react";
 import {Web3Context} from "../context/web3Context";
 import {CAMPAIGN_LIST, CAMPAIGN_LOADING} from "../context/actionType";
 import {CAMPAIGN_DATA} from "../utils/mockdata";
+import useReactGA from "../hooks/useReactGA";
 
 const Home = () => {
+    useReactGA();
     const { appState, appDispatch } = useContext(Web3Context);
 
     const loadCampaigns = async () => {

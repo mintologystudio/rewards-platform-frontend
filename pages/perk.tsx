@@ -8,8 +8,10 @@ import {useContext, useEffect} from "react";
 import {Web3Context} from "../context/web3Context";
 import {PERK_LIST, PERK_LOADING} from "../context/actionType";
 import {getPerks} from "../utils/api/niftyRewards";
+import useReactGA from "../hooks/useReactGA";
 
 const MyPerk: NextPage = () => {
+    useReactGA();
     const { appState, appDispatch } = useContext(Web3Context);
 
     const loadPerks = async () => {
