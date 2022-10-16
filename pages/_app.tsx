@@ -7,11 +7,13 @@ import '../styles/nprogress.scss'
 import { Web3AuthProvider } from '../utils/services/web3auth'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Web3ContextProvider from '../context/web3Context'
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import useReactGA from "../hooks/useReactGA";
 
-const TRACKING_ID = "UA-245602425-2"; // OUR_TRACKING_ID
-// const TRACKING_ID = "UA-245602425-3"; // OUR_TRACKING_ID
+// const TRACKING_ID = "UA-245602425-2"; // YOUR_TRACKING_ID (UX type)
+// const TRACKING_ID = "UA-245602425-3"; // YOUR_TRACKING_ID (UX type - ngrok local test)
+const TRACKING_ID = "G-W63ZL5E34K"; // YOUR_TRACKING_ID (GA4 type - need use react-ga4)
 ReactGA.initialize(TRACKING_ID);
 
 function MyApp({ Component, pageProps }: AppProps) {
