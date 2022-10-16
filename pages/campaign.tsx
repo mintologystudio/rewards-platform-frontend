@@ -15,7 +15,7 @@ import Footer from "../components/Footer/Footer";
 import {MOCK_DATA} from "../utils/mockdata";
 import CampaignDetailSkeleton from "../components/CampaignDetails/CampaignDetailSkeleton";
 import {Web3Context} from "../context/web3Context";
-import {getCampaign, redeemCampaign} from "../utils/api/niftyRewards";
+import {getCampaign, redeemBefore, redeemCampaign} from "../utils/api/niftyRewards";
 import useReactGA from "../hooks/useReactGA";
 
 const data = (index: string) => {
@@ -78,6 +78,7 @@ const Campaign: NextPage = () => {
   const [campaignId, setCampaignId] = useState<string>('')
   const [isLoading, setIsLoading] = useState(true);
   const [isRedeeming, setIsRedeeming] = useState(false);
+  const [isRedeemed, setIsRedeemed] = useState(false);
   const [campaignDetails, setCampaignDetails] = useState<ICampaignNew>(emptyICampaignNew)
   const [voucherDetails, setVoucherDetails] = useState<IVoucher | undefined>(campaignDetails.voucher)
   const [showRedemptionModal, setShowRedemptionModal] = useState<boolean>(false)
@@ -90,6 +91,18 @@ const Campaign: NextPage = () => {
       setCampaignDetails(res.campaign);
     } else {
       router.replace(Routes.ERROR);
+    }
+  }
+
+  const checkRedeemBefore = async (_id: string) => {
+    console.log("check redeem before", _id);
+    const res = await redeemBefore(appState.address_w3a, _id);
+
+    if (res.status && _id === '3') {
+      setIsRedeemed(true);
+      // setCampaignDetails(res.campaign);
+    } else {
+      // router.replace(Routes.ERROR);
     }
   }
 
@@ -139,11 +152,12 @@ const Campaign: NextPage = () => {
 
     if (!selectedCampaign) {
       findCampaign(campaignId);
-
+      checkRedeemBefore(campaignId);
       // router.push(Routes.ERROR)
       setIsLoading(false);
     } else {
       setCampaignDetails(selectedCampaign)
+      checkRedeemBefore(campaignId);
       setIsLoading(false);
     }
   }, [campaignId])
@@ -167,6 +181,7 @@ const Campaign: NextPage = () => {
                   toggleModal={setShowRedemptionModal}
                   redemptionRemaining={campaignDetails.remaining}
                   redeemCampaign={doRedeemCampaign}
+                  redeemed={isRedeemed}
               />
             </>)
         }

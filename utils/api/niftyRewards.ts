@@ -117,6 +117,32 @@ export const getCampaign = async (
   }
 }
 
+export const redeemBefore = async (
+    web3AuthAddress: string,
+    _id: string
+) => {
+  try {
+    const data = JSON.stringify({
+      address: web3AuthAddress,
+      campaignId: _id
+    });
+
+    return { status: true };
+
+    // const response: any = await api.put(`/api/v1/redeem`, data)
+    // if (response.status == 200) {
+    //   console.log("success redeemCampaign", response);
+    //   return { status: true, voucher: response.data.data, message: response.data.message};
+    // } else {
+    //   console.log("failed redeemCampaign", response);
+    //   return { status: false};
+    // }
+  } catch (error) {
+    console.log('[Error from redeemCampaign API]: ', error)
+    return { status: false};
+  }
+}
+
 export const redeemCampaign = async (
     web3AuthAddress: string,
     _id: string

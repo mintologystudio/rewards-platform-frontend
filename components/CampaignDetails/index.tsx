@@ -33,7 +33,8 @@ const CampaignDetails = ({
   details,
   toggleModal,
   redemptionRemaining,
-  redeemCampaign
+  redeemCampaign,
+  redeemed
 }: {
   campaign: ICampaignNew
   collectionAddr?: string
@@ -41,6 +42,7 @@ const CampaignDetails = ({
   toggleModal: Dispatch<SetStateAction<boolean>>
   redemptionRemaining: number | undefined
   redeemCampaign: Function
+  redeemed: boolean
 }) => {
   const { appState } = useContext(Web3Context);
   const [availableTokens, setAvailableTokens] = useState<
@@ -234,6 +236,7 @@ const CampaignDetails = ({
                   :
                   !isExpired && !showSoldOld && appState.chainId === 1 && (<button
                       type="button"
+                      disabled={redeemed}
                       className={styles.button}
                       onClick={()=>redeemCampaign(_id)}>Get It Now</button>)
               }
