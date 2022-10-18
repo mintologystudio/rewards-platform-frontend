@@ -127,18 +127,18 @@ export const redeemBefore = async (
       campaignId: _id
     });
 
-    return { status: true };
+    // return { status: true };
 
-    // const response: any = await api.put(`/api/v1/redeem`, data)
-    // if (response.status == 200) {
-    //   console.log("success redeemCampaign", response);
-    //   return { status: true, voucher: response.data.data, message: response.data.message};
-    // } else {
-    //   console.log("failed redeemCampaign", response);
-    //   return { status: false};
-    // }
+    const response: any = await api.get(`/api/v1/reward/hasClaimed?address=${web3AuthAddress}&campaignId=${_id}`, { data : data })
+    if (response.status == 200) {
+      console.log("success redeemBefore", response);
+      return { status: true, isClaimed: response.data.hasClaimed, message: response.data.message};
+    } else {
+      console.log("failed redeemBefore", response);
+      return { status: false};
+    }
   } catch (error) {
-    console.log('[Error from redeemCampaign API]: ', error)
+    console.log('[Error from redeemBefore API]: ', error)
     return { status: false};
   }
 }
@@ -152,7 +152,7 @@ export const redeemCampaign = async (
       address: web3AuthAddress,
       campaignId: _id
     });
-    const response: any = await api.put(`/api/v1/redeem`, data)
+    const response: any = await api.put(`/api/v1/reward/redeem`, data)
     if (response.status == 200) {
       console.log("success redeemCampaign", response);
       return { status: true, voucher: response.data.data, message: response.data.message};
@@ -166,9 +166,15 @@ export const redeemCampaign = async (
   }
 }
 
-export const getPerks = async () => {
+export const getPerks = async (
+    web3AuthAddress: string
+) => {
   try {
-    const response: any = await api.get(`/api/v1/perk`)
+    const data = JSON.stringify({
+      address: web3AuthAddress,
+    });
+
+    const response: any = await api.get(`/api/v1/reward/userRewards?address=${web3AuthAddress}`)
     if (response.status == 200) {
       console.log("success getPerks", response);
       return { status: true, perks: response.data.data};

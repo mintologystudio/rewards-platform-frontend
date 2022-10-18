@@ -21,7 +21,8 @@ const MyPerk: NextPage = () => {
                 isLoading: true
             });
 
-            const res = await getPerks();
+            const res = await getPerks(appState.address_w3a);
+            console.log(res);
             if (res.status) {
                 appDispatch({
                     type: PERK_LIST,

@@ -98,11 +98,9 @@ const Campaign: NextPage = () => {
     console.log("check redeem before", _id);
     const res = await redeemBefore(appState.address_w3a, _id);
 
-    if (res.status && _id === '3') {
+    // if (res.status && res.isClaimed) {
+    if (res.status && _id === '3' ) {
       setIsRedeemed(true);
-      // setCampaignDetails(res.campaign);
-    } else {
-      // router.replace(Routes.ERROR);
     }
   }
 
