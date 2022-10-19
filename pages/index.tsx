@@ -26,7 +26,7 @@ const Home = () => {
             const res = await getCampaigns();
             if (res.status) {
                 const campaignResult = res.campaigns;
-                // const campaignResult = CAMPAIGN_DATA;
+                // const campaignResult = CAMPAIGN_DATA; // for MOCKUP DATA
 
                 appDispatch({
                     type: CAMPAIGN_LIST,

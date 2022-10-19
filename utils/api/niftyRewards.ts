@@ -2,7 +2,7 @@ import axios, {AxiosError, AxiosInstance} from 'axios'
 import envConfig from '../envConfig'
 
 // const apiUrl = envConfig.API_URL
-const apiUrl = `https://nifty-rewards-backend.herokuapp.com/`
+const apiUrl = `https://mintology-backend.herokuapp.com/`
 
 const api: AxiosInstance = axios.create({
   baseURL: apiUrl,
@@ -122,17 +122,10 @@ export const redeemBefore = async (
     _id: string
 ) => {
   try {
-    const data = JSON.stringify({
-      address: web3AuthAddress,
-      campaignId: _id
-    });
-
-    // return { status: true };
-
-    const response: any = await api.get(`/api/v1/reward/hasClaimed?address=${web3AuthAddress}&campaignId=${_id}`, { data : data })
+    const response: any = await api.get(`/api/v1/reward/hasClaimed?address=${web3AuthAddress}&campaignId=${_id}`)
     if (response.status == 200) {
-      console.log("success redeemBefore", response);
-      return { status: true, isClaimed: response.data.hasClaimed, message: response.data.message};
+      // console.log("success redeemBefore", response);
+      return { status: true, hasClaimed: response.data.hasClaimed, message: response.data.message};
     } else {
       console.log("failed redeemBefore", response);
       return { status: false};
@@ -154,7 +147,7 @@ export const redeemCampaign = async (
     });
     const response: any = await api.put(`/api/v1/reward/redeem`, data)
     if (response.status == 200) {
-      console.log("success redeemCampaign", response);
+      // console.log("success redeemCampaign", response);
       return { status: true, voucher: response.data.data, message: response.data.message};
     } else {
       console.log("failed redeemCampaign", response);
@@ -170,10 +163,6 @@ export const getPerks = async (
     web3AuthAddress: string
 ) => {
   try {
-    const data = JSON.stringify({
-      address: web3AuthAddress,
-    });
-
     const response: any = await api.get(`/api/v1/reward/userRewards?address=${web3AuthAddress}`)
     if (response.status == 200) {
       console.log("success getPerks", response);

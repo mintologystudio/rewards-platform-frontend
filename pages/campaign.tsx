@@ -84,7 +84,7 @@ const Campaign: NextPage = () => {
   const [showRedemptionModal, setShowRedemptionModal] = useState<boolean>(false)
 
   const findCampaign = async (_id: string) => {
-    console.log("load from api", _id);
+    // console.log("load from api", _id);
     const res = await getCampaign(_id);
 
     if (res.status && res.campaign && res.message && res.message == "Campaigns Retrieved") {
@@ -95,18 +95,17 @@ const Campaign: NextPage = () => {
   }
 
   const checkRedeemBefore = async (_id: string) => {
-    console.log("check redeem before", _id);
     const res = await redeemBefore(appState.address_w3a, _id);
+    // console.log("check redeem before", _id, res.status);
 
-    // if (res.status && res.isClaimed) {
-    if (res.status && _id === '3' ) {
+    if (res.status && res.hasClaimed) {
+    // if (res.status && _id === '3' ) { // for mockup
       setIsRedeemed(true);
     }
   }
 
   const redeemCampaignCall = async (_id: string) => {
     const res = await redeemCampaign(appState.address_w3a, _id);
-    console.log("res", res);
 
     if (res.status && res.voucher && res.message && res.message == "Reward redeemed") {
       setVoucherDetails(res.voucher);
