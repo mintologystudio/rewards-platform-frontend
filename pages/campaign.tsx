@@ -106,8 +106,8 @@ const Campaign: NextPage = () => {
 
   const redeemCampaignCall = async (_id: string) => {
     const res = await redeemCampaign(appState.address_w3a, _id);
-
     if (res.status && res.voucher && res.message && res.message == "Reward redeemed") {
+      res.voucher.title = campaignDetails.offer;
       setVoucherDetails(res.voucher);
     }
 

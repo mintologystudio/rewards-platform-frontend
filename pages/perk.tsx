@@ -7,8 +7,9 @@ import PerkList from "../components/PerkList";
 import {useContext, useEffect} from "react";
 import {Web3Context} from "../context/web3Context";
 import {PERK_LIST, PERK_LOADING} from "../context/actionType";
-import {getPerks} from "../utils/api/niftyRewards";
+import {getCampaigns, getPerks} from "../utils/api/niftyRewards";
 import useReactGA from "../hooks/useReactGA";
+import { ICampaignNew } from '../utils/interfaces';
 
 const MyPerk: NextPage = () => {
     useReactGA();
@@ -22,12 +23,28 @@ const MyPerk: NextPage = () => {
             });
 
             const res = await getPerks(appState.address_w3a);
-            console.log(res);
-            if (res.status) {
+            const campaigns = await getCampaigns();
+            
+            if (res.status && campaigns.status) {
+                let perks = res.perks.rewards;
+                perks = perks.map((p: any) => {
+                    const campaign = campaigns.campaigns.find((c: ICampaignNew) => c._id === p.campaignId);
+                    if (campaign) {
+                        return {
+                            ...p,
+                            ...campaign,
+                            voucher: {
+                                title: p.offer,
+                                code: p.availableCodes[0],
+                            }
+                        }
+                    } 
+                    return p;
+                });
                 appDispatch({
                     type: PERK_LIST,
                     perk: {
-                        perks: res.perks,
+                        perks,
                         isLoading: false
                     }
                 });

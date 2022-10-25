@@ -209,9 +209,9 @@ export interface IPerk {
 }
 
 export interface IVoucher {
-  title: string
-  description: string
-  tnc: string[]
+  title?: string
+  description?: string
+  tnc?: string[]
   code: string
 }
 

@@ -147,8 +147,8 @@ export const redeemCampaign = async (
     });
     const response: any = await api.put(`/api/v1/reward/redeem`, data)
     if (response.status == 200) {
-      // console.log("success redeemCampaign", response);
-      return { status: true, voucher: response.data.data, message: response.data.message};
+      console.log("success redeemCampaign", response);
+      return { status: true, voucher: response.data, message: response.data.message};
     } else {
       console.log("failed redeemCampaign", response);
       return { status: false};
@@ -166,7 +166,7 @@ export const getPerks = async (
     const response: any = await api.get(`/api/v1/reward/userRewards?address=${web3AuthAddress}`)
     if (response.status == 200) {
       console.log("success getPerks", response);
-      return { status: true, perks: response.data.data};
+      return { status: true, perks: response.data};
     } else {
       console.log("failed getPerks", response);
       return { status: false};

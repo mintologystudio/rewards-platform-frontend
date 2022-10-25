@@ -4,7 +4,7 @@ import Image from "next/image";
 import Badge from "../Badge";
 import {BsClockFill} from "react-icons/bs";
 import {IPerk} from "../../utils/interfaces";
-import {getImageUrl, getReadableTime, getTimeDate, getUSFormatDate, upperCaseString} from "../../utils";
+import {getImageUrl, getReadableTime, getTimeDate, getUSFormatDate, upperCaseString, isHttpUrl} from "../../utils";
 import {PERK_DATA} from "../../utils/mockdata";
 import {useRouter} from "next/router";
 import Routes from "../../utils/constants/routes";
@@ -53,7 +53,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
         <div className={styles.perk_left}>
           <div className={styles.perk_left_upper}>
             <div className={styles.perk_left_img}>
-              <Image src={imgUrl} alt={company} layout="fill" style={{ borderRadius: '5px'}}/>
+              <Image src={isHttpUrl(imgUrl) ? `/api/imageproxy?url=${encodeURIComponent(imgUrl)}` : imgUrl} alt={company} layout="fill" style={{ borderRadius: '5px'}}/>
             </div>
             <div className={styles.perk_left_upper_detail}>
               <h5>{voucher?.title} @{upperCaseString(company)}</h5>
@@ -180,28 +180,17 @@ const PerkList = ({ }) => {
         <div className={styles.perks}>
           <h2>My Perks</h2>
 
-          {/*{*/}
-          {/*  !perk.isLoading && perk.perks.length == 0 ?*/}
-          {/*      <p className={styles.main_empty}>No Redeemed Coupon</p>*/}
-          {/*      : <></>*/}
-          {/*}*/}
+          {!perk.isLoading && perk.perks.length == 0 ? <p className={styles.main_empty}>No Redeemed Coupon</p> : <></>}
 
-          {/*{*/}
-          {/*  perk.isLoading ? (*/}
-          {/*      Array(3).fill(3)*/}
-          {/*          .map((item, index) => <PerkSkeleton key={index}/>)*/}
-          {/*  ): (*/}
-          {/*      <></>*/}
-          {/*  )*/}
-          {/*}*/}
+          {perk.isLoading ? (Array(3).fill(3).map((item, index) => <PerkSkeleton key={index}/>)): (<></>)}
 
           {
-            // !perk.isLoading && perk.perks.length > 0 ? (
-                ListOfPerks.map(vperk => (
+            !perk.isLoading && perk.perks.length > 0 ? (
+              perk.perks.map((vperk: IPerk) => (
                     <Perk perkDetail={vperk} key={vperk.company} redirectHandler={toDetail}/>
                 ))
-                // )
-                // : <></>
+                )
+                : <></>
           }
         </div>
       </div>
@@ -210,3 +199,4 @@ const PerkList = ({ }) => {
 }
 
 export default PerkList
+
