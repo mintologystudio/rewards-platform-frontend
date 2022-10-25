@@ -160,27 +160,58 @@ export interface ICampaign {
   expiration?: number
 }
 
-export interface IPerk {
-  campaignId?: string | number
-  title?: string
-  description?: string
-  nft: string
+export interface ICampaignNew {
+  _id: string
+  merchantId: string
+  merchantAddress: string
+  collectionIdentifiers: string[]
+  title: string
   company: string
-  location: string
-  website?: string
-  startTime: number
-  endTime: number
-  voucher: IVoucher
-  nftCollectionAddr: string
+  companyLogoUrl: string
+  offer: string
+  description: string
   bgUrl?: string
+  location: string
+  website: string
+  descriptions?: any[]
+  tnc: string[]
+  startDate: string
+  endDate: string
+  status: string
+  totalCoupon: number
+  remaining: number
+  voucher?: IVoucher
+}
+
+export interface IPerk {
+  _id: string
+  merchantId: string
+  merchantAddress: string
+  collectionIdentifiers: string[]
+  title: string
+  company: string
+  companyLogoUrl: string
+  offer: string
+  description: string
+  bgUrl?: string
+  location: string
+  website: string
+  descriptions?: any[]
+  tnc: string[]
+  startDate: string
+  endDate: string
+  status: string
+  totalCoupon: number
+  remaining: number
+  voucher?: IVoucher
   isExpired?: boolean
   expiration?: number
 }
 
 export interface IVoucher {
-  title: string
-  description: string
-  tnc: string[]
+  title?: string
+  description?: string
+  tnc?: string[]
   code: string
 }
 

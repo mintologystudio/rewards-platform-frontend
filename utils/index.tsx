@@ -143,6 +143,17 @@ export const upperCaseString = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
+export const isHttpUrl = (url: string) => (url.startsWith("https://") || url.startsWith("http://"));
+export const isLocalUrl = (url: string) => (url.trim().charAt(0) === '/' );
+
+export const getImageUrl = (string: string) => {
+  return isHttpUrl(string) ? string : isLocalUrl(string) ? string : `/${string}`;
+}
+
+export const getHttpsUrl = (string: string) => {
+  return isHttpUrl(string) ? string : `https://${string}`;
+}
+
 export const extractMetaData = (nfts: Array<{}>) => {
   let nftWithUrl: Array<INFT> = [];
 
