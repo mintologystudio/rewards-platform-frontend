@@ -27,7 +27,7 @@ const Badge = ({
     return (
             <Image
                 loader={loaderProp}
-                src={isHttpUrl(src) ? `/api/imageproxy?url=${encodeURIComponent(src)}` : src}
+                src={src}
                 alt={`${company} Badge`}
                 layout="fixed"
                 width={newWidth}
