@@ -48,12 +48,18 @@ const Perk = ({ perkDetail, redirectHandler }: {
     }, 2000);
   }
 
+  const loaderProp = ({ src }: { src: string }) => {
+    return src;
+  };
+
   return (
       <div className={styles.perk}>
         <div className={styles.perk_left}>
           <div className={styles.perk_left_upper}>
             <div className={styles.perk_left_img}>
-              <Image src={isHttpUrl(imgUrl) ? `/api/imageproxy?url=${encodeURIComponent(imgUrl)}` : imgUrl} alt={company} layout="fill" style={{ borderRadius: '5px'}}/>
+              <Image 
+                src={isHttpUrl(imgUrl) ? `/api/imageproxy?url=${encodeURIComponent(imgUrl)}` : imgUrl} alt={company} layout="fill" style={{ borderRadius: '5px'}}
+                loader={loaderProp} />
             </div>
             <div className={styles.perk_left_upper_detail}>
               <h5>{voucher?.title} @{upperCaseString(company)}</h5>
