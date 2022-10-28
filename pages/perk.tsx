@@ -10,10 +10,12 @@ import {PERK_LIST, PERK_LOADING} from "../context/actionType";
 import {getCampaigns, getPerks} from "../utils/api/niftyRewards";
 import useReactGA from "../hooks/useReactGA";
 import { ICampaignNew } from '../utils/interfaces';
+import { useWeb3Auth } from '../utils/services/web3auth';
 
 const MyPerk: NextPage = () => {
     useReactGA();
     const { appState, appDispatch } = useContext(Web3Context);
+    const { isLoading, web3Auth } = useWeb3Auth();
 
     const loadPerks = async () => {
         try {
@@ -64,10 +66,26 @@ const MyPerk: NextPage = () => {
     }
 
     useEffect(() => {
-        if (appState.perk.perks.length === 0) {
+        if (!appState.address_w3a) {
+            appDispatch({
+                type: PERK_LOADING,
+                isLoading: true
+            });
+
+            setTimeout(() => {
+                if (!appState.address_w3a) {
+                    appDispatch({
+                        type: PERK_LOADING,
+                        isLoading: false
+                    });
+                }
+            }, 5000)
+        }
+
+        if (appState.perk.perks.length === 0 && !isLoading && web3Auth) {
             loadPerks();
         }
-    },[])
+    }, [appState.address_w3a])
 
   return (
     <div className={styles.container}>

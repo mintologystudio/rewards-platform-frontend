@@ -21,7 +21,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
   perkDetail: IPerk
   redirectHandler: Function
 }) => {
-  const {_id, company, location, startDate, endDate, bgUrl, voucher} = perkDetail;
+  const {_id, company, location, startDate, endDate, bgUrl, voucher, companyLogoUrl} = perkDetail;
   const [copied, setCopied] = useState(false);
   // const nft = `/assets/nfts/banner/${perkDetail.nft || 'default'}.png`;
   const defaultImg = `/assets/no-image.jpeg`;
@@ -58,7 +58,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
             <div className={styles.perk_left_upper_detail}>
               <h5>{voucher?.title} @{upperCaseString(company)}</h5>
               <div className={styles.perk_left_upper_detail_span}>
-                <Badge company={company} width={'20rem'} />
+                <Badge company={companyLogoUrl} width={'20rem'} />
                 <span>Location: {location}</span>
               </div>
             </div>
@@ -180,7 +180,7 @@ const PerkList = ({ }) => {
         <div className={styles.perks}>
           <h2>My Perks</h2>
 
-          {!perk.isLoading && perk.perks.length == 0 ? <p className={styles.main_empty}>No Redeemed Coupon</p> : <></>}
+          {!perk.isLoading && perk.perks.length == 0 ? <p className={styles.main_empty}>No Redeemed Coupons</p> : <></>}
 
           {perk.isLoading ? (Array(3).fill(3).map((item, index) => <PerkSkeleton key={index}/>)): (<></>)}
 
