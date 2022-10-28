@@ -58,7 +58,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
           <div className={styles.perk_left_upper}>
             <div className={styles.perk_left_img}>
               <Image 
-                src={isHttpUrl(imgUrl) ? `/api/imageproxy?url=${encodeURIComponent(imgUrl)}` : imgUrl} alt={company} layout="fill" style={{ borderRadius: '5px'}}
+                src={imgUrl} alt={company} layout="fill" style={{ borderRadius: '5px'}}
                 loader={loaderProp} />
             </div>
             <div className={styles.perk_left_upper_detail}>
