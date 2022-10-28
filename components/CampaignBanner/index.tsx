@@ -29,7 +29,7 @@ const CampaignBanner = ({ campaign }: { campaign: ICampaignNew }) => {
 
       <div className={styles.content}>
         <div className={styles.content_center}>
-          <Badge company={campaign.company} width={'40rem'} />
+          <Badge company={campaign.companyLogoUrl} width={'40rem'} />
           <h2 className={styles.content_center_title}>
             {upperCaseString(campaign.company) || <Skeleton />}
           </h2>

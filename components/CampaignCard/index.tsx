@@ -16,7 +16,7 @@ import Skeleton from 'react-loading-skeleton'
 const CampaignCard = ({campaign}: {campaign: ICampaignNew}) => {
 
   // const {campaignId, company, nft, offer, remaining, startTime, endTime, expiration, bgUrl} = campaign;
-  const {_id, company, offer, remaining, startDate, endDate, bgUrl} = campaign;
+  const {_id, company, offer, remaining, startDate, endDate, bgUrl, companyLogoUrl} = campaign;
 
   const startTime = new Date(startDate).getTime();
   const endTime = new Date(endDate).getTime();
@@ -41,7 +41,7 @@ const CampaignCard = ({campaign}: {campaign: ICampaignNew}) => {
           style={{ backgroundImage: backgroundImg, backgroundRepeat: 'no-repeat', backgroundSize:'cover' }}
         >
           <div className={styles.main_top_badges}>
-            <Badge company={company} width={'35rem'}/>
+            <Badge company={companyLogoUrl} width={'35rem'}/>
           </div>
           <div className={styles.main_top_timeleft}>
             {

@@ -189,7 +189,7 @@ const Campaign: NextPage = () => {
             website={campaignDetails.website}
             toggleModal={setShowRedemptionModal}
             voucher={voucherDetails}
-            company={campaignDetails.company}
+            company={campaignDetails.companyLogoUrl}
           />
         )}
       </main>
