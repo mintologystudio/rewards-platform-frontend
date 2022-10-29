@@ -95,12 +95,14 @@ const Campaign: NextPage = () => {
   }
 
   const checkRedeemBefore = async (_id: string) => {
-    const res = await redeemBefore(appState.address_w3a, _id);
-    // console.log("check redeem before", _id, res.status);
-
-    if (res.status && res.hasClaimed) {
-    // if (res.status && _id === '3' ) { // for mockup
-      setIsRedeemed(true);
+    if (appState.address_w3a) {
+      const res = await redeemBefore(appState.address_w3a, _id);
+      // console.log("check redeem before", _id, res.status);
+  
+      if (res.status && res.hasClaimed) {
+      // if (res.status && _id === '3' ) { // for mockup
+        setIsRedeemed(true);
+      }
     }
   }
 
@@ -110,7 +112,7 @@ const Campaign: NextPage = () => {
       res.voucher.title = campaignDetails.offer;
       setVoucherDetails(res.voucher);
     }
-
+  
     setIsRedeeming(false);
   }
 
@@ -135,7 +137,7 @@ const Campaign: NextPage = () => {
   }, [router])
 
   useEffect(() => {
-    if (!campaignId) return
+    if (!campaignId || appState.address_w3a === '') return
 
     // const selectedCampaign = data(campaignId)
     let selectedCampaign: ICampaignNew | undefined = (appState.campaign.campaigns as [])
@@ -157,7 +159,7 @@ const Campaign: NextPage = () => {
       checkRedeemBefore(campaignId);
       setIsLoading(false);
     }
-  }, [campaignId])
+  }, [campaignId, appState.address_w3a])
 
   return (
     <div className={styles.container}>
