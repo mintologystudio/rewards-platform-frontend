@@ -248,6 +248,384 @@
   }
 }
 
+.campaign_offer_container {
+  margin-top: -15rem;
+  margin-bottom: 2rem; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  & > div {
+    flex: 1 1 auto;
+    margin: 5px;
+  }
+
+  @include l {
+    flex-direction: row; 
+    justify-content: space-between;
+    width: 60vw;
+  }
+}
+
+.campaign_main {
+  position: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: $white;
+
+  color: $black;
+  font-family: $baseFont;
+
+  font-size: 1.8rem;
+  word-wrap: break-word;
+
+  width: 80rem;
+  max-width: 70vw;
+
+  border-radius: 8px;
+  min-height: 10rem;
+
+  padding: 2rem;
+
+  @include xs {
+    max-width: 80%;
+  }
+
+  @include l {
+    font-size: 2.4rem;
+    width: 49%;
+    max-width: 70%;
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include s {
+      flex-direction: row;
+    }
+
+    &_title {
+      width: 15rem;
+
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 30px;
+
+      letter-spacing: 0.48px;
+
+      color: rgba(0, 0, 0, 0.403983);
+    }
+
+    &_text {
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 30px;
+      /* or 188% */
+
+      letter-spacing: 0.48px;
+
+      color: rgba(0, 0, 0, 0.895269);
+    }
+  }
+
+  &_detail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &_img {
+      width: 100%;
+      margin-bottom: 2rem;
+      border-radius: 20px;
+    }
+
+    &_top {
+      min-height: 12rem;
+    }
+
+    & h3 {
+      text-align: left;
+      word-wrap: break-word;
+      font-family: $baseFont;
+      font-size: 2.2rem;
+      margin: 0;
+      color: rgba(0, 0, 0, 0.895269);
+      line-height: 30px;
+    }
+
+    & p {
+      margin: 0;
+      font-family: $baseFont;
+      font-size: 1.4rem;
+      text-align: left;
+      line-height: 30px;
+      color: rgba(0, 0, 0, 0.598558);
+    }
+
+    & li {
+      margin: 0;
+      font-family: $baseFont;
+      font-size: 1.4rem;
+      text-align: left;
+      color: rgba(0, 0, 0, 0.598558);
+    }
+
+  }
+
+  &_timeleft_redeem {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+
+    @include xs {
+      width: 100%;
+    }
+
+    @include s {
+      width: 80%;
+    }
+
+    @include m {
+      flex-direction: row;
+      width: 70%;
+    }
+
+    @include l {
+      width: 70%;
+    }
+
+    @include xl {
+      width: 50%;
+    }
+  }
+
+  &_timeleft_redeem_expired {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+
+    @include xs {
+      width: 100%;
+    }
+
+    @include s {
+      width: 100%;
+    }
+
+    @include m {
+      flex-direction: row;
+      width: 100%;
+    }
+
+    @include l {
+      width: 100%;
+    }
+
+    @include xl {
+      width: 100%;
+    }
+  }
+
+  &_timeleft, &_redeem {
+    display: flex;
+    align-items: center;
+    height: 3.5rem;
+    //width: 100%;
+    justify-content: left;
+    //background-color: rgba(0, 0, 0, 0.7);
+    padding: 0;
+
+    @include xs {
+      width: 100%;
+    }
+
+    @include s {
+      width: 80%;
+    }
+
+    @include m {
+      flex-direction: row;
+      width: 95%;
+    }
+
+    @include l {
+      width: 95%;
+    }
+
+    @include xl {
+      width: 50%;
+    }
+
+    & span {
+      color: rgba(0, 0, 0, 0.895269);
+      font-size: 2rem;
+    }
+
+    &_icon {
+      color: #D8D8D8;
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+  }
+
+  &_timeleft {
+    @include xl {
+      width: 55%;
+    }
+  }
+
+  &_redeem {
+    @include xl {
+      padding-left: 3rem;
+      width: 45%;
+    }
+  }
+
+  &_soldout {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.campaign_offer {
+  position: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: $white;
+  border: 3px dashed #E717A7;
+
+  color: $black;
+  font-family: $baseFont;
+
+  font-size: 1.8rem;
+  word-wrap: break-word;
+
+  width: 80rem;
+  max-width: 70vw;
+
+  border-radius: 8px;
+  min-height: 10rem;
+
+  padding: 2rem;
+
+  @include xs {
+    max-width: 80%;
+    align-self: stretch;
+  }
+
+  @include l {
+    font-size: 2.4rem;
+    width: 49%;
+    max-width: 70%;
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: right;
+    flex-direction: column;
+
+    @include s {
+      flex-direction: column;
+    }
+
+    &_title {
+      width: 15rem;
+      letter-spacing: 0.48px;
+      font-weight: 500;
+      font-size: 96px;
+      line-height: 0px;
+      text-align: right;
+      color: #E717A7;
+    }
+
+    &_text {
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 30px;
+      /* or 188% */
+
+      letter-spacing: 0.48px;
+
+      color: rgba(0, 0, 0, 0.895269);
+    }
+  }
+
+  &_detail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &_img {
+      width: 100%;
+      margin-bottom: 2rem;
+      border-radius: 20px;
+    }
+
+    &_top {
+      min-height: 12rem;
+    }
+
+    & h3 {
+      text-align: left;
+      word-wrap: break-word;
+      font-family: $baseFont;
+      font-size: 2.2rem;
+      margin: 0;
+      color: rgba(0, 0, 0, 0.895269);
+      line-height: 30px;
+    }
+
+    & p {
+      margin: 0;
+      font-family: $baseFont;
+      font-size: 1.4rem;
+      text-align: left;
+      line-height: 30px;
+      color: rgba(0, 0, 0, 0.598558);
+    }
+
+    & li {
+      margin: 0;
+      font-family: $baseFont;
+      font-size: 1.4rem;
+      text-align: left;
+      color: rgba(0, 0, 0, 0.598558);
+    }
+
+  }
+}
+
+.campaign_offer_info {
+  text-align: right;
+  flex-direction: column;
+}
+
+.campaign_offer_title {
+  font-weight: 500;
+  font-size: 96px;
+  line-height: 1;
+  text-align: right;
+  color: #E717A7;
+}
+
 .soldout {
   display: flex;
   justify-content: center;

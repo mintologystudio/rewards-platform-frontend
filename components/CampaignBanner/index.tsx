@@ -23,7 +23,7 @@ const CampaignBanner = ({ campaign }: { campaign: ICampaignNew }) => {
       <div
         className={styles.backgroundFake}
         style={{
-          backgroundImage: `url(assets/detail-banner.jpg)`,
+          backgroundImage: `url(${campaign.backdropUrl})`,
         }}
       />
 

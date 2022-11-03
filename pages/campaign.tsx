@@ -137,7 +137,7 @@ const Campaign: NextPage = () => {
   }, [router])
 
   useEffect(() => {
-    if (!campaignId || appState.address_w3a === '') return
+    if (!campaignId) return
 
     // const selectedCampaign = data(campaignId)
     let selectedCampaign: ICampaignNew | undefined = (appState.campaign.campaigns as [])

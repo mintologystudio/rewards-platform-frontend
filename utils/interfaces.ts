@@ -162,6 +162,7 @@ export interface ICampaign {
 
 export interface ICampaignNew {
   _id: string
+  backdropUrl?: string;
   merchantId: string
   merchantAddress: string
   collectionIdentifiers: string[]

@@ -161,54 +161,109 @@ const CampaignDetails = ({
       {/*</div>*/}
 
       <div className={styles.main}>
-        <div className={styles.campaign} style={{ marginTop: '-15rem', marginBottom: '2rem' }}>
-          <div className={styles.campaign_info}>
-            <span className={styles.campaign_info_title}>Location</span>
-            <span className={styles.campaign_info_text}>{campaign.location}</span>
+        {(isExpired || showSoldOld) && 
+          <div className={styles.campaign} style={{ marginTop: '-15rem', marginBottom: '2rem' }}>
+            <div className={styles.campaign_info}>
+              <span className={styles.campaign_info_title}>Location</span>
+              <span className={styles.campaign_info_text}>{campaign.location}</span>
+            </div>
+            <div className={styles.campaign_info}>
+              <span className={styles.campaign_info_title}>Start Date</span>
+              <span className={styles.campaign_info_text}>{usStartDate}</span>
+            </div>
+            <div className={styles.campaign_info}>
+              <span className={styles.campaign_info_title}>End Date</span>
+              <span className={styles.campaign_info_text}>{usEndDate}</span>
+            </div>
+
+            <div className={styles.campaign_timeleft_redeem_expired}>
+              <div className={styles.campaign_timeleft}>
+                {
+                  !isExpired? (
+                      <>
+                        <BsClockFill className={styles.campaign_timeleft_icon}/>
+                        <span>
+                            Time Left: {days}d {hours}h {mins}m
+                        </span>
+                      </>
+                  ) :
+                      <>
+                        <BsClockFill className={styles.campaign_timeleft_icon}/>
+                        <span>Claim period ended</span>
+                      </>
+                }
+
+              </div>
+              <div className={styles.campaign_redeem}>
+                <BsFillBookmarkCheckFill className={styles.campaign_redeem_icon} />
+                <span>
+                  Remaining: { isExpired? 0 : BigNumberFormatter(redemptionRemaining)}
+                </span>
+              </div>
+              <div className={styles.campaign_soldout}>
+                {showSoldOld ?
+                <span className={styles.soldout}>
+                  Sold Out
+                </span> : (<></>)
+                }
+              </div>
+            </div>
+
           </div>
-          <div className={styles.campaign_info}>
-            <span className={styles.campaign_info_title}>Start Date</span>
-            <span className={styles.campaign_info_text}>{usStartDate}</span>
-          </div>
-          <div className={styles.campaign_info}>
-            <span className={styles.campaign_info_title}>End Date</span>
-            <span className={styles.campaign_info_text}>{usEndDate}</span>
+        }
+
+        {!isExpired && !showSoldOld && 
+        <div className={styles.campaign_offer_container}>
+          <div className={styles.campaign_main}>
+            <div className={styles.campaign_main_info}>
+              <span className={styles.campaign_main_info_title}>Location</span>
+              <span className={styles.campaign_main_info_text}>{campaign.location}</span>
+            </div>
+            <div className={styles.campaign_main_info}>
+              <span className={styles.campaign_main_info_title}>Start Date</span>
+              <span className={styles.campaign_main_info_text}>{usStartDate}</span>
+            </div>
+            <div className={styles.campaign_main_info}>
+              <span className={styles.campaign_main_info_title}>End Date</span>
+              <span className={styles.campaign_main_info_text}>{usEndDate}</span>
+            </div>
+
+            <div className={styles.campaign_main_timeleft_redeem_expired}>
+              <div className={styles.campaign_main_timeleft}>
+                {
+                  !isExpired? (
+                      <>
+                        <BsClockFill className={styles.campaign_main_timeleft_icon}/>
+                        <span>
+                            Time Left: {days}d {hours}h {mins}m
+                        </span>
+                      </>
+                  ) :
+                      <>
+                        <BsClockFill className={styles.campaign_main_timeleft_icon}/>
+                        <span>Claim period ended</span>
+                      </>
+                }
+
+              </div>
+              <div className={styles.campaign_main_redeem}>
+                <BsFillBookmarkCheckFill className={styles.campaign_main_redeem_icon} />
+                <span>
+                  Remaining: { isExpired? 0 : BigNumberFormatter(redemptionRemaining)}
+                </span>
+              </div>
+            </div>
+
           </div>
 
-          <div className={styles.campaign_timeleft_redeem_expired}>
-            <div className={styles.campaign_timeleft}>
-              {
-                !isExpired? (
-                    <>
-                      <BsClockFill className={styles.campaign_timeleft_icon}/>
-                      <span>
-                          Time Left: {days}d {hours}h {mins}m
-                      </span>
-                    </>
-                ) :
-                    <>
-                      <BsClockFill className={styles.campaign_timeleft_icon}/>
-                      <span>Claim period ended</span>
-                    </>
-              }
-
-            </div>
-            <div className={styles.campaign_redeem}>
-              <BsFillBookmarkCheckFill className={styles.campaign_redeem_icon} />
-              <span>
-                Remaining: { isExpired? 0 : BigNumberFormatter(redemptionRemaining)}
-              </span>
-            </div>
-            <div className={styles.campaign_soldout}>
-              {showSoldOld ?
-              <span className={styles.soldout}>
-                Sold Out
-              </span> : (<></>)
-              }
+          <div className={styles.campaign_offer}>
+            <div className={styles.campaign_offer_info}>
+              <div><span className={styles.campaign_offer_title}>20%</span></div>
+              <div><span className={styles.campaign_offer_text}>off on all merchandise.</span></div>
             </div>
           </div>
-
         </div>
+        }
 
         <div className={styles.campaign}>
           <div className={styles.campaign_detail}>

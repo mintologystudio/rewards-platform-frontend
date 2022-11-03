@@ -5,6 +5,7 @@ import CampaignCard, {CampaignCardSkeleton} from "../CampaignCard";
 import {CAMPAIGN_DATA} from "../../utils/mockdata";
 import {useContext, useEffect} from "react";
 import {Web3Context} from "../../context/web3Context";
+import MoreCampaignCard from '../MoreCampaignCard';
 
 const campaignData: Array<ICampaignNew> = CAMPAIGN_DATA;
 
@@ -41,8 +42,11 @@ const AvailableCampaign = () => {
               <CampaignCard key={c._id}
                   campaign={c}
               />
-            )) : <></>
+            ))  
+            : <></>
           }
+
+          { !campaign.isLoading && campaign.campaigns.length > 0 ? <MoreCampaignCard key={-1} /> : <></> }
 
             {/*campaignData.map((c: ICampaign) => (*/}
             {/*<CampaignCard key={c.campaignId}*/}

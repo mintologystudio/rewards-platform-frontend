@@ -19,13 +19,29 @@ const ListOfFeaturedCampaigns = [
   //   percentage: '10',
   //   description: 'off storewide footwear',
   // },
-
   {
     campaignId: 1,
-    nft: 'azuki',
+    nft: 'Danz',
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
+    url: 'https://gateway.pinata.cloud/ipfs/QmYxfbD9pT12z7QQgwavq2yq6Bjxs8R4qWpiwRzbfNDABs'
+  },
+  {
+    campaignId: 2,
+    nft: 'Tasty Toastys',
+    company: 'nike',
+    percentage: '15',
+    description: 'off storewide footwear',
+    url: 'https://gateway.pinata.cloud/ipfs/QmZKd96umAdsJm9w39ToEsDgwcw9Gx6ZmUcuodw8VLPXNK'
+  },
+  {
+    campaignId: 3,
+    nft: 'Bellina Caetano',
+    company: 'nike',
+    percentage: '15',
+    description: 'off storewide footwear',
+    url: 'https://gateway.pinata.cloud/ipfs/QmZCD4pbARG8niXA43hBubJed52W2a152zut4uuc64Mibt/Featured%20Banner%20-01.png'
   },
   // {
   //   campaignId: 2,
@@ -49,12 +65,14 @@ const FeaturedCampaignItem = ({
   company,
   percentage,
   description,
+  url,
 }: {
   campaignId: number
   nft: string
   company: string
   percentage: string
   description: string
+  url: string
 }) => {
   return (
     <div className={styles.container} key={`FeatuedCampaign_${nft}_${company}`}>
@@ -91,9 +109,10 @@ const FeaturedCampaignItem = ({
           <div
             className={styles.backgroundFake}
             style={{
-              backgroundImage: `url(assets/main-banner.png)`
+              backgroundImage: `url(${url})`
             }}
           />
+          
           {/*<div*/}
           {/*  className={styles.background}*/}
           {/*  style={{*/}
