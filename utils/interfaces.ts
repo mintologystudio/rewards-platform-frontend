@@ -182,6 +182,8 @@ export interface ICampaignNew {
   totalCoupon: number
   remaining: number
   voucher?: IVoucher
+  header?: string
+  brandDescription?: string
 }
 
 export interface IPerk {

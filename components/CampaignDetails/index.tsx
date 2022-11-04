@@ -114,6 +114,8 @@ const CampaignDetails = ({
   const isExpired = new Date(endTime) < new Date();
 
   const showSoldOld = redemptionRemaining !== undefined && redemptionRemaining === 0;
+  const offerPercentage = campaign.offer && campaign.offer !== '' ? campaign.offer.split('% ')[0] : '0';
+  const offerDesc = campaign.offer && campaign.offer !== '' ? campaign.offer.split('% ')[1] : '';
 
   return (
     <div className={styles.container}>
@@ -258,66 +260,70 @@ const CampaignDetails = ({
 
           <div className={styles.campaign_offer}>
             <div className={styles.campaign_offer_info}>
-              <div><span className={styles.campaign_offer_title}>20%</span></div>
-              <div><span className={styles.campaign_offer_text}>off on all merchandise.</span></div>
+              <div><span className={styles.campaign_offer_title}>{offerPercentage}%</span></div>
+              <div><span className={styles.campaign_offer_text}>{offerDesc}</span></div>
             </div>
           </div>
         </div>
         }
 
-        <div className={styles.campaign}>
+        <div className={styles.campaign} style={{ marginBottom: '2rem' }}>
           <div className={styles.campaign_detail}>
               {/*<img src={`/assets/nfts/banner/${campaign.nft}.png`} className={styles.campaign_detail_img}/>*/}
               <img src={campaign.bgUrl} alt={'details1'} className={styles.campaign_detail_img}/>
 
               <div className={styles.campaign_detail_top}>
                 {/*{offerDisplay(campaign.offers)}*/}
-                <h3 className={styles.content_tnc_title}>{campaign.offer}</h3>
-                <p>{campaign.description}</p>
+                <h3 className={styles.content_tnc_title}>{campaign.header}</h3>
+                <p>{campaign.brandDescription}</p>
               </div>
+          </div>
 
+        </div>
+
+        <div className={styles.campaign}>
+          <div className={styles.campaign_detail}>
             <div className={styles.content_tnc}>
-              <h3 className={styles.content_tnc_title}>Terms and conditions</h3>
-              <ul>
-                {campaign.tnc.map((tnc) => (
-                    <li key={tnc}>{tnc}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.content_button}>
-              { !isExpired && !showSoldOld && !(appState.address_to_bind != '') ?
-                  (<button type="button" onClick={loginHandler}>Get It Now</button>)
-                  :
-                  !isExpired && !showSoldOld && appState.chainId === 1 && (<button
-                      type="button"
-                      disabled={redeemed}
-                      className={styles.button}
-                      onClick={()=>redeemCampaign(_id)}>Get It Now</button>)
-              }
-
-              {isExpired && !showSoldOld &&
-                (
-                    <button
-                        type="button"
-                        disabled
-                        className={styles.button}
-                    >Claim period ended</button>
-                )
-              }
-
-              {showSoldOld &&
-                (
-                    <button
-                        type="button"
-                        disabled
-                        className={styles.button}
-                    >Sold Out</button>
-                )
-              }
-
+                <h3 className={styles.content_tnc_title}>Terms and conditions</h3>
+                <ul>
+                  {campaign.tnc.map((tnc) => (
+                      <li key={tnc}>{tnc}</li>
+                  ))}
+                </ul>
             </div>
           </div>
+        </div>
+
+        <div className={styles.content_button}>
+          { !isExpired && !showSoldOld && !(appState.address_to_bind != '') ?
+              (<button type="button" onClick={loginHandler}>Get It Now</button>)
+              :
+              !isExpired && !showSoldOld && appState.chainId === 1 && (<button
+                  type="button"
+                  disabled={redeemed}
+                  className={styles.button}
+                  onClick={()=>redeemCampaign(_id)}>Get It Now</button>)
+          }
+
+          {isExpired && !showSoldOld &&
+            (
+                <button
+                    type="button"
+                    disabled
+                    className={styles.button}
+                >Claim period ended</button>
+            )
+          }
+
+          {showSoldOld &&
+            (
+                <button
+                    type="button"
+                    disabled
+                    className={styles.button}
+                >Sold Out</button>
+            )
+          }
 
         </div>
       </div>

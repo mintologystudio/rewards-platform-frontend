@@ -9,7 +9,7 @@ import Badge from "../Badge";
 import DiscountTag from "../../public/assets/misc/discounttag.svg";
 import Image from "next/image";
 
-const delay = 500000000
+const delay = 3000
 
 const ListOfFeaturedCampaigns = [
   // {
@@ -20,28 +20,28 @@ const ListOfFeaturedCampaigns = [
   //   description: 'off storewide footwear',
   // },
   {
-    campaignId: 1,
+    campaignId: '6362c4973958dfbe81bf3bac',
     nft: 'Danz',
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
-    url: 'https://gateway.pinata.cloud/ipfs/QmYxfbD9pT12z7QQgwavq2yq6Bjxs8R4qWpiwRzbfNDABs'
+    url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Danz.jpg', 
   },
   {
-    campaignId: 2,
+    campaignId: '6362c49e3958dfbe81bf3bca',
     nft: 'Tasty Toastys',
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
-    url: 'https://gateway.pinata.cloud/ipfs/QmZKd96umAdsJm9w39ToEsDgwcw9Gx6ZmUcuodw8VLPXNK'
+    url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Toasty.jpg'
   },
   {
-    campaignId: 3,
+    campaignId: '6362c49b3958dfbe81bf3bb2',
     nft: 'Bellina Caetano',
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
-    url: 'https://gateway.pinata.cloud/ipfs/QmZCD4pbARG8niXA43hBubJed52W2a152zut4uuc64Mibt/Featured%20Banner%20-01.png'
+    url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Bellina.jpg'
   },
   // {
   //   campaignId: 2,
@@ -67,7 +67,7 @@ const FeaturedCampaignItem = ({
   description,
   url,
 }: {
-  campaignId: number
+  campaignId: string
   nft: string
   company: string
   percentage: string
@@ -106,12 +106,14 @@ const FeaturedCampaignItem = ({
       {/*</div>*/}
 
         <div className={styles.layer}>
+          <Link href={`${Routes.VIEW_CAMPAIGN}?campaignId=${campaignId}`}>
           <div
             className={styles.backgroundFake}
             style={{
               backgroundImage: `url(${url})`
             }}
           />
+          </Link>
           
           {/*<div*/}
           {/*  className={styles.background}*/}
