@@ -24,7 +24,6 @@ const Home = () => {
             });
 
             const res = await getCampaigns();
-            console.log('res', res)
             if (res.status) {
                 const campaignResult = res.campaigns;
                 // const campaignResult = CAMPAIGN_DATA; // for MOCKUP DATA
