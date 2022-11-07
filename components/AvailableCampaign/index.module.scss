@@ -45,19 +45,20 @@
 }
 
 .contents {
-  padding-left: 100px;
-  padding-right: 100px;
   display: flex;
   flex-direction: row;
-  align-items: center;
   flex-wrap: wrap;
-  justify-content: space-between;
-
-
+  justify-content: center;
+  align-items: center;
+  @include l {
+    width: 70%;
+    justify-content: space-evenly;
+    gap: 4px;
+  }
 
   &::after {
     content: "";
-    flex: 0 0 35%;
+    flex: 0 0 32%;
   }
 
   & li {
