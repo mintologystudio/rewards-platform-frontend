@@ -15,7 +15,7 @@ import LogoutModal from "../Modals/LogoutModal";
 import { HashLink as HLink } from 'react-router-hash-link';
 
 const Routes = {
-  About: '/https://mintology.studio/',
+  About: 'https://mintology.studio/',
   "Featured Deals": '/#hot-brand-deals',
   PERKS: '/perk',
   // MYNFT: '/mynft',
