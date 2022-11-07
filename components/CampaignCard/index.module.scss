@@ -8,7 +8,6 @@
   list-style-type: none;
 
   @include l {
-    width: 30%;
   }
 }
 
@@ -18,10 +17,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1137);
+  border-radius: 2rem;
   height: 45rem;
   width: 40rem;
 
+  &:hover {
+    transform: translateY(0.2rem);
+    transition: all 0.5s ease;
+  }
   &_top {
     position: relative;
     background-size: contain;

@@ -63,6 +63,7 @@ const Home = () => {
 
       <main className={styles.main}>
         <FeaturedCampaign />
+        <section id="hot-brand-deals" className={styles.section}></section>
         <AvailableCampaign />
       </main>
 

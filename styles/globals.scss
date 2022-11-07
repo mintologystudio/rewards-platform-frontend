@@ -43,6 +43,7 @@ body {
 html {
   // This redefine 1rem of 16px to become 1rem of 10px
   font-size: 48%;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -62,6 +63,7 @@ footer {
   position: inherit;
   bottom: 0;
   width: 100%;
-  min-height: 45rem;
+  min-height: 275px;
+  height: 275px;
   background-color: #0E131D;
 }

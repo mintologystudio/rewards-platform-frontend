@@ -3,13 +3,12 @@
 
 .footer {
   display: flex;
-  flex-direction: row;
-  padding: 5rem 5rem;
+  flex-direction: column;
+  padding-left: 5rem;
+  padding-right: 5rem;
   height: 100%;
 
   &_main {
-    flex-grow: 5;
-    padding-right: 0.25rem;
 
     &_div {
       position: relative;
@@ -17,21 +16,26 @@
       height: 100%;
       flex-direction: column;
 
-      & span {
-
-      }
+      @media (max-width: 720px) {
+        align-items: center;
+      } 
     }
 
     &_image {
-      margin-bottom: 2rem;
+      padding-top: 52px;
+      @media (max-width: 720px) {
+        padding-top: 20px;
+      } 
+      margin-bottom: 4px;
     }
 
     &_title {
       color: $white;
-      font-size: 2rem;
+      font-size: 15px;
       font-family: $baseFont;
+      font-weight: 400;
       line-height: 3.5rem;
-      margin-bottom: 5rem;
+      margin-bottom: 32px;
     }
 
     &_copyright {
@@ -43,6 +47,79 @@
       letter-spacing: 0.42px;
 
       color: rgba(255, 255, 255, 0.595198);
+    }
+  }
+
+  &_horizontal_line {
+    width: 100%;
+    border-bottom: 3px solid #E717A7;
+  }
+
+  &_navigation {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    padding-bottom: 52px;
+    @media (max-width: 720px) {
+      padding-bottom: 20px;
+    }
+    &_spaceBetween {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @media (max-width: 720px) {
+        flex-direction: column;
+      }
+
+      &_general {
+        width: 50%;
+        display: flex;
+        gap: 40px;
+        @media (max-width: 720px) {
+          flex-wrap: wrap;
+          width: 100%;
+          justify-content: space-evenly;
+          gap: 20px;
+          padding-bottom: 15px;
+        }
+        span {
+          cursor: pointer;
+          font-family: $baseFont;
+          font-size: 14px;
+          font-weight: 400;
+          color: #FFFFFF;
+          letter-spacing: 0.42px;
+        }
+      }
+      &_social {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 40px;
+        @media (max-width: 720px) {
+          flex-wrap: wrap;
+          width: 100%;
+          justify-content: space-evenly;
+          gap: 20px;
+        }
+        svg {
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 400;
+          color: #E717A7;
+          letter-spacing: 0.42px;
+          height: 22px;
+          width: auto;
+        }
+
+        Image {
+          padding: 0;
+          width: 22px;
+        }
+      }
     }
   }
 
@@ -91,4 +168,11 @@
       }
     }
   }
+}
+
+.footer2 {
+  display: flex;
+  flex-direction: row;
+  padding: 5rem 5rem;
+  height: 100%;
 }

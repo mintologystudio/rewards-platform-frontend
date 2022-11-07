@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
-import FooterLogo from "../../public/assets/misc/logo-footer.png";
-import { BsLinkedin , BsTwitter } from 'react-icons/bs';
-import { FaEnvelope } from 'react-icons/fa';
+import FooterLogo from "../../public/assets/misc/logo-footer-v2.png";
+import { BsDiscord, BsLinkedin , BsTwitter } from 'react-icons/bs';
+import MediumIcon from "../../public/assets/misc/medium-icon-standard.svg";
 import Image from "next/image";
 
 const Footer = () => {
@@ -11,36 +11,30 @@ const Footer = () => {
     return (
         <footer>
             <div className={styles.footer}>
-                <div className={styles.footer_main}>
-                    <div className={styles.footer_main_div}>
-                        <span className={styles.footer_main_image}>
-                            <Image src={FooterLogo} alt="Main Logo" width={200} height={30}/>
-                        </span>
-                        <span className={styles.footer_main_title}>Enjoy real life brand benefits with your NFTs.</span>
-                        <span className={styles.footer_main_copyright}>&copy; {currentYear} Mintology. All Rights Reserved</span>
+                <div className={styles.footer_main_div}>
+                    <span className={styles.footer_main_image}>
+                        <Image src={FooterLogo} alt="Main Logo"/>
+                    </span>
+                    <span className={styles.footer_main_title}>© 2022 Mintology. All rights reserved</span>
+                    <div className={styles.footer_horizontal_line}></div>
+                    <div className={styles.footer_navigation}>
+                        <div className={styles.footer_navigation_spaceBetween}>
+                            <div className={styles.footer_navigation_spaceBetween_general}>
+                                <span>Request a demo</span>
+                                <span>FAQs</span>
+                                <span>Contact Us</span>
+                                <span>Terms of Use</span>
+                                <span>Privacy policy</span>
+                            </div>
+                            <div className={styles.footer_navigation_spaceBetween_social}>
+                                <BsTwitter/>
+                                <BsDiscord/>
+                                <Image src={MediumIcon}/>
+                                <BsLinkedin/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className={styles.footer_div}>
-                    <div className={styles.footer_div_title}>
-                        <h3>Quick Links</h3>
-                    </div>
-                    <div className={styles.footer_div_items}>
-                        <span className={styles.footer_div_items_item}>Request a demo</span>
-                        <span className={styles.footer_div_items_item}>Merchant Signup</span>
-                        <span className={styles.footer_div_items_item}>Contact Us</span>
-                    </div>
-                </div>
-                <div className={styles.footer_div}>
-                    <div className={styles.footer_div_title}>
-                        <h3>Follow Us</h3>
-                    </div>
-                    <div className={styles.footer_div_items}>
-                        <span className={styles.footer_div_items_icon}><BsLinkedin /></span>
-                        <span className={styles.footer_div_items_icon}><BsTwitter /></span>
-                        <span className={styles.footer_div_items_icon}><FaEnvelope /></span>
-                    </div>
-                </div>
-
             </div>
         </footer>
     )

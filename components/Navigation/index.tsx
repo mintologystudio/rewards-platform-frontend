@@ -12,16 +12,17 @@ import useWeb3Modal from "../../hooks/useWeb3Modal";
 import {getDisplayAddress} from "../../utils";
 import {useWeb3Auth} from "../../utils/services/web3auth";
 import LogoutModal from "../Modals/LogoutModal";
+import { HashLink as HLink } from 'react-router-hash-link';
 
 const Routes = {
-  Home: '/',
+  About: '/https://mintology.studio/',
   PERKS: '/perk',
   // MYNFT: '/mynft',
 }
 
 const FilteredRoutes = {
-  Home: '/',
-  Explore: '/',
+  About: 'https://mintology.studio/',
+  "Featured Deals": '/#hot-brand-deals'
 }
 
 const Navigation = () => {

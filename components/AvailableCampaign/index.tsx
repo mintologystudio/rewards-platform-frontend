@@ -46,7 +46,7 @@ const AvailableCampaign = () => {
             : <></>
           }
 
-          { !campaign.isLoading && campaign.campaigns.length > 0 ? <MoreCampaignCard key={-1} /> : <></> }
+          { !campaign.isLoading && campaign.campaigns.length > 0 ? <></> : <></> }
 
             {/*campaignData.map((c: ICampaign) => (*/}
             {/*<CampaignCard key={c.campaignId}*/}
