@@ -4,8 +4,7 @@
 .footer {
   display: flex;
   flex-direction: column;
-  padding-left: 5rem;
-  padding-right: 5rem;
+  align-items: center;
   height: 100%;
 
   &_main {
@@ -15,14 +14,17 @@
       display: flex;
       height: 100%;
       flex-direction: column;
-
+      align-items: center;
+      width: 940px;
+      max-width: 1080px;
       @media (max-width: 720px) {
         align-items: center;
       } 
     }
 
     &_image {
-      padding-top: 52px;
+      width: 216px;
+      padding-top: 50px;
       @media (max-width: 720px) {
         padding-top: 20px;
       } 
@@ -30,12 +32,13 @@
     }
 
     &_title {
+      width: 216px;
       color: $white;
-      font-size: 15px;
+      font-size: 12px;
       font-family: $baseFont;
       font-weight: 400;
       line-height: 3.5rem;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
 
     &_copyright {
@@ -52,7 +55,8 @@
 
   &_horizontal_line {
     width: 100%;
-    border-bottom: 3px solid #E717A7;
+    height: 1px;
+    background-color: #e717a7;
   }
 
   &_navigation {
@@ -92,6 +96,7 @@
           font-weight: 400;
           color: #FFFFFF;
           letter-spacing: 0.42px;
+          white-space: nowrap;
         }
       }
       &_social {

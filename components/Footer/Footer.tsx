@@ -27,10 +27,10 @@ const Footer = () => {
                                 <span>Privacy policy</span>
                             </div>
                             <div className={styles.footer_navigation_spaceBetween_social}>
-                                <BsTwitter/>
-                                <BsDiscord/>
-                                <Image src={MediumIcon}/>
-                                <BsLinkedin/>
+                                <BsTwitter onClick={() => window.open('https://twitter.com/MintologyStudio')}/>
+                                <BsDiscord onClick={() => window.open('https://discord.com/invite/48NFUtjPcc')}/>
+                                <Image src={MediumIcon} onClick={() => window.open('https://medium.com/@mintology.studio')}/>
+                                <BsLinkedin onClick={() => window.open('https://www.linkedin.com/company/mintology-studio/')}/>
                             </div>
                         </div>
                     </div>
