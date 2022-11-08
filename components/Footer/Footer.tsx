@@ -29,10 +29,10 @@ const Footer = () => {
                         <a href="https://mintology.studio/privacypolicy">Privacy Policy</a>
                     </div>
                     <div className={styles.footer_wrapper_three_block_three_2}>
-                        <a href="mailto:hello@mintology.studio" className="footer-link"><Image src={TwitterIcon} /></a>
-                        <a href="https://mintology.studio/faqs" className="link"><Image src={DiscordIcon}/></a>
-                        <a href="https://mintology.studio/termsofuse" className="link"><Image src={MediumIcon} /></a>
-                        <a href="https://mintology.studio/privacypolicy"><Image src={Linkedin} /></a>
+                        <a href="https://twitter.com/MintologyStudio" className="footer-link"><Image src={TwitterIcon} /></a>
+                        <a href="https://discord.com/invite/48NFUtjPcc" className="link"><Image src={DiscordIcon}/></a>
+                        <a href="https://medium.com/@mintology.studio" className="link"><Image src={MediumIcon} /></a>
+                        <a href="https://www.linkedin.com/company/mintology-studio/"><Image src={Linkedin} /></a>
                     </div>
                 </div>
             </div>
