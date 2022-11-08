@@ -12,16 +12,18 @@ import useWeb3Modal from "../../hooks/useWeb3Modal";
 import {getDisplayAddress} from "../../utils";
 import {useWeb3Auth} from "../../utils/services/web3auth";
 import LogoutModal from "../Modals/LogoutModal";
+import { HashLink as HLink } from 'react-router-hash-link';
 
 const Routes = {
-  Home: '/',
+  About: 'https://mintology.studio/',
+  "Featured Deals": '/#hot-brand-deals',
   PERKS: '/perk',
   // MYNFT: '/mynft',
 }
 
 const FilteredRoutes = {
-  Home: '/',
-  Explore: '/',
+  About: 'https://mintology.studio/',
+  "Featured Deals": '/#hot-brand-deals'
 }
 
 const Navigation = () => {
@@ -107,7 +109,7 @@ const Navigation = () => {
                     </button>
                   )
                 ) : (
-                  <button onClick={loginHandler}>Login</button>
+                  <button onClick={loginHandler}>Sign in</button>
                 )}
               </div>
             </div>
@@ -133,7 +135,7 @@ const Navigation = () => {
 
             <div className={styles.nav_mobile_header}>
               <div className={styles.nav_mobile_header_img}>
-                  <Image onClick={()=> router.push(Routes.Home)}  src={NavLogo} alt="Main Logo" layout="fill" />
+                  <Image onClick={()=> router.push('/')}  src={NavLogo} alt="Main Logo" layout="fill" />
               </div>
               <div
                 id="BurgerMenu"
@@ -151,7 +153,7 @@ const Navigation = () => {
         <div className={styles.main}>
           <div className={styles.nav}>
             <div className={styles.nav_img}>
-                <Image onClick={()=> router.push(Routes.Home)} src={NavLogo} alt="Main Logo" layout="fill" />
+                <Image onClick={()=> router.push('/')} src={NavLogo} alt="Main Logo" layout="fill" />
             </div>
 
             <ul className={styles.sub}>
@@ -167,7 +169,7 @@ const Navigation = () => {
                   <button className={styles.lwidth} onClick={logoutHandler}>Wrong Network</button>
                 )
               ) : (
-                <button onClick={loginHandler}>Login</button>
+                <button onClick={loginHandler}>Sign in</button>
               )}
             </ul>
           </div>

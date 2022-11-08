@@ -43,11 +43,9 @@ const LogoutModal = ({
         </div>
         }
         <div className={styles.logoutBtn}>
-          <div className={styles.actionBtn}>
             <button className={styles.button} onClick={logout}>
               Disconnect Wallet
             </button>
-          </div>
         </div>
       </div>
     </li>

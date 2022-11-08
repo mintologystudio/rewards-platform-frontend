@@ -34,10 +34,6 @@
     border: none;
     cursor: pointer;
 
-    @include l {
-      margin: 0 0 0 3.5rem;
-    }
-
     // height: 4rem;
     // width: 15rem;
 
@@ -247,12 +243,15 @@
 
   list-style: none;
   padding: 0;
+  gap: 25px;
 
   & li {
-    color: $black;
+    color: rgba(0, 0, 0, 0.801737);
     font-family: $baseFont;
-    font-size: 1.8rem;
-    margin: 0 3.5rem 0 3.5rem;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.48px;
     cursor: pointer;
 
     &:last-child {

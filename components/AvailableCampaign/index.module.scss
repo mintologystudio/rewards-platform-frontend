@@ -47,22 +47,23 @@
 .contents {
   display: flex;
   flex-direction: row;
-  align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-
+  align-items: center;
   @include l {
     width: 70%;
-    justify-content: flex-start;
+    justify-content: space-evenly;
+    gap: 4px;
   }
 
   &::after {
     content: "";
-    flex: 0 0 35%;
+    flex: 0 0 32%;
   }
 
   & li {
     margin: 10px;
+    margin-bottom: 80px;
   }
 }
 
