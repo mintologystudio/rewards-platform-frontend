@@ -20,11 +20,21 @@ const ListOfFeaturedCampaigns = [
   //   description: 'off storewide footwear',
   // },
   {
+    campaignId: '1',
+    nft: 'none',
+    company: 'Mintology',
+    percentage: '15',
+    description: 'Mintology Campaign',
+    extUrl: 'https://www.mintology.studio/campaign',
+    url: 'https://gateway.pinata.cloud/ipfs/QmTpqq4fGnEDNVtyvYNvSWRPQ5fVsex8K8X8LsebTGkhNA', 
+  },
+  {
     campaignId: '6362c4973958dfbe81bf3bac',
     nft: 'Danz',
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
+    extUrl: null,
     url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Danz.jpg', 
   },
   {
@@ -33,6 +43,7 @@ const ListOfFeaturedCampaigns = [
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
+    extUrl: null,
     url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Toasty.jpg'
   },
   {
@@ -41,6 +52,7 @@ const ListOfFeaturedCampaigns = [
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
+    extUrl: null,
     url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Bellina.jpg'
   },
   // {
@@ -65,6 +77,7 @@ const FeaturedCampaignItem = ({
   company,
   percentage,
   description,
+  extUrl,
   url,
 }: {
   campaignId: string
@@ -72,6 +85,7 @@ const FeaturedCampaignItem = ({
   company: string
   percentage: string
   description: string
+  extUrl: string
   url: string
 }) => {
   return (
@@ -106,7 +120,7 @@ const FeaturedCampaignItem = ({
       {/*</div>*/}
 
         <div className={styles.layer}>
-          <Link href={`${Routes.VIEW_CAMPAIGN}?campaignId=${campaignId}`}>
+          <Link href={campaignId === '1' ? extUrl : `${Routes.VIEW_CAMPAIGN}?campaignId=${campaignId}`}>
           <div
             className={styles.backgroundFake}
             style={{

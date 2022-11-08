@@ -153,7 +153,7 @@ const Navigation = () => {
         <div className={styles.main}>
           <div className={styles.nav}>
             <div className={styles.nav_img}>
-                <Image onClick={()=> router.push(Routes.Home)} src={NavLogo} alt="Main Logo" layout="fill" />
+                <Image onClick={()=> router.push(Routes.About)} src={NavLogo} alt="Main Logo" layout="fill" />
             </div>
 
             <ul className={styles.sub}>
