@@ -15,7 +15,7 @@ import LogoutModal from "../Modals/LogoutModal";
 import { HashLink as HLink } from 'react-router-hash-link';
 
 const Routes = {
-  About: 'shttps://mintology.studio/',
+  About: 'https://mintology.studio/',
   "Featured Deals": '/#hot-brand-deals',
   PERKS: '/perk',
   // MYNFT: '/mynft',
@@ -135,7 +135,7 @@ const Navigation = () => {
 
             <div className={styles.nav_mobile_header}>
               <div className={styles.nav_mobile_header_img}>
-                  <Image onClick={()=> router.push(Routes.Home)}  src={NavLogo} alt="Main Logo" layout="fill" />
+                  <Image onClick={()=> router.push('/')}  src={NavLogo} alt="Main Logo" layout="fill" />
               </div>
               <div
                 id="BurgerMenu"
@@ -153,7 +153,7 @@ const Navigation = () => {
         <div className={styles.main}>
           <div className={styles.nav}>
             <div className={styles.nav_img}>
-                <Image onClick={()=> router.push(Routes.About)} src={NavLogo} alt="Main Logo" layout="fill" />
+                <Image onClick={()=> router.push('/')} src={NavLogo} alt="Main Logo" layout="fill" />
             </div>
 
             <ul className={styles.sub}>
