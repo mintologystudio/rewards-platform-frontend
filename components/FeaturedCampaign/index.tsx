@@ -34,7 +34,7 @@ const ListOfFeaturedCampaigns = [
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
-    extUrl: null,
+    extUrl: '',
     url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Danz.jpg', 
   },
   {
@@ -43,7 +43,7 @@ const ListOfFeaturedCampaigns = [
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
-    extUrl: null,
+    extUrl: '',
     url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Toasty.jpg'
   },
   {
@@ -52,7 +52,7 @@ const ListOfFeaturedCampaigns = [
     company: 'nike',
     percentage: '15',
     description: 'off storewide footwear',
-    extUrl: null,
+    extUrl: '',
     url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Bellina.jpg'
   },
   // {
