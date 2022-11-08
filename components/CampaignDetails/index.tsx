@@ -284,7 +284,7 @@ const CampaignDetails = ({
         <div className={styles.campaign}>
           <div className={styles.campaign_detail}>
             <div className={styles.content_tnc}>
-                <h3 className={styles.content_tnc_title}>Terms and conditions</h3>
+                <h3 className={styles.content_tnc_title}>Terms and Conditions</h3>
                 <ul>
                   {campaign.tnc.map((tnc) => (
                       <li key={tnc}>{tnc}</li>

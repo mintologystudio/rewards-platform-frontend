@@ -15,7 +15,7 @@ import LogoutModal from "../Modals/LogoutModal";
 import { HashLink as HLink } from 'react-router-hash-link';
 
 const Routes = {
-  About: 'https://mintology.studio/',
+  About: 'shttps://mintology.studio/',
   "Featured Deals": '/#hot-brand-deals',
   PERKS: '/perk',
   // MYNFT: '/mynft',
@@ -109,7 +109,7 @@ const Navigation = () => {
                     </button>
                   )
                 ) : (
-                  <button onClick={loginHandler}>Sign up/Sign in</button>
+                  <button onClick={loginHandler}>Sign in</button>
                 )}
               </div>
             </div>
@@ -169,7 +169,7 @@ const Navigation = () => {
                   <button className={styles.lwidth} onClick={logoutHandler}>Wrong Network</button>
                 )
               ) : (
-                <button onClick={loginHandler}>Sign up/Sign in</button>
+                <button onClick={loginHandler}>Sign in</button>
               )}
             </ul>
           </div>
