@@ -13,7 +13,7 @@ import useReactGA from "../hooks/useReactGA";
 
 // const TRACKING_ID = "UA-245602425-2"; // YOUR_TRACKING_ID (UX type)
 // const TRACKING_ID = "UA-245602425-3"; // YOUR_TRACKING_ID (UX type - ngrok local test)
-const TRACKING_ID = "G-W63ZL5E34K"; // YOUR_TRACKING_ID (GA4 type - need use react-ga4)
+const TRACKING_ID = "G-3THN7P22RN"; // YOUR_TRACKING_ID (GA4 type - need use react-ga4)
 ReactGA.initialize(TRACKING_ID);
 
 function MyApp({ Component, pageProps }: AppProps) {
