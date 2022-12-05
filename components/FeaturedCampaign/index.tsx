@@ -38,6 +38,16 @@ const ListOfFeaturedCampaigns = [
     extUrl: '',
     url: 'https://gateway.pinata.cloud/ipfs/QmXWNNpHYiGsZboM21e8EgfhFsqw4JLq8Hv3JXN6zZwiNL/1.%20Sephora.jpg'
   },
+  {
+    campaignId: '638cad41d75ef3a3a6c342c0',
+    nft: 'Marrisa Wilson',
+    company: 'Marrisa Wilson',
+    percentage: '20',
+    description: 'off sitewide',
+    extUrl: '',
+    url: 'https://gateway.pinata.cloud/ipfs/Qmb5iosRaspz6JcJmcVqDZpp2sdY3Z5nvnQt3ubWz7ywyJ/marrisa%20wilson%20836x376.jpg'
+  },
+  
 
   // ORIGIN
   {
