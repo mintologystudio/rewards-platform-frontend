@@ -19,42 +19,32 @@ const ListOfFeaturedCampaigns = [
   //   percentage: '10',
   //   description: 'off storewide footwear',
   // },
+  // ORIGIN
   // {
-  //   campaignId: '1',
-  //   nft: 'none',
-  //   company: 'Mintology',
+  //   campaignId: '6362c4973958dfbe81bf3bac',
+  //   nft: 'Danz',
+  //   company: 'nike',
   //   percentage: '15',
-  //   description: 'Mintology Campaign',
-  //   extUrl: 'https://www.mintology.studio/campaign',
-  //   url: 'https://gateway.pinata.cloud/ipfs/QmTpqq4fGnEDNVtyvYNvSWRPQ5fVsex8K8X8LsebTGkhNA', 
+  //   description: 'off storewide footwear',
+  //   url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Danz.jpg', 
   // },
-  {
-    campaignId: '6362c4973958dfbe81bf3bac',
-    nft: 'Danz',
-    company: 'nike',
-    percentage: '15',
-    description: 'off storewide footwear',
-    extUrl: '',
-    url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Danz.jpg', 
-  },
-  {
-    campaignId: '6362c49e3958dfbe81bf3bca',
-    nft: 'Tasty Toastys',
-    company: 'nike',
-    percentage: '15',
-    description: 'off storewide footwear',
-    extUrl: '',
-    url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Toasty.jpg'
-  },
-  {
-    campaignId: '6362c49b3958dfbe81bf3bb2',
-    nft: 'Bellina Caetano',
-    company: 'nike',
-    percentage: '15',
-    description: 'off storewide footwear',
-    extUrl: '',
-    url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Bellina.jpg'
-  },
+  // {
+  //   campaignId: '6362c49e3958dfbe81bf3bca',
+  //   nft: 'Tasty Toastys',
+  //   company: 'nike',
+  //   percentage: '15',
+  //   description: 'off storewide footwear',
+  //   url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Toasty.jpg'
+  // },
+  // {
+  //   campaignId: '6362c49b3958dfbe81bf3bb2',
+  //   nft: 'Bellina Caetano',
+  //   company: 'nike',
+  //   percentage: '15',
+  //   description: 'off storewide footwear',
+  //   url: 'https://gateway.pinata.cloud/ipfs/QmSENR9c9BTgNzdTuK7Q6JDgXhfhkoKtZ8SSMS11gMKBzh/Bellina.jpg'
+  // },
+  // END OF ORIGIN
   // {
   //   campaignId: 2,
   //   nft: 'karafuru',
@@ -69,6 +59,17 @@ const ListOfFeaturedCampaigns = [
   //   percentage: '10',
   //   description: 'off storewide footwear',
   // },
+
+  // DEC 5
+  {
+    campaignId: '638cac6ecf89745ecc5b3ef5',
+    nft: 'Sephora',
+    company: 'Sephora',
+    percentage: '15',
+    description: 'Get a Free Skincare trial size',
+    url: 'https://gateway.pinata.cloud/ipfs/QmXWNNpHYiGsZboM21e8EgfhFsqw4JLq8Hv3JXN6zZwiNL/1.%20Sephora.jpg'
+  },
+  // END OF DEC 5
 ]
 
 const FeaturedCampaignItem = ({
