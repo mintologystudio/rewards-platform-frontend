@@ -115,6 +115,7 @@ const CampaignDetails = ({
 
   const showSoldOld = redemptionRemaining !== undefined && redemptionRemaining === 0;
   const offerPercentage = campaign.offer && campaign.offer !== '' ? campaign.offer.split('% ')[0] : '0';
+
   const offerDesc = campaign.offer && campaign.offer !== '' ? campaign.offer.split('% ')[1] : '';
 
   return (
@@ -260,7 +261,14 @@ const CampaignDetails = ({
 
           <div className={styles.campaign_offer}>
             <div className={styles.campaign_offer_info}>
-              <div><span className={styles.campaign_offer_title}>{offerPercentage}%</span></div>
+              <div>
+                {!isNaN(parseInt(offerPercentage)) &&
+                  <span className={styles.campaign_offer_title}>{offerPercentage}%</span>
+                }
+                {isNaN(parseInt(offerPercentage)) &&
+                  <span className={styles.campaign_offer_title_text_only}>{offerPercentage}</span>
+                }
+              </div>
               <div><span className={styles.campaign_offer_text}>{offerDesc}</span></div>
             </div>
           </div>
