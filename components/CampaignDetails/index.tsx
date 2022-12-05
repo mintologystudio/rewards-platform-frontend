@@ -263,7 +263,9 @@ const CampaignDetails = ({
             <div className={styles.campaign_offer_info}>
               <div>
                 {!isNaN(parseInt(offerPercentage)) &&
+                  <>
                   <span className={styles.campaign_offer_title}>{offerPercentage}%</span>
+                  </>
                 }
                 {isNaN(parseInt(offerPercentage)) &&
                   <span className={styles.campaign_offer_title_text_only}>{offerPercentage}</span>
