@@ -12,7 +12,7 @@ const campaignData: Array<ICampaignNew> = CAMPAIGN_DATA;
 const AvailableCampaign = () => {
     const { appState } = useContext(Web3Context);
     const { campaign } = appState;
-
+    
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -38,10 +38,12 @@ const AvailableCampaign = () => {
 
           {
               !campaign.isLoading && campaign.campaigns.length > 0 ?
-            campaign.campaigns.map((c: ICampaignNew) => (
+            campaign.campaigns.sort((a: any, b: any) => new Date(b.startDate).valueOf() - new Date(a.startDate).valueOf()).map((c: ICampaignNew) => (
+              <>
               <CampaignCard key={c._id}
                   campaign={c}
               />
+              </>
             ))  
             : <></>
           }
