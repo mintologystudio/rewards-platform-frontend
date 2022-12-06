@@ -36,7 +36,7 @@ const Perk = ({ perkDetail, redirectHandler }: {
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
   const countdownDate = new Date(usEndDate);
 
-  const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
+  const [days, hours, mins, seconds] = getReadableTime(new Date(endTime).getTime()  - new Date().getTime());
 
   const isExpired = new Date(endTime) < new Date();
 

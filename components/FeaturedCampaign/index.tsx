@@ -36,7 +36,7 @@ const ListOfFeaturedCampaigns = [
     percentage: '15',
     description: 'Free Gift Charlotte Tilbury’s Airbrush Flawless Foundation With $35+',
     extUrl: '',
-    url: 'https://gateway.pinata.cloud/ipfs/QmYQxiD6CEL6bW2SXvg6wEV3Bc6BZ45JKdJEiwneroYuZZ/Sephora%20-%20Product%20Image%20836%20x%20385.jpg'
+    url: 'https://gateway.pinata.cloud/ipfs/QmXWNNpHYiGsZboM21e8EgfhFsqw4JLq8Hv3JXN6zZwiNL/10.%20Sephora.jpg'
   },
   {
     campaignId: '638e15035c49b1c45dfb1f1d',
@@ -65,7 +65,7 @@ const ListOfFeaturedCampaigns = [
     percentage: '20',
     description: 'off sitewide',
     extUrl: '',
-    url: 'https://gateway.pinata.cloud/ipfs/Qmb5iosRaspz6JcJmcVqDZpp2sdY3Z5nvnQt3ubWz7ywyJ/marrisa%20wilson%20836x376.jpg'
+    url: 'https://gateway.pinata.cloud/ipfs/QmW8yBqaXrqkuz5HhrqJGVWm2noDtNmdcPFd5Cqg3tzVg5'
   },
 
   
