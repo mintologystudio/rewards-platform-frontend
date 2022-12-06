@@ -28,9 +28,18 @@ const ListOfFeaturedCampaigns = [
   //   extUrl: 'https://www.mintology.studio/campaign',
   //   url: 'https://gateway.pinata.cloud/ipfs/QmTpqq4fGnEDNVtyvYNvSWRPQ5fVsex8K8X8LsebTGkhNA', 
   // },
-
+  
   {
-    campaignId: '638ded854cbc4b5519925c15',
+    campaignId: '638f19b582b1637d418508a8',
+    nft: 'Sephora',
+    company: 'Sephora',
+    percentage: '15',
+    description: 'Free Gift Charlotte Tilbury’s Airbrush Flawless Foundation With $35+',
+    extUrl: '',
+    url: 'https://gateway.pinata.cloud/ipfs/QmYQxiD6CEL6bW2SXvg6wEV3Bc6BZ45JKdJEiwneroYuZZ/Sephora%20-%20Product%20Image%20836%20x%20385.jpg'
+  },
+  {
+    campaignId: '638e15035c49b1c45dfb1f1d',
     nft: 'Sephora',
     company: 'Sephora',
     percentage: '15',
@@ -38,6 +47,17 @@ const ListOfFeaturedCampaigns = [
     extUrl: '',
     url: 'https://gateway.pinata.cloud/ipfs/QmXWNNpHYiGsZboM21e8EgfhFsqw4JLq8Hv3JXN6zZwiNL/1.%20Sephora.jpg'
   },
+
+  {
+    campaignId: '1',
+    nft: 'Christmas 2022',
+    company: 'Christmas 2022',
+    percentage: '',
+    description: 'Christmas 2022',
+    extUrl: 'https://www.mintology.studio/campaign',
+    url: 'https://gateway.pinata.cloud/ipfs/QmfMvFDDuqc98ey5JQV7ayTFfQcdVkExMt5rcexpoBeLFE'
+  },
+
   {
     campaignId: '638cad41d75ef3a3a6c342c0',
     nft: 'Marrisa Wilson',
@@ -47,6 +67,7 @@ const ListOfFeaturedCampaigns = [
     extUrl: '',
     url: 'https://gateway.pinata.cloud/ipfs/Qmb5iosRaspz6JcJmcVqDZpp2sdY3Z5nvnQt3ubWz7ywyJ/marrisa%20wilson%20836x376.jpg'
   },
+
   
 
   // ORIGIN
@@ -112,7 +133,7 @@ const FeaturedCampaignItem = ({
   url: string
 }) => {
   return (
-    <div className={styles.container} key={`FeatuedCampaign_${nft}_${company}`}>
+    <div className={styles.container} key={`FeatuedCampaign_${nft}_${company}_${description}`}>
       {/*<div className={styles.layer}>*/}
       {/*    <div*/}
       {/*      className={styles.background}*/}

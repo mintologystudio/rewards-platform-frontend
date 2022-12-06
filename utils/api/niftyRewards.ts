@@ -2,7 +2,7 @@ import axios, {AxiosError, AxiosInstance} from 'axios'
 import envConfig from '../envConfig'
 
 // const apiUrl = envConfig.API_URL
-const apiUrl = `https://mintology-backend.herokuapp.com/`
+const apiUrl = `https://mintology-backend-v1.herokuapp.com`
 
 const api: AxiosInstance = axios.create({
   baseURL: apiUrl,
