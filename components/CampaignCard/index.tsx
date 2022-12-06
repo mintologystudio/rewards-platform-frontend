@@ -27,7 +27,9 @@ const CampaignCard = ({campaign}: {campaign: ICampaignNew}) => {
   const usEndDate = getUSFormatDate(eday, emonth, eyear);
   const countdownDate = new Date(usEndDate);
 
-  const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
+  // Fixed time difference remaining duration
+  // const [days, hours, mins, seconds] = getReadableTime(countdownDate.getTime() - new Date().getTime());
+  const [days, hours, mins, seconds] = getReadableTime(new Date(endTime).getTime() - new Date().getTime());
 
   const backgroundImg = bgUrl? `url(${bgUrl})` : `url(assets/no-image.jpeg)`;
 
