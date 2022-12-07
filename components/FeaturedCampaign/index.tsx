@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from './index.module.scss'
 import BadgesPair from '../BadgesPair'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import Routes from '../../utils/constants/routes'
 import Link from 'next/link'
 import { upperCaseString } from '../../utils'
 import Badge from "../Badge";
 import DiscountTag from "../../public/assets/misc/discounttag.svg";
 import Image from "next/image";
+import { IBannerDetail, Web3Context } from '../../context/web3Context'
 
 const delay = 3000
 
@@ -132,6 +133,7 @@ const FeaturedCampaignItem = ({
   extUrl: string
   url: string
 }) => {
+
   return (
     <div className={styles.container} key={`FeatuedCampaign_${nft}_${company}_${description}`}>
       {/*<div className={styles.layer}>*/}
@@ -216,8 +218,23 @@ const FeaturedCampaignItem = ({
   )
 }
 
+interface IBannerProps {
+  orderNo: number,
+  campaignId: string,
+  company: string,
+  description: string,
+  nft: string,
+  percentage: string,
+  url: string,
+  extUrl: string,
+  status: boolean
+}
 // NOTE: At the moment content_right styling is hackish
 const FeaturedCampaignCarousel = () => {
+  
+  const { appState } = useContext(Web3Context);
+  const { banners } = appState.banner;
+
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const timeoutRef = useRef<any>(null)
 
@@ -236,7 +253,7 @@ const FeaturedCampaignCarousel = () => {
     timeoutRef.current = setTimeout(
       () =>
         setActiveIndex((prevIndex) =>
-          prevIndex === ListOfFeaturedCampaigns.length - 1 ? 0 : prevIndex + 1
+          prevIndex === banners.length - 1 ? 0 : prevIndex + 1
         ),
       delay
     )
@@ -252,21 +269,49 @@ const FeaturedCampaignCarousel = () => {
         className={styles.slideshow_slider}
         style={{ transform: `translateX(${-activeIndex * 100}%)` }}
       >
-        {ListOfFeaturedCampaigns.map((campaign) =>
-          FeaturedCampaignItem(campaign)
-        )}
+        {banners.length > 0 ?
+          <>
+          {banners.sort((a: IBannerProps, b: IBannerProps) => b.orderNo - a.orderNo)
+          .map((campaignBanner: IBannerProps) =>
+            FeaturedCampaignItem(campaignBanner)
+          )}
+          </>
+          :
+          <>
+          {ListOfFeaturedCampaigns.map((campaignBanner) =>
+            FeaturedCampaignItem(campaignBanner)
+          )}
+          </>
+        }
       </div>
 
       <ul className={styles.slideshow_dots}>
-        {ListOfFeaturedCampaigns.map((campaign, index: number) => (
-          <li
-            key={`Slideshow_${index}`}
-            onClick={() => setActiveIndex(index)}
-            className={`${
-              activeIndex === index ? styles.slideshow_dots_active : ''
-            }`}
-          />
-        ))}
+        {banners.length > 0 ?
+          <>
+          {banners.sort((a: IBannerProps, b: IBannerProps) => b.orderNo - a.orderNo)
+          .map((campaignBanner: IBannerProps, index: number) => (
+            <li
+              key={`Slideshow_${index}`}
+              onClick={() => setActiveIndex(index)}
+              className={`${
+                activeIndex === index ? styles.slideshow_dots_active : ''
+              }`}
+            />
+          ))}
+          </>
+          :
+          <>
+          {ListOfFeaturedCampaigns.map((campaignBanner, index: number) => (
+            <li
+              key={`Slideshow_${index}`}
+              onClick={() => setActiveIndex(index)}
+              className={`${
+                activeIndex === index ? styles.slideshow_dots_active : ''
+              }`}
+            />
+          ))}
+          </>
+        }
       </ul>
     </div>
   )

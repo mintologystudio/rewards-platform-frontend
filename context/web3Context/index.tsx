@@ -7,11 +7,17 @@ export interface IAppContextState {
   address_w3a: string //web3auth address
   chainId: number
   campaign: ICampaignDetail
+  banner: IBannerDetail
   perk: IPerkDetail
 }
 
 export interface ICampaignDetail {
   campaigns: any
+  isLoading: boolean
+}
+
+export interface IBannerDetail {
+  banners: any
   isLoading: boolean
 }
 
@@ -32,6 +38,7 @@ export const InitialAppContextState: IAppContextState = {
   address_to_bind: '',
   address_w3a: '',
   campaign: {campaigns: [], isLoading: false},
+  banner: {banners: [], isLoading: false},
   perk: {perks: [], isLoading: false},
 }
 

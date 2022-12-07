@@ -3,6 +3,7 @@ import envConfig from '../envConfig'
 
 // const apiUrl = envConfig.API_URL
 const apiUrl = `https://mintology-backend-v1.herokuapp.com`
+// const apiUrl = `http://localhost:5000`;
 
 const api: AxiosInstance = axios.create({
   baseURL: apiUrl,
@@ -13,6 +14,22 @@ const api: AxiosInstance = axios.create({
 });
 
 const DELIMETER = ' binded to ';
+
+export const getBanners = async () => {
+  try {
+    const response: any = await api.get(`/api/v1/banner`)
+    if (response.status == 200) {
+      // console.log("success getCampaigns", response);
+      return { status: true, banners: response.data.data};
+    } else {
+      console.log("failed getBanners", response);
+      return { status: false};
+    }
+  } catch (error) {
+    console.log('[Error from getBanners API]: ', error)
+    return { status: false};
+  }
+}
 
 export const signMessageForBinding = async (
   web3AuthAddress: string,

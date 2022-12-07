@@ -3,9 +3,9 @@ import {
   SET_WEB3_PROVIDER,
   SET_ADDRESS,
   SET_WEB3AUTH_ADDRESS,
-  RESET_WEB3_PROVIDER, SET_ADDRESS_PROVIDER, CAMPAIGN_LIST, CAMPAIGN_LOADING, PERK_LIST, PERK_LOADING,
+  RESET_WEB3_PROVIDER, SET_ADDRESS_PROVIDER, CAMPAIGN_LIST, CAMPAIGN_LOADING, PERK_LIST, PERK_LOADING, BANNER_LIST, BANNER_LOADING,
 } from '../actionType'
-import {InitialAppContextState, IAppContextState, ICampaignDetail, IPerkDetail} from '.'
+import {InitialAppContextState, IAppContextState, ICampaignDetail, IPerkDetail, IBannerDetail} from '.'
 
 export type IAction =
   | {
@@ -47,6 +47,14 @@ export type IAction =
   | {
     type: 'CAMPAIGN_LOADING'
     isLoading: ICampaignDetail['isLoading']
+  }
+  | {
+    type: 'BANNER_LIST'
+    banner: IBannerDetail
+  }
+  | {
+    type: 'BANNER_LOADING'
+    isLoading: IBannerDetail['isLoading']
   }
   | {
     type: 'PERK_LIST'
@@ -98,6 +106,16 @@ const Web3Reducer = (
       return {
         ...state,
         campaign: { ...state.campaign, isLoading: action.isLoading},
+      }
+    case BANNER_LIST:
+      return {
+        ...state,
+        banner: action.banner,
+      }
+    case BANNER_LOADING:
+      return {
+        ...state,
+        banner: { ...state.banner, isLoading: action.isLoading},
       }
     case PERK_LIST:
       return {
