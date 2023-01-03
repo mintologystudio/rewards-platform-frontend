@@ -3,16 +3,40 @@ import styles from './index.module.scss'
 import {ICampaignNew} from "../../utils/interfaces";
 import CampaignCard, {CampaignCardSkeleton} from "../CampaignCard";
 import {CAMPAIGN_DATA} from "../../utils/mockdata";
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Web3Context} from "../../context/web3Context";
 import MoreCampaignCard from '../MoreCampaignCard';
 
 const campaignData: Array<ICampaignNew> = CAMPAIGN_DATA;
 
 const AvailableCampaign = () => {
-    const { appState } = useContext(Web3Context);
-    const { campaign } = appState;
-    
+  const { appState } = useContext(Web3Context);
+  const { campaign } = appState;
+  const [sortedCampaign, setSortedCampaign] = useState<any[]>([]);
+  const state: {[key: string]: number} = {
+    "inactive": 0,
+    "active": 1
+  }
+
+  useEffect(() => {
+    if(campaign && campaign.campaigns.length > 0) {
+      sortedData();
+    }
+  }, [sortedCampaign, campaign])
+
+  const sortedData = async () => {
+      // Using && sort is buggy
+      const _sort_date = campaign.campaigns
+      .sort((a: any, b: any) => 
+        (new Date(b.startDate).valueOf() - new Date(a.startDate).valueOf())
+      );
+      const _sort_state = _sort_date
+      .sort((a: any, b: any) => 
+        (state[b.status] - state[a.status])
+      )
+      setSortedCampaign(_sort_state);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -37,8 +61,9 @@ const AvailableCampaign = () => {
             }
 
           {
-              !campaign.isLoading && campaign.campaigns.length > 0 ?
-            campaign.campaigns.sort((a: any, b: any) => new Date(b.startDate).valueOf() - new Date(a.startDate).valueOf()).map((c: ICampaignNew) => (
+            sortedCampaign && sortedCampaign.length > 0 ?
+            sortedCampaign
+            .map((c: ICampaignNew) => (
               <>
               <CampaignCard key={c._id}
                   campaign={c}
